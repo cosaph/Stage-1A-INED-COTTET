@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 project:
   type: website
   output-dir: docs 
@@ -18,26 +17,3 @@ format:
     toc: true
 
 
-
-=======
-project:
-  type: website
-  output-dir: docs 
-
-website:
-  title: "Stage-1A-INED-COTTET"
-  navbar:
-    left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
-
-format:
-  html:
-    theme: minimal
-    css: styles.css
-    toc: true
-
-
-
->>>>>>> 84be897b4d5cd1e04dcf3d1436bb420d916c4c59
