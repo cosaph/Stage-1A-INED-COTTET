@@ -1,0 +1,62 @@
+Les inégalités sociales face à la mort tiennent une place importante dans les débats sur l’âge de départ à la retraite, car elles induisent des écarts dans les chances d’atteindre cet âge et dans les durées passées à la retraite. Des différences entre groupes sociaux dans les statuts d’(in)activité occupés tout au long de la carrière existent également, en partie prises en compte par les dispositifs de solidarité du système de retraite. Les durées d’emploi, d’inactivité et de chômage sont importantes car elles déterminent non seulement l’éligibilité aux droits de retraite, mais aussi les montants des pensions qui seront perçues (encadré 1). Cet article présente ces durées à différents âges et en fin de carrière, selon la catégorie socioprofessionnelle (CSP) en France.
+À partir des données de mortalité, les espérances de vie à différents âges et les écarts selon les CSP sont calculés et analysés. Ces années de vie sont ensuite réparties, pour chaque CSP, entre les statuts d’activité (emploi et chômage) et d’inactivité (retraite, au foyer, autre motif ) que les personnes ont déclaré au moment du recensement (encadré 2). Ces indicateurs « conjoncturels » décrivent les situations professionnelles moyennes au sein de chaque CSP et à différents âges pour la période étudiée, autour de 2018.
+Les hommes cadres vivent en moyenne
+6 ans de plus que les ouvriers après 35 ans
+En 2018, l’espérance de vie à 35 ans des individus nés en France
+est de 46 ans et 5 mois pour les hommes et de 51 ans et 7 mois
+pour les femmes. Celle des cadres dépasse celle des ouvriers de 5 ans et 8 mois chez les hommes et de 3 ans et 5 mois chez les femmes (figure 1). Ces écarts sont encore importants à 62 ans : 3 ans et 6 mois chez les hommes (pour une espérance de vie moyenne de 22 ans) et 2 ans et 8 mois chez les femmes (pour une espérance de vie moyenne de 26 ans). L’espérance de vie des employés se situe juste au-dessus de celle des ouvriers ; les professions intermédiaires et les indépendants (artisans, commerçants, chefs d’entreprise, exploitants agricoles) bénéficient d’un avantage, mais moindre que les cadres. Chez les femmes, les indépendantes ont une espérance de vie plus faible que les professions intermédiaires ; chez les hommes, c’est l’inverse. Les résultats pour cette période sont
+proches de ceux produits précédemment [1].
+Les CSP se distinguent aussi dans les chances d’atteindre les âges élevés du fait d’une mortalité prématurée qui les touche différemment bien que relativement faible : sur 100 hommes de 35 ans, 96 peuvent espérer atteindre 62 ans parmi les cadres mais seulement 89 parmi les ouvriers ; ces chiffres sont respectivement de 97 et 94 chez les femmes.
+Sept années d’inactivité ou de chômage
+pour les ouvrières après 35 ans
+La figure 2 montre que les 53,3 années d’espérance de vie des femmes cadres à 35 ans se répartissent en presque 27 ans et demi d’emploi (environ 51 %) et un peu plus de 24 ans de retraite (environ 45 %) ; elles comprennent aussi environ 1 an de chômage et 1 an d’inactivité (y compris invalidité). L’espérance de vie des ouvrières à 35 ans se compose de 23,6 années de retraite (47 %), soit 8 mois de moins que les cadres ; leurs durées d’emploi sont bien plus courtes, 20 ans en moyenne (40 %) et les années vécues au chômage ou en inactivité plus nombreuses
+Institut national d’études démographiques (INED), F-93300
+Aubervilliers, France.
+** U1086 “ANTICIPE” INSERM, Université de Caen Normandie, Centre
+François Baclesse
+Ce travail a bénéficié d’une aide de l’Etat gérée par l’Agence Nationale de
+la Recherche au titre du programme Investissements d’avenir portant la
+référence ANR-10-EQPX-17 (Centre d’accès sécurisé aux données – CASD).
+www.ined.fr
+Population & Sociétés
+Population & Sociétés • numéro 611 • mai 2023 • bulletin mensuel d’information de l’Institut national d’études démographiques
+Numéro 611
+Mai 2023
+English version(respectivement 4 ans et 3 ans) (13 %). L’inactivité des femmes est pour moitié environ déclarée comme « au foyer », correspondant à des interruptions souvent associées à la maternité ou pour s’occuper du foyer (plus fréquentes dans les anciennes
+générations que celles d’aujourd’hui). L’autre moitié s’explique,
+en partie, par des difficultés à conserver ou trouver un emploi,
+parfois du fait d’invalidités reconnues ou non, une situation
+également fréquente pour les hommes ouvriers.
+Les hommes ouvriers passent deux ans
+de moins à la retraite que les cadres
+En dépit d’un départ à la retraite à un âge plus jeune que les
+cadres, les ouvriers y passent 2 années de moins (soit respectivement 42 % et 43 % de l’espérance de vie) ; ils passent
+3,4 années de plus au chômage ou en inactivité.
+Les différences entre CSP sont donc assez similaires pour
+les hommes et les femmes, mais les années passées en emploi
+occupent une part plus grande des années à vivre après 35 ans
+pour les hommes que les femmes.
+À l’âge légal de départ à la retraite (62 ans pour la période étudiée), les années de chômage ou d’inactivité sont réduites, même si elles restent un peu plus importantes pour les femmes que pour les hommes. Les différences d’années de vie passées à la retraite selon la CSP sont proches de celles observées à 35 ans, du fait d’une assez faible mortalité entre 35 et 62 ans. À 62 ans la différence de durées d’activité est importante entre les cadres et les indépendants d’une part, et les employés, professions intermédiaires et ouvriers d’autre part : les premiers y
+passent encore plus de 2 ans, en partie du fait d’entrées plus
+tardives dans la carrière, tandis que les seconds moins d’1 an.
+Les ouvriers vivent moins longtemps que les cadres
+Population & Sociétés • numéro 611 • mai 2023À 58 et 59 ans, une partie des hommes
+employés et des femmes des professions
+intermédiaires sont déjà à la retraite
+Si les retraités sont majoritairement en emploi au moment de « liquider » (c’est-à-dire de prendre) leur retraite, une partie non négligeable d’entre eux sont au chômage ou inactifs. La figure 3 représente les durées dans chaque statut d’activité par tranches d’âges de deux ans autour des âges de la retraite (58- 59 ans inclus, 60-61 ans inclus, 62-63 ans inclus). Pour les hommes, la durée moyenne de retraite des employés repré- sente déjà un tiers des deux années à vivre entre 58 et 59 ans, bien supérieure à celles des autres CSP. Cette spécificité est liée à l’existence de dispositifs de liquidation anticipée de la retraite pour certains métiers de cette catégorie (encadré 1). À ces âges, les ouvriers sont plus fortement touchés par le chômage et l’inactivité que les autres CSP ; ces périodes occupent presque 5 mois (soit 0,4 année), c’est-à-dire 20 % de ces 2 années de vie. Parmi les femmes, ce sont les professions intermédiaires qui affichent une durée à la retraite légèrement plus élevée que les autres CSP dans la tranche d’âges 58-59 ans. Les ouvrières,
+quant à elles, présentent une durée en activité plus faible que
+les autres CSP, en raison d’une durée moyenne passée au chô-
+mage ou en inactivité plus élevée (8 mois en moyenne).
+Entre 60 et 61 ans, juste avant l’âge légal de 62 ans pour la période étudiée, les hommes cadres passent près d’un an et demi en activité, sur les presque deux années de vie dans cette tranche d’âges ; c’est trois fois plus que les ouvriers. Ces derniers passent un peu plus de temps à la retraite, du fait de dispositifs dérogatoires, mais aussi trois fois plus de temps au chômage ou en inactivité. Concernant les femmes aussi, les ouvrières passent deux fois plus de temps à la retraite que les cadres, mais sont plus fortement touchées par le chômage et
+l’inactivité (près de 6 mois en moyenne) ; leur durée passée en
+activité est plus courte que les autres CSP (2 fois moins importante que celle des indépendantes par exemple).
+Aux âges immédiatement supérieurs (62-63 ans), la possibilité de liquider sa retraite diminue les durées de chômage et d’inactivité. Sur les presque deux années vécues à ces âges, les ouvrières, employées et professions intermédiaires passent entre 18 et 20 mois à la retraite, 16 mois pour les indépendantes et moins de 14 mois pour les cadres. Les durées d’activité des cadres sont encore quatre fois plus élevées que celles des ouvrières, comme indiqué sur la figure 2. Au sein de chaque CSP, dans cette tranche d’âges, les situations des hommes et
+des femmes se ressemblent, avec des durées de vie passées à la
+retraite et en activité similaires.
+Les années à vivre en activité à 35 ans sont plus nombreuses chez les cadres que chez les ouvriers, ces derniers ont plus travaillé avant 35 ans et présentent un risque d’inactivité et chômage plus important. Les années de retraite sont aussi plus nombreuses pour les cadres en raison de leur espérance de vie plus élevée. Par ailleurs, l’espérance de vie plus longue des femmes se traduit par davantage de temps de retraite (3 à 4 ans de plus selon la CSP), mais aussi d’inactivité (1 à 2 ans de plus selon la CSP) ; les durées en emploi des femmes et des hommes
+sont proches au sein de chaque CSP
+Juste avant l’âge légal, les durées de retraite sont déjà bien
+présentes dans les CSP des employés et ouvriers du fait de
+dispositifs de départ anticipé. Mais ces CSP présentent aussi des périodes plus longues de chômage ou d’inactivité que les autres CSP. Elles sont probablement en partie liées à des difficultés à conserver ou trouver un emploi [
+En 2018, l’espérance de vie à 35 ans des hommes cadres est de près de 50 ans, contre 44ans pour les ouvriers, soit presque 6 ans d’écart. Ces écarts d’espérance de vie sont encore importants à 62 ans : 3 ans et 6 mois chez les hommes, 2 ans et 8 mois chez les femmes. En dépit d’un départ à la retraite plus précoce, les ouvriers passent 2 années de moins à la retraite que les cadres et 3,4 années de plus au chômage ou en inactivité. Par ailleurs, les années de chômage ou d’inactivité sont fréquentes dans les années précédant l’âge légal pour
+les ouvriers. Les femmes 

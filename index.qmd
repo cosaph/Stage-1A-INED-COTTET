@@ -1,15 +1,8 @@
 ---
-<<<<<<< HEAD
 title: "Stage-1A-INED-COTTET"
-=======
-title: "Stage-1A"
->>>>>>> 84be897b4d5cd1e04dcf3d1436bb420d916c4c59
 ---
 
-This is a Quarto website.
+Ce site a été créé dans le cadre de mon stage de première année à l'INED. Mon objectif est de rédiger une série d'articles sur l'utilisation de R pour soutenir les chercheurs dans leurs travaux.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+R est un langage de programmation et un environnement statistique largement utilisé dans le domaine de la recherche. Il est particulièrement populaire dans les domaines des statistiques, de la bioinformatique, de l'économétrie, de la finance et de l'analyse des données en général.
 
-```{r}
-1 + 1
-```

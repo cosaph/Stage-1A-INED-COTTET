@@ -1,0 +1,59 @@
+---
+title: "Nuage de mot (R.temis)"
+toc-title: ""
+categories:
+  - R
+  - VSCode
+author: "COTTET Coralie"
+affiliations: INED
+
+date: 06/06/2023
+
+---
+
+
+```{r}
+
+
+# ----- Librairies ----
+library("R.temis")
+library("RColorBrewer") # pour charger des couleurs dans le nuage de mot
+
+```
+
+
+
+(N'oubliez pas d'installer les packages avant d'exéctuer les libraries si ceux-ci sont nouveaux!)
+Concernant le choix des données, j’ai choisis une publication de Mathieu Trachman datant de 2022 intitulé “Très masculin, pas très féminine. Les variations sociales du genre”, Population et Sociétés: 1-4, pour illustrer mon exemple.
+
+```{r results='hide'}
+# ---- Import des données ----
+
+corpus <- import_corpus("genre.csv",format="csv",textcolumn=1,language="fr")
+
+```
+C'est quoi les __stop_words__?
+
+Les stop words (ou mots vides) sont des mots très courants dans un langage donné, comme les prépositions, les articles, les pronoms, etc., qui sont souvent omis lors de l'analyse de texte car ils ne portent pas de sens important pour la compréhension globale du texte.
+
+
+```{r results='hide'}
+# ---- traitement des données ----
+dtmsmo <-build_dtm(corpus, remove_stopwords = T, min_length = 0)
+
+dic <-dictionary(dtmsmo) #création d'un dictionnaire de mot 
+
+frequent_terms(dtmsmo) #fréquence d'apparition des mots dans le texte en question
+
+```
+__Il est possible de faire un traitement plus poussé des données__
+
+
+
+
+
+```{r}
+# ---- Générateur du Nuage ---- 
+cloud<-word_cloud(dtmsmo, color=brewer.pal(10, "OrRd"), min.freq=0) 
+terms_graph(dtmsmo, min_occ=1,interactive=T) #pour obtenir un graph de mots.
+```

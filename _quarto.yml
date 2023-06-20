@@ -8,11 +8,14 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - Cartographie.qmd
+      - Package_mapsf/map_sf.qmd
+      - Package_mapsf/R_cartographie.qmd
+      - Nuage_de_mot/nuage_de_mot.qmd
+      - Nuage_de_mot/nuage_de_mot_rtemis.qmd
 
 format:
   html:
-    theme: minimal
+    theme: slate
     css: styles.css
     toc: true
 
