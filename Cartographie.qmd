@@ -1,0 +1,20 @@
+---
+title: "Comment réaliser une carte sur R ? Avec mapsf"
+toc-title: ""
+categories:
+  - R
+author: "COTTET Coralie"
+affiliations: INED
+
+date: 06/06/2023
+
+css: "style.css"
+---
+Nous allons réaliser des cartes avec R à l'aide du packages install.packages("mapsf"). 
+
+```{r results='hide'}
+library(mapsf)
+library(sf)
+
+```
+---

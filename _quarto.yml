@@ -8,12 +8,12 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - Cartographie.qmd
 
 format:
   html:
-    theme: cosmo
-    css: styles.scss
+    theme: minimal
+    css: styles.css
     toc: true
 
 
