@@ -164,6 +164,4 @@ Pour la rédaction de cet article je me suis grandement inspirée du travail de 
 
 
 
-Pour la rédaction de cet article je me suis grandement inspirée du travail de Timothée Giraud.
-
 <https://rcarto.github.io/ined2022/07_mise_en_page.html>

@@ -8,12 +8,16 @@ R est un langage de programmation et un environnement statistique largement util
 
 
 
-### **A propos**
-[ENSAI](https://ensai.fr/)\
-[Ined](https://www.ined.fr/)\
-[Linkedin](https://www.linkedin.com/in/coralie-c-05926b130)\
-[Author]: COTTET Coralie \
-[Mail]: coralie.cottet@hotmail.fr
+<a href="mailto:vcoralie.cottet@hotmail.fr">
+  <img src="mail.PNG" alt="Logo email" width=50 lenght=50>
+</a>
+
+
+<a href="https://www.linkedin.com/in/coralie-c-05926b130">
+  <img src="logo_linkedin.png" alt="Logo LinkedIn" width=50 lenght=50>
+</a>
+
+
 
 
 
