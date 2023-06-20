@@ -7,8 +7,6 @@ author: "COTTET Coralie"
 affiliations: INED
 
 date: 06/06/2023
-
-css: "style.css"
 ---
 Nous allons réaliser des cartes avec R à l'aide du packages install.packages("mapsf"). 
 
