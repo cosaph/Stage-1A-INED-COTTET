@@ -1,5 +1,9 @@
 ---
+<<<<<<< HEAD
 title: "Stage-1A-INED-COTTET"
+=======
+title: "Stage-1A"
+>>>>>>> 84be897b4d5cd1e04dcf3d1436bb420d916c4c59
 ---
 
 This is a Quarto website.
