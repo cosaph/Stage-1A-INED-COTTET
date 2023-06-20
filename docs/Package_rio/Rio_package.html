@@ -9,7 +9,7 @@
 <meta name="author" content="COTTET Coralie">
 <meta name="dcterms.date" content="2023-06-06">
 
-<title>Stage-1A-INED-COTTET - Nuage de mot (R.temis)</title>
+<title>Stage-1A-INED-COTTET - Package Rio</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -98,6 +98,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body class="nav-fixed">
@@ -134,7 +135,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Nuage de mot (Tm)</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../Nuage_de_mot/nuage_de_mot_rtemis.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="../Nuage_de_mot/nuage_de_mot_rtemis.html" rel="" target="">
  <span class="menu-text">Nuage de mot (R.temis)</span></a>
   </li>  
   <li class="nav-item">
@@ -146,7 +147,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Package Dplyr</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../Package_rio/Rio_package.html" rel="" target="">
+    <a class="nav-link active" href="../Package_rio/Rio_package.html" rel="" target="" aria-current="page">
  <span class="menu-text">Package Rio</span></a>
   </li>  
 </ul>
@@ -168,10 +169,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Nuage de mot (R.temis)</h1>
+<h1 class="title">Package Rio</h1>
   <div class="quarto-categories">
     <div class="quarto-category">R</div>
-    <div class="quarto-category">VSCode</div>
   </div>
   </div>
 
@@ -201,70 +201,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ----- Librairies ----</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"R.temis"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="logo_rio.png" alt="Texte alternatif de l'image" title="Titre de l'image"></p>
+<p>L’import de données est la base de tout programme informatique portant sur le traitement de données. Le package “rio” est une collection de fonctions pour importer et exporter des données dans différents formats avec R. Il permet d’importer facilement des fichiers de données à partir de diverses sources, notamment des fichiers plats, des bases de données, des fichiers SAS, SPSS et Stata, ainsi que des fichiers Excel et RData. Il faut au préalable installer le package avec la commande suivante: ” install.packages(“rio”)“.</p>
+<div class="cell" data-result="hide">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Librairie ---- </span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rio)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: le package 'R.temis' a été compilé avec la version R 4.2.3</code></pre>
+<pre><code>Warning: le package 'rio' a été compilé avec la version R 4.2.3</code></pre>
 </div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Le chargement a nécessité le package : tm</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: le package 'tm' a été compilé avec la version R 4.2.3</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Le chargement a nécessité le package : NLP</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Le chargement a nécessité le package : slam</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Le chargement a nécessité le package : FactoMineR</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: le package 'FactoMineR' a été compilé avec la version R 4.2.3</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Le chargement a nécessité le package : explor</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: le package 'explor' a été compilé avec la version R 4.2.3</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"RColorBrewer"</span>) <span class="co"># pour charger des couleurs dans le nuage de mot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>(N’oubliez pas d’installer les packages avant d’exéctuer les libraries si ceux-ci sont nouveaux!) Concernant le choix des données, j’ai choisis une publication de Mathieu Trachman datant de 2022 intitulé “Très masculin, pas très féminine. Les variations sociales du genre”, Population et Sociétés: 1-4, pour illustrer mon exemple.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Import des données ----</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">import_corpus</span>(<span class="st">"genre.csv"</span>,<span class="at">format=</span><span class="st">"csv"</span>,<span class="at">textcolumn=</span><span class="dv">1</span>,<span class="at">language=</span><span class="st">"fr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>C’est quoi les <strong>stop_words</strong>?</p>
-<p>Les stop words (ou mots vides) sont des mots très courants dans un langage donné, comme les prépositions, les articles, les pronoms, etc., qui sont souvent omis lors de l’analyse de texte car ils ne portent pas de sens important pour la compréhension globale du texte.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- traitement des données ----</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>dtmsmo <span class="ot">&lt;-</span><span class="fu">build_dtm</span>(corpus, <span class="at">remove_stopwords =</span> T, <span class="at">min_length =</span> <span class="dv">0</span>)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>dic <span class="ot">&lt;-</span><span class="fu">dictionary</span>(dtmsmo) <span class="co">#création d'un dictionnaire de mot </span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">frequent_terms</span>(dtmsmo) <span class="co">#fréquence d'apparition des mots dans le texte en question</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><strong>Il est possible de faire un traitement plus poussé des données</strong></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Générateur du Nuage ---- </span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>cloud<span class="ot">&lt;-</span><span class="fu">word_cloud</span>(dtmsmo, <span class="at">color=</span><span class="fu">brewer.pal</span>(<span class="dv">10</span>, <span class="st">"OrRd"</span>), <span class="at">min.freq=</span><span class="dv">0</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in brewer.pal(10, "OrRd"): n too large, allowed maximum for palette OrRd is 9
-Returning the palette you asked for with that many colors</code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="nuage_de_mot_rtemis_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">terms_graph</span>(dtmsmo, <span class="at">min_occ=</span><span class="dv">1</span>,<span class="at">interactive=</span>T) <span class="co">#pour obtenir un graph de mots.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install_formats</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1</code></pre>
+<pre><code>[1] TRUE</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- import de données --- </span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Pour des données au format xlsx</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>data_xslx<span class="ot">&lt;-</span><span class="fu">import</span>(<span class="st">"election_leg.xlsx"</span>) </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Pour des données au format SAS (ou autre), c'est la même chose.</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>data_sas<span class="ot">&lt;-</span><span class="fu">import</span>(<span class="st">"chemin_d_acces.sas7bdat"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Pour exporter une base de données dans un fichier, il est recommandé d’utiliser la méthode “export” en utilisant le dataframe que vous voulez exporter, ici “data_sas” (comme illustré ci-dessous), et en spécifiant le chemin où vous souhaitez le sauvegarder. Cette méthode est généralement utilisée lorsque vous apportez des modifications directes à votre dataframe et que vous souhaitez enregistrer les changements quelque part.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- export de données ---</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>chemin_acces<span class="ot">&lt;-</span><span class="fu">export</span>(data_sas,<span class="st">"election_leg.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Pour en apprendre plus sur le package rio <a href="https://rdocumentation.org/packages/rio/versions/0.5.29" class="uri">https://rdocumentation.org/packages/rio/versions/0.5.29</a></p>
+<p>To learn more about Quarto websites visit <a href="https://quarto.org/docs/websites" class="uri">https://quarto.org/docs/websites</a>.</p>
 
 
 

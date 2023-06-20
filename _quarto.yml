@@ -12,10 +12,13 @@ website:
       - Package_mapsf/R_cartographie.qmd
       - Nuage_de_mot/nuage_de_mot.qmd
       - Nuage_de_mot/nuage_de_mot_rtemis.qmd
+      - Package_purrr/package_purrr.qmd
+      - Package_dplyr/quarto_dplyr.qmd
+      - Package_rio/Rio_package.qmd
 
 format:
   html:
-    theme: slate
+    theme: lux
     css: styles.css
     toc: true
 

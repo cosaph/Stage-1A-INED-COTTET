@@ -3,3 +3,18 @@ body {
   background-color: black;
   color: white ;
 }
+
+h1 {
+  color: white;
+}
+
+
+/* cible le titre */
+h3 {
+  color: white;
+}
+
+/* cible les liens */
+a {
+  color: white;
+}

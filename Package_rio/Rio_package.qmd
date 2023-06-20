@@ -1,0 +1,53 @@
+---
+title: "Package Rio"
+toc-title: ""
+categories:
+  - R
+author: "COTTET Coralie"
+affiliations: INED
+
+date: 06/06/2023
+
+css: "style.css"
+---
+<img src="logo_rio.png" alt="Texte alternatif de l'image" title="Titre de l'image" />
+
+
+L'import de données est la base de tout programme informatique portant sur le traitement de données.
+Le package "rio" est une collection de fonctions pour importer et exporter des données dans différents formats avec R. Il permet d'importer facilement des fichiers de données à partir de diverses sources, notamment des fichiers plats, des bases de données, des fichiers SAS, SPSS et Stata, ainsi que des fichiers Excel et RData.
+Il faut au préalable installer le package avec la commande suivante: " install.packages("rio")".
+
+
+```{r result='hide'}
+
+
+# ---- Librairie ---- 
+
+library(rio)
+install_formats()
+
+# --- import de données --- 
+
+#Pour des données au format xlsx
+
+data_xslx<-import("election_leg.xlsx") 
+
+
+#Pour des données au format SAS (ou autre), c'est la même chose.
+data_sas<-import("chemin_d_acces.sas7bdat")
+
+```
+Pour exporter une base de données dans un fichier, il est recommandé d'utiliser la méthode "export" en utilisant le dataframe que vous voulez exporter, ici "data_sas"  (comme illustré ci-dessous), et en spécifiant le chemin où vous souhaitez le sauvegarder. Cette méthode est généralement utilisée lorsque vous apportez des modifications directes à votre dataframe et que vous souhaitez enregistrer les changements quelque part.
+
+```{r results='hide'}
+
+# --- export de données ---
+
+chemin_acces<-export(data_sas,"election_leg.xlsx")
+
+
+```
+
+Pour en apprendre plus sur le package rio <https://rdocumentation.org/packages/rio/versions/0.5.29>
+
+To learn more about Quarto websites visit <https://quarto.org/docs/websites>.

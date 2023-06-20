@@ -9,7 +9,7 @@
 <meta name="author" content="COTTET Coralie">
 <meta name="dcterms.date" content="2023-06-06">
 
-<title>Stage-1A-INED-COTTET - Nuage de mot (Tm)</title>
+<title>Stage-1A-INED-COTTET - Package Dplyr</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -98,6 +98,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body class="nav-fixed">
@@ -130,7 +131,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Mapview et Oceanis</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../Nuage_de_mot/nuage_de_mot.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="../Nuage_de_mot/nuage_de_mot.html" rel="" target="">
  <span class="menu-text">Nuage de mot (Tm)</span></a>
   </li>  
   <li class="nav-item">
@@ -142,7 +143,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Package Purrr</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../Package_dplyr/quarto_dplyr.html" rel="" target="">
+    <a class="nav-link active" href="../Package_dplyr/quarto_dplyr.html" rel="" target="" aria-current="page">
  <span class="menu-text">Package Dplyr</span></a>
   </li>  
   <li class="nav-item">
@@ -168,10 +169,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Nuage de mot (Tm)</h1>
+<h1 class="title">Package Dplyr</h1>
   <div class="quarto-categories">
     <div class="quarto-category">R</div>
-    <div class="quarto-category">VSCode</div>
   </div>
   </div>
 
@@ -201,109 +201,68 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>Comme dans tout bon code R il est nécessaire au début d’installer (une fois sur un ordinateur): (dans le terminal de commande ) install.packages(“tm”) # pour le text mining install.packages(“SnowballC”) # pour le text stemming install.packages(“wordcloud”) # générateur de word-cloud install.packages(“RColorBrewer”) # Palettes de couleurs les packages recquis pour le code et de charger (à chaque fois ) les librairies requisent pour le code.</p>
+<p><img src="dplyr.png" alt="Texte alternatif de l'image" title="Titre de l'image" width="160" height="160"></p>
+<p>Nous utiliserons dplyr comme package. dplyr est une grammaire de manipulation de données, fournissant un ensemble cohérent de verbes qui vous aide à résoudre les problèmes de manipulation de données les plus courants. <a href="https://www.rdocumentation.org/packages/dplyr/versions/0.7.8" class="uri">https://www.rdocumentation.org/packages/dplyr/versions/0.7.8</a></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- library ----</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tm"</span>) <span class="co"># pour le text mining</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Librairie nécessaire pour le code ----</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: le package 'tm' a été compilé avec la version R 4.2.3</code></pre>
+<pre><code>Warning: le package 'dplyr' a été compilé avec la version R 4.2.3</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co">#pour utiliser "%&gt;%" (ou pipe) définit en dessous</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Le chargement a nécessité le package : NLP</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"SnowballC"</span>) <span class="co"># pour le text stemming</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: le package 'SnowballC' a été compilé avec la version R 4.2.3</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"wordcloud"</span>) <span class="co"># générateur de word-cloud </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: le package 'wordcloud' a été compilé avec la version R 4.2.3</code></pre>
+<pre><code>Warning: le package 'tidyverse' a été compilé avec la version R 4.2.3</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Le chargement a nécessité le package : RColorBrewer</code></pre>
+<pre><code>Warning: le package 'ggplot2' a été compilé avec la version R 4.2.3</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"RColorBrewer"</span>) <span class="co"># pour charger des couleurs dans le nuage de mot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: le package 'tibble' a été compilé avec la version R 4.2.3</code></pre>
 </div>
-<p>Le <em>text-mining</em> (ou fouille de texte) est une technique d’analyse de données qui consiste à extraire des informations significatives à partir de données textuelles non structurées telles que des documents, des e-mails, des pages web, des tweets, etc.</p>
-<p>Le <em>stemming</em> est une technique de traitement automatique du langage naturel (TALN) qui consiste à réduire les mots à leur forme racine ou à leur base lexicale, en éliminant les suffixes ou les terminaisons des mots. Par exemple, le stemming pourrait transformer les mots “manger”, “mangeais” et “mangé” en leur forme racine “mang”.</p>
-<p>J’ai choisis une publication de Mathieu Trachman datant de 2022 intitulé “Très masculin, pas très féminine. Les variations sociales du genre”, Population et Sociétés: 1-4, pour illustrer mon exemple.</p>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: le package 'purrr' a été compilé avec la version R 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: le package 'stringr' a été compilé avec la version R 4.2.3</code></pre>
+</div>
+</div>
+<p>Une fois la librairie importée, nous devons importer les donnés pour pouvoir travailler dessus. Nous utilisons ici un exemple de fichier de traitement de données portant sur le titanic. Nous utiliserons le package Rio pour les importer.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lire le fichier texte</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>filePath <span class="ot">&lt;-</span> <span class="st">"genre.txt"</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>text <span class="ot">&lt;-</span> <span class="fu">readLines</span>(filePath)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in readLines(filePath): ligne finale incomplète trouvée dans
-'genre.txt'</code></pre>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(starwars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Charger les données comme un corpus</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>docs <span class="ot">&lt;-</span> <span class="fu">Corpus</span>(<span class="fu">VectorSource</span>(text))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Par la suite, il faut transformer un peu le texte pour ne gardez que l’essentiel, le coeur du sujet. Il faut donc supprimer les “stopword” (le,la,une,des,…).</p>
+<p>Mais comment puis-je <strong>filtrer</strong> ma table pour n’obtenir que les passagers situé dans la classe 2 à bord du titanic ?</p>
+<p>Le “pipe” ou opérateur “%&gt;%” en R permet d’enchaîner les opérations sur une table sans avoir à répéter le nom de la table à chaque étape. Cela simplifie la syntaxe et rend le code plus lisible en permettant d’écrire des enchaînements d’opérations sur une table de manière plus concise et efficace.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Transofrmation du texte ----</span></span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>starwars<span class="ot">&lt;-</span>starwars <span class="sc">%&gt;%</span> <span class="fu">filter</span>(species<span class="sc">==</span><span class="st">"Human"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># sans l'opérateur %&gt;% on aurait : </span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>starwars_filtered <span class="ot">&lt;-</span> <span class="fu">filter</span>(starwars, species <span class="sc">==</span> <span class="st">"Human"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># une autre façon de filter sans utiliser le package dplyr est </span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>starwars_filtered <span class="ot">&lt;-</span> starwars[starwars<span class="sc">$</span>species <span class="sc">==</span> <span class="st">"Human"</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Comment est-ce que je peut <strong>ajouter</strong> des données à mon dataframe?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#avec dplyr on utilise la fonction mutate() pour ajouter des colonnes</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># a notre dataframe. Pour afficher la nouvelle colonne dans le dataframe </span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#on rajoute la commande select(nouvelle_colonne,everything())</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">moyenne=</span><span class="fu">mean</span>(<span class="fu">is.na</span>(mass))) <span class="sc">%&gt;%</span> <span class="fu">select</span>(moyenne,<span class="fu">everything</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Comment est-ce que je peux <em>selectionner</em> uniquement les colonnes qui m’interesse pour mon travail?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">select</span>(species,gender) <span class="co">#on selectionne ici l'espèce et le genre</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Comment est-ce que je peux <strong>grouper</strong> mes données ?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(species) <span class="co"># regroupe par espèce</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>toSpace <span class="ot">&lt;-</span> <span class="fu">content_transformer</span>(<span class="cf">function</span> (x , pattern ) <span class="fu">gsub</span>(pattern, <span class="st">" "</span>, x)) </span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertir le texte en minuscule</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>docs <span class="ot">&lt;-</span> <span class="fu">tm_map</span>(docs, <span class="fu">content_transformer</span>(tolower)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in tm_map.SimpleCorpus(docs, content_transformer(tolower)):
-transformation drops documents</code></pre>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#La fonction tapply() est une autre fonction de base de R </span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#qui permet de regrouper les données selon une ou plusieurs variables</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>avg_height_by_species <span class="ot">&lt;-</span> <span class="fu">tapply</span>(starwars<span class="sc">$</span>height, starwars<span class="sc">$</span>species, mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">#La fonction aggregate() est une fonction de base de R qui permet de regrouper les données selon une ou plusieurs variables </span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>avg_height_by_species <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(starwars<span class="sc">$</span>height, <span class="at">by =</span> <span class="fu">list</span>(starwars<span class="sc">$</span>species), <span class="at">FUN =</span> mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Supprimer les mots vides anglais</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>docs <span class="ot">&lt;-</span> <span class="fu">tm_map</span>(docs, removeWords, <span class="fu">stopwords</span>(<span class="st">"fr"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in tm_map.SimpleCorpus(docs, removeWords, stopwords("fr")):
-transformation drops documents</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Supprimer votre propre liste de mots non désirés</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>docs <span class="ot">&lt;-</span> <span class="fu">tm_map</span>(docs, removeWords, <span class="fu">c</span>(<span class="st">"blabla1"</span>, <span class="st">"'"</span>, <span class="st">"chez"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in tm_map.SimpleCorpus(docs, removeWords, c("blabla1", "'", "chez")):
-transformation drops documents</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Supprimer les ponctuations</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>docs <span class="ot">&lt;-</span> <span class="fu">tm_map</span>(docs, removePunctuation)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in tm_map.SimpleCorpus(docs, removePunctuation): transformation drops
-documents</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Supprimer les espaces vides supplémentaires</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>docs <span class="ot">&lt;-</span> <span class="fu">tm_map</span>(docs, stripWhitespace)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in tm_map.SimpleCorpus(docs, stripWhitespace): transformation drops
-documents</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">inspect</span>(docs) <span class="co">#inspecter le document</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>S’il on veut supprimer des nombres, on utilise la syntaxe : “docs &lt;- tm_map(docs, removeNumbers)”</p>
-<p>On réalise ensuite une table de fréquence d’apparition des mots</p>
-<p>::: {.cell}</p>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># table de fréquence de mot (voir table d'occurence)</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>dtm <span class="ot">&lt;-</span> <span class="fu">TermDocumentMatrix</span>(docs)</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(dtm)</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">rowSums</span>(m),<span class="at">decreasing=</span><span class="cn">TRUE</span>)</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">word =</span> <span class="fu">names</span>(v),<span class="at">freq=</span>v)</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(d, <span class="dv">12</span>) <span class="co"># affiche les 12 mots avec les plus grosses fréquences. </span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="fu">wordcloud</span>(<span class="at">words =</span> d<span class="sc">$</span>word, <span class="at">freq =</span> d<span class="sc">$</span>freq, <span class="at">min.freq =</span> <span class="dv">4</span>,</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">max.words=</span><span class="dv">200</span>, <span class="at">random.order=</span><span class="cn">FALSE</span>, <span class="at">rot.per=</span><span class="fl">0.35</span>, </span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">colors=</span><span class="fu">brewer.pal</span>(<span class="dv">8</span>, <span class="st">"Paired"</span>)) <span class="co">#réalisation du nuage de mots.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>::: {.cell-output-display} <img src="nuage_de_mot_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"> :::</p>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On pourrait faire quelque chose de beaucoup plus neutre en terme de couleur avec la commande :</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="fu">wordcloud</span>(<span class="at">words =</span> d<span class="sc">$</span>word, <span class="at">freq =</span> d<span class="sc">$</span>freq, <span class="at">min.freq =</span> <span class="dv">4</span>,</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">max.words=</span><span class="dv">200</span>, <span class="at">random.order=</span><span class="cn">FALSE</span>, <span class="at">rot.per=</span><span class="fl">0.35</span>, </span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">colors=</span><span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>::: {.cell-output-display} <img src="nuage_de_mot_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid" width="672"> ::: :::</p>
-<p>C’est quoi le <strong>set.seed(1234)</strong> ? Lorsque vous utilisez une graine aléatoire (le set.seed(1234)), cela garantit que les résultats de votre analyse seront les mêmes à chaque fois que vous exécutez le code. Cela est particulièrement important lorsque vous travaillez avec des fonctions qui impliquent une certaine forme d’aléatoire, comme la génération de nuages de mots.</p>
-<p>Ainsi, si vous utilisez la même graine aléatoire (par exemple, 1234) dans votre code chaque fois que vous exécutez l’analyse, vous obtiendrez toujours les mêmes résultats, ce qui facilite la reproductibilité de votre analyse. Sans fixer la graine aléatoire, la génération du nuage de mots peut varier à chaque exécution, car les fonctions qui génèrent le nuage de mots utilisent généralement des algorithmes aléatoires pour placer les mots dans l’espace et choisir les couleurs. Cela signifie que chaque fois que vous exécutez le code, vous obtiendrez un nuage de mots différent, même si les données d’entrée sont les mêmes.</p>
-<p>Pour en apprendre plus sur la constrcution des images de mots : <a href="http://www.sthda.com/french/wiki/text-mining-et-nuage-de-mots-avec-le-logiciel-r-5-etapes-simples-a-savoir" class="uri">http://www.sthda.com/french/wiki/text-mining-et-nuage-de-mots-avec-le-logiciel-r-5-etapes-simples-a-savoir</a></p>
+<p>Pour en apprendre plus sur dplyr :</p>
+<p><a href="https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html" class="uri">https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html</a></p>
 
 
 
