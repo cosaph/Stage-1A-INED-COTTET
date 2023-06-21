@@ -1,6 +1,22 @@
 ---
 title: "Stage-INED"
+sidebar: false
+page-layout: custom
+
+
+listing:
+  - id: R
+    contents: 
+    - /R
+    type: grid
+    categories: true
+    filter-ui: false
+    page-size: 3
+    feed: false
+    max-description-length: 300
+    
 ---
+
 
 Ce site a été créé dans le cadre de mon stage de première année à l'INED. Mon objectif est de rédiger une série d'articles sur l'utilisation de R pour soutenir les chercheurs.es dans leurs travaux.
 
@@ -9,7 +25,7 @@ R est un langage de programmation et un environnement statistique largement util
 
 
 <a href="mailto:vcoralie.cottet@hotmail.fr">
-  <img src="mail.PNG" alt="Logo email" width=50 lenght=50>
+  <img src="mail.PNG" alt="Logo email" width=65 lenght=65>
 </a>
 
 

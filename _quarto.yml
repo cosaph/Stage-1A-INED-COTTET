@@ -3,23 +3,44 @@ project:
   output-dir: docs 
 
 website:
-  title: "Stage-1A-INED-COTTET"
-  navbar:
-    left:
-      - href: index.qmd
-        text: Home
-      - Package_mapsf/map_sf.qmd
-      - Package_mapsf/R_cartographie.qmd
-      - Nuage_de_mot/nuage_de_mot.qmd
-      - Nuage_de_mot/nuage_de_mot_rtemis.qmd
-      - Package_purrr/package_purrr.qmd
-      - Package_dplyr/quarto_dplyr.qmd
-      - Package_rio/Rio_package.qmd
+   navbar:
+    logo: outil_R.PNG
+    collapse-below: lg
+    right:
+      - text: "R"
+        href: R/index.qmd
+        menu:
+          - text: "Package mapsf"
+            href: R/Package_mapsf/map_sf.qmd
+          - text: "Package cartographie en R"
+            href: R/Package_mapsf/R_cartographie.qmd
+          - text: "Nuage de mots avec R"
+            href: R/Nuage_de_mot/nuage_de_mot.qmd
+          - text: "Nuage de mots avec RTemis"
+            href: R/Nuage_de_mot/nuage_de_mot_rtemis.qmd
+          - text: "Package purrr"
+            href: R/Package_purrr/package_purrr.qmd
+          - text: "Package dplyr"
+            href: R/Package_dplyr/quarto_dplyr.qmd
+          - text: "Package rio"
+            href: R/Package_rio/Rio_package.qmd
+    
+
 
 format:
   html:
-    theme: lux
-    css: styles.css
+    theme: [lux, sms.scss]
+    css: sms.css
     toc: true
-
+    logo-size: 100px
+    grid:
+     sidebar-width: 800px
+     body-width:    800px
+     margin-width:  100px
+    code-line-numbers: true
+    code-copy: true
+    code-tools:
+      source: true
+highlight-style: dracula
+   
 

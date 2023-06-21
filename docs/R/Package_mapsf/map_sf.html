@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.361">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="COTTET Coralie">
+<meta name="dcterms.date" content="2023-06-06">
+
+<title>Mapsf</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../sms.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../outil_R.PNG" alt="" class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../R/index.html" rel="" target="">
+ <span class="menu-text">R</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Mapsf</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+  <div class="quarto-categories">
+    <div class="quarto-category">R</div>
+  </div>
+  </div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">COTTET Coralie </p>
+  </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 6, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Nous allons réaliser des cartes avec R à l’aide du packages install.packages(“mapsf”).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(mapsf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: le package 'mapsf' a été compilé avec la version R 4.2.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: le package 'sf' a été compilé avec la version R 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Linking to GEOS 3.9.3, GDAL 3.5.2, PROJ 8.2.1; sf_use_s2() is TRUE</code></pre>
+</div>
+</div>
+<p>Nous allons réaliser une carte des arrondissments de Paris. J’ai récupérer les données sur le site de Paris Data : <a href="https://opendata.paris.fr/pages/catalogue/?disjunctive.theme&amp;disjunctive.publisher" class="uri">https://opendata.paris.fr/pages/catalogue/?disjunctive.theme&amp;disjunctive.publisher</a></p>
+<p>Je réalise un fond de carte.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># ----- Import des données -----</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a>arrondissements <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">"https://opendata.paris.fr/explore/dataset/arrondissements/download/?format=geojson&amp;timezone=Europe/Berlin&amp;lang=fr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `OGRGeoJSON' from data source 
+  `https://opendata.paris.fr/explore/dataset/arrondissements/download/?format=geojson&amp;timezone=Europe/Berlin&amp;lang=fr' 
+  using driver `GeoJSON'
+Simple feature collection with 20 features and 9 fields
+Geometry type: POLYGON
+Dimension:     XY
+Bounding box:  xmin: 2.224078 ymin: 48.81558 xmax: 2.469761 ymax: 48.90216
+Geodetic CRS:  WGS 84</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>cours_deau<span class="ot">&lt;-</span><span class="fu">st_read</span>(<span class="at">dsn=</span><span class="st">"https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/plan-de-voirie-voies-deau/exports/geojson?lang=fr&amp;timezone=Europe%2FBerlin"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `OGRGeoJSON' from data source 
+  `https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/plan-de-voirie-voies-deau/exports/geojson?lang=fr&amp;timezone=Europe%2FBerlin' 
+  using driver `GeoJSON'
+Simple feature collection with 58 features and 25 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 2.224081 ymin: 48.81924 xmax: 2.450555 ymax: 48.90207
+Geodetic CRS:  WGS 84</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co">#Dans un premier temps je réalise mon fond de carte avec les arrondissments de Paris </span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="fu">mf_map</span>(<span class="at">x =</span> arrondissements, <span class="at">border =</span> <span class="st">"black"</span>) </span>
+<span id="cb10-3"><a href="#cb10-3"></a></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co">#Je rajoute les cours d'eau sur mon fond de carte avec l'argument "add=TRUE"</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="fu">mf_map</span>(<span class="at">x=</span>cours_deau,<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">border=</span><span class="st">"lightblue"</span>,<span class="at">col=</span><span class="st">"lightblue"</span>,<span class="at">add=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="map_sf_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># d'un point de vue esthétique je choisis d'appliquer un fond noir à mes cartes</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="fu">mf_theme</span>(<span class="st">"darkula"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Les différents type de cartes</strong></p>
+<p><img src="arbre_type_data.png" alt="Texte alternatif de l'image" title="Titre de l'image" width="700" height="500"></p>
+<p><strong>Les cartes à symboles proportionels</strong></p>
+<p>Les cartes à symboles proportionnels sont une méthode de représentation graphique utilisée pour visualiser les variables de stocks, ce qui correspond à des variables quantitatives absolues pour lesquelles la somme et la moyenne ont une signification.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>arrondissements<span class="sc">$</span>pop <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1012687</span>, <span class="dv">903036</span>, <span class="dv">1369857</span>, <span class="dv">1491027</span>, <span class="dv">1672009</span>, <span class="dv">1506475</span>, <span class="dv">1637163</span>, <span class="dv">1603380</span>, <span class="dv">1637542</span>, <span class="dv">1059282</span>, <span class="dv">1494945</span>, <span class="dv">1436205</span>, <span class="dv">1705774</span>, <span class="dv">1425805</span>, <span class="dv">236769</span>, <span class="dv">1668605</span>, <span class="dv">1674568</span>, <span class="dv">1539668</span>, <span class="dv">1421827</span>, <span class="dv">1829526</span>) <span class="co">#INSEE,2021</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="fu">mf_map</span>(<span class="at">x =</span> arrondissements, <span class="at">border =</span> <span class="st">"black"</span>)</span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="fu">mf_map</span>(<span class="at">x=</span>cours_deau,<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">border=</span><span class="st">"lightblue"</span>,<span class="at">col=</span><span class="st">"lightblue"</span>,<span class="at">add=</span><span class="cn">TRUE</span>)</span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="fu">mf_map</span>(</span>
+<span id="cb12-5"><a href="#cb12-5"></a>  <span class="at">x =</span> arrondissements,</span>
+<span id="cb12-6"><a href="#cb12-6"></a>  <span class="at">var =</span> <span class="st">"pop"</span>,</span>
+<span id="cb12-7"><a href="#cb12-7"></a>  <span class="at">type =</span> <span class="st">"prop"</span>,</span>
+<span id="cb12-8"><a href="#cb12-8"></a>  <span class="at">leg_title =</span> <span class="st">"Population totale\12 271 794"</span>,</span>
+<span id="cb12-9"><a href="#cb12-9"></a>  <span class="at">col=</span><span class="st">"#F39487"</span>,</span>
+<span id="cb12-10"><a href="#cb12-10"></a>  <span class="at">add=</span> <span class="cn">TRUE</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a>)</span>
+<span id="cb12-12"><a href="#cb12-12"></a></span>
+<span id="cb12-13"><a href="#cb12-13"></a><span class="fu">mf_title</span>(<span class="st">"Distribution de la population dans Paris"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="map_sf_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><strong>Les cartes choroplètes</strong></p>
+<p>Les cartes choroplèthes sont une méthode courante de représentation graphique utilisée pour visualiser les variables de ratios, qui correspondent à des variables quantitatives relatives pour lesquelles la moyenne a un sens, mais la somme n’a pas de sens.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">#création de la variable densite </span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>arrondissements<span class="sc">$</span>DENS <span class="ot">&lt;-</span> <span class="fl">1e6</span> <span class="sc">*</span> arrondissements<span class="sc">$</span>pop <span class="sc">/</span> <span class="fu">as.numeric</span>(<span class="fu">st_area</span>(arrondissements))</span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="fu">mf_map</span>(</span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="at">x =</span> arrondissements,</span>
+<span id="cb13-5"><a href="#cb13-5"></a>  <span class="at">var =</span> <span class="st">"DENS"</span>,</span>
+<span id="cb13-6"><a href="#cb13-6"></a>  <span class="at">type =</span> <span class="st">"choro"</span>,</span>
+<span id="cb13-7"><a href="#cb13-7"></a>  <span class="at">breaks =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb13-8"><a href="#cb13-8"></a>  <span class="at">pal =</span> <span class="st">"Reds"</span>,</span>
+<span id="cb13-9"><a href="#cb13-9"></a>  <span class="at">lwd =</span> <span class="dv">1</span>,</span>
+<span id="cb13-10"><a href="#cb13-10"></a>  <span class="at">leg_title =</span> <span class="st">"Densité de population</span><span class="sc">\n</span><span class="st">(habitants par km2)"</span>, </span>
+<span id="cb13-11"><a href="#cb13-11"></a>  <span class="at">leg_val_rnd =</span> <span class="dv">0</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a>)</span>
+<span id="cb13-13"><a href="#cb13-13"></a></span>
+<span id="cb13-14"><a href="#cb13-14"></a><span class="fu">mf_title</span>(<span class="st">"Distribution de la population dans Paris (INSEE,2021)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="map_sf_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>On peut aussi représenter ces variables sous d’autres forme:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>arr_c<span class="ot">&lt;-</span><span class="fu">st_centroid</span>(arrondissements)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: st_centroid assumes attributes are constant over geometries</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">mf_map</span>(<span class="at">x =</span> arrondissements, <span class="at">border =</span> <span class="st">"black"</span>)</span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="fu">mf_map</span>(<span class="at">x=</span>cours_deau,<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">border=</span><span class="st">"lightblue"</span>,<span class="at">col=</span><span class="st">"lightblue"</span>,<span class="at">add=</span><span class="cn">TRUE</span>)</span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="fu">mf_map</span>(</span>
+<span id="cb16-4"><a href="#cb16-4"></a>  <span class="at">x =</span> arr_c,</span>
+<span id="cb16-5"><a href="#cb16-5"></a>  <span class="at">var =</span> <span class="st">"DENS"</span>,</span>
+<span id="cb16-6"><a href="#cb16-6"></a>  <span class="at">type =</span> <span class="st">"choro"</span>,</span>
+<span id="cb16-7"><a href="#cb16-7"></a>  <span class="at">breaks =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb16-8"><a href="#cb16-8"></a>  <span class="at">pal =</span> <span class="st">"Inferno"</span>,</span>
+<span id="cb16-9"><a href="#cb16-9"></a>  <span class="at">pch =</span> <span class="dv">24</span>,</span>
+<span id="cb16-10"><a href="#cb16-10"></a>  <span class="at">cex =</span> <span class="dv">2</span>,</span>
+<span id="cb16-11"><a href="#cb16-11"></a>  <span class="at">border =</span> <span class="st">"#F29094"</span>,</span>
+<span id="cb16-12"><a href="#cb16-12"></a>  <span class="at">lwd =</span> <span class="dv">1</span>,</span>
+<span id="cb16-13"><a href="#cb16-13"></a>  <span class="at">leg_title =</span> <span class="st">"Densité de population</span><span class="sc">\n</span><span class="st">(habitants par km2)"</span>, </span>
+<span id="cb16-14"><a href="#cb16-14"></a>  <span class="at">leg_val_rnd =</span> <span class="dv">0</span>,</span>
+<span id="cb16-15"><a href="#cb16-15"></a>  <span class="at">add=</span> <span class="cn">TRUE</span></span>
+<span id="cb16-16"><a href="#cb16-16"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="map_sf_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Et si on regroupait deux arrondissemtns ?</p>
+<p>Le code ci-dessous montre la fusion du 15e et 16e arrondissement. L’idée globale du code c’est de fusionner les deux polygones (celui du 15e et du 16e). Ensuite, on recrée toute la ligne de notre tableau de donnée pour pouvoir la fusionner avec celui-ci.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># ---- Fusionner deux polygones ---- #</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="co"># Sélectionner les deux polygones que vous souhaitez fusionner</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a>poly1 <span class="ot">&lt;-</span> arrondissements[arrondissements<span class="sc">$</span>l_aroff <span class="sc">==</span> <span class="st">"Passy"</span>, ] <span class="co"># sélectionne le polygone avec le nom "Passy"</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a>poly2 <span class="ot">&lt;-</span> arrondissements[arrondissements<span class="sc">$</span>l_aroff <span class="sc">==</span> <span class="st">"Vaugirard"</span>, ] <span class="co"># sélectionne le polygone avec le nom "Vaugirard"</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a></span>
+<span id="cb17-7"><a href="#cb17-7"></a><span class="co"># Fusionner les polygones</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a>new_poly <span class="ot">&lt;-</span> <span class="fu">st_union</span>(poly1, poly2) <span class="co"># fusionne les deux polygones sélectionnés en un seul polygone</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: attribute variables are assumed to be spatially constant throughout
+all geometries</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># Ajouter la surface, la population, le périmètre et les coordonnées géographiques des deux polygones </span></span>
+<span id="cb19-2"><a href="#cb19-2"></a></span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="co">#l'idée c'est de recréer une nouvelle ligne pour notre nouveau polygone pour qu'on puisse le reinsérer dans notre tableau. </span></span>
+<span id="cb19-4"><a href="#cb19-4"></a></span>
+<span id="cb19-5"><a href="#cb19-5"></a>new_poly<span class="sc">$</span>surface <span class="ot">&lt;-</span> new_poly<span class="sc">$</span>surface <span class="sc">+</span> new_poly<span class="sc">$</span>surface<span class="fl">.1</span> <span class="co"># ajouter la surface des deux polygones</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a>new_poly<span class="sc">$</span>n_sq_co <span class="ot">&lt;-</span> new_poly<span class="sc">$</span>n_sq_co <span class="sc">+</span> new_poly<span class="sc">$</span>n_sq_co<span class="fl">.1</span> <span class="co"># ajouter la population des deux polygones</span></span>
+<span id="cb19-7"><a href="#cb19-7"></a>new_poly<span class="sc">$</span>perimetre <span class="ot">&lt;-</span> new_poly<span class="sc">$</span>perimetre <span class="sc">+</span> new_poly<span class="sc">$</span>perimetre<span class="fl">.1</span> <span class="co"># ajouter le périmètre des deux polygones</span></span>
+<span id="cb19-8"><a href="#cb19-8"></a>new_poly<span class="sc">$</span>n_sq_ar <span class="ot">&lt;-</span> new_poly<span class="sc">$</span>n_sq_ar <span class="sc">+</span> new_poly<span class="sc">$</span>n_sq_ar<span class="fl">.1</span> <span class="co"># ajouter les coordonnées géographiques des deux polygones</span></span>
+<span id="cb19-9"><a href="#cb19-9"></a></span>
+<span id="cb19-10"><a href="#cb19-10"></a><span class="co"># Modifier les informations de localisation</span></span>
+<span id="cb19-11"><a href="#cb19-11"></a>new_poly<span class="sc">$</span>l_aroff <span class="ot">&lt;-</span> <span class="st">"un nouvel arrondissement"</span> <span class="co"># changer le nom de l'arrondissement</span></span>
+<span id="cb19-12"><a href="#cb19-12"></a>new_poly<span class="sc">$</span>l_ar <span class="ot">&lt;-</span> <span class="st">"xxème Ardt"</span> <span class="co"># changer le numéro de l'arrondissement</span></span>
+<span id="cb19-13"><a href="#cb19-13"></a>new_poly<span class="sc">$</span>c_ar <span class="ot">&lt;-</span> <span class="st">"xx"</span> <span class="co"># changer le code de l'arrondissement</span></span>
+<span id="cb19-14"><a href="#cb19-14"></a>new_poly<span class="sc">$</span>c_arinsee <span class="ot">&lt;-</span> <span class="st">"75xxxx"</span> <span class="co"># changer le code INSEE de la commune</span></span>
+<span id="cb19-15"><a href="#cb19-15"></a></span>
+<span id="cb19-16"><a href="#cb19-16"></a><span class="co"># Sélectionner certaines colonnes pour créer un nouvel objet de données</span></span>
+<span id="cb19-17"><a href="#cb19-17"></a>arrondissements_test <span class="ot">&lt;-</span> <span class="fu">subset</span>(new_poly, <span class="at">select =</span> <span class="fu">c</span>(c_ar, l_aroff, surface, l_ar, n_sq_co, c_arinsee, n_sq_ar, perimetre, geom_x_y))</span>
+<span id="cb19-18"><a href="#cb19-18"></a><span class="co"># à noter qu'il est très important de mettre les éléments dans le même ordre que celui du tableau</span></span>
+<span id="cb19-19"><a href="#cb19-19"></a></span>
+<span id="cb19-20"><a href="#cb19-20"></a><span class="co"># Remplacer les informations de l'arrondissement "Passy" dans l'objet "arrondissements" par les nouvelles informations</span></span>
+<span id="cb19-21"><a href="#cb19-21"></a>arrondissements[arrondissements<span class="sc">$</span>l_aroff <span class="sc">==</span> <span class="st">"Passy"</span>, ] <span class="ot">&lt;-</span> arrondissements_test</span>
+<span id="cb19-22"><a href="#cb19-22"></a></span>
+<span id="cb19-23"><a href="#cb19-23"></a><span class="co"># Afficher la carte de l'objet "arrondissements" avec les frontières en noir</span></span>
+<span id="cb19-24"><a href="#cb19-24"></a><span class="fu">mf_map</span>(<span class="at">x =</span> arrondissements, <span class="at">border =</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="map_sf_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Pour la rédaction de cet article je me suis grandement inspirée du travail de Timothée Giraud.</p>
+<p><a href="https://rcarto.github.io/ined2022/07_mise_en_page.html" class="uri">https://rcarto.github.io/ined2022/07_mise_en_page.html</a></p>
+
+
+<!-- -->
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb20" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb20-1"><a href="#cb20-1"></a><span class="co">---</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="an">title:</span><span class="co"> "Mapsf"</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="an">toc-title:</span><span class="co"> ""</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="an">categories:</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="co">  - R</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a><span class="an">author:</span><span class="co"> "COTTET Coralie"</span></span>
+<span id="cb20-7"><a href="#cb20-7"></a><span class="an">affiliations:</span><span class="co"> INED</span></span>
+<span id="cb20-8"><a href="#cb20-8"></a></span>
+<span id="cb20-9"><a href="#cb20-9"></a><span class="an">date:</span><span class="co"> 06/06/2023</span></span>
+<span id="cb20-10"><a href="#cb20-10"></a><span class="co">---</span></span>
+<span id="cb20-11"><a href="#cb20-11"></a>Nous allons réaliser des cartes avec R à l'aide du packages install.packages("mapsf"). </span>
+<span id="cb20-12"><a href="#cb20-12"></a></span>
+<span id="cb20-13"><a href="#cb20-13"></a><span class="in">```{r results='hide'}</span></span>
+<span id="cb20-14"><a href="#cb20-14"></a><span class="fu">library</span>(mapsf)</span>
+<span id="cb20-15"><a href="#cb20-15"></a><span class="fu">library</span>(sf)</span>
+<span id="cb20-16"><a href="#cb20-16"></a></span>
+<span id="cb20-17"><a href="#cb20-17"></a><span class="in">```</span></span>
+<span id="cb20-18"><a href="#cb20-18"></a></span>
+<span id="cb20-19"><a href="#cb20-19"></a>Nous allons réaliser une carte des arrondissments de Paris. J'ai récupérer les données sur </span>
+<span id="cb20-20"><a href="#cb20-20"></a>le site de Paris Data : <span class="ot">&lt;https://opendata.paris.fr/pages/catalogue/?disjunctive.theme&amp;disjunctive.publisher&gt;</span></span>
+<span id="cb20-21"><a href="#cb20-21"></a></span>
+<span id="cb20-22"><a href="#cb20-22"></a>Je réalise un fond de carte.</span>
+<span id="cb20-25"><a href="#cb20-25"></a><span class="in">```{r}</span></span>
+<span id="cb20-26"><a href="#cb20-26"></a><span class="co"># ----- Import des données -----</span></span>
+<span id="cb20-27"><a href="#cb20-27"></a></span>
+<span id="cb20-28"><a href="#cb20-28"></a>arrondissements <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">"https://opendata.paris.fr/explore/dataset/arrondissements/download/?format=geojson&amp;timezone=Europe/Berlin&amp;lang=fr"</span>)</span>
+<span id="cb20-29"><a href="#cb20-29"></a></span>
+<span id="cb20-30"><a href="#cb20-30"></a>cours_deau<span class="ot">&lt;-</span><span class="fu">st_read</span>(<span class="at">dsn=</span><span class="st">"https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/plan-de-voirie-voies-deau/exports/geojson?lang=fr&amp;timezone=Europe%2FBerlin"</span>)</span>
+<span id="cb20-31"><a href="#cb20-31"></a></span>
+<span id="cb20-32"><a href="#cb20-32"></a><span class="in">```</span></span>
+<span id="cb20-33"><a href="#cb20-33"></a></span>
+<span id="cb20-36"><a href="#cb20-36"></a><span class="in">```{r}</span></span>
+<span id="cb20-37"><a href="#cb20-37"></a><span class="co">#Dans un premier temps je réalise mon fond de carte avec les arrondissments de Paris </span></span>
+<span id="cb20-38"><a href="#cb20-38"></a><span class="fu">mf_map</span>(<span class="at">x =</span> arrondissements, <span class="at">border =</span> <span class="st">"black"</span>) </span>
+<span id="cb20-39"><a href="#cb20-39"></a></span>
+<span id="cb20-40"><a href="#cb20-40"></a><span class="co">#Je rajoute les cours d'eau sur mon fond de carte avec l'argument "add=TRUE"</span></span>
+<span id="cb20-41"><a href="#cb20-41"></a><span class="fu">mf_map</span>(<span class="at">x=</span>cours_deau,<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">border=</span><span class="st">"lightblue"</span>,<span class="at">col=</span><span class="st">"lightblue"</span>,<span class="at">add=</span><span class="cn">TRUE</span>)</span>
+<span id="cb20-42"><a href="#cb20-42"></a></span>
+<span id="cb20-43"><a href="#cb20-43"></a><span class="in">```</span></span>
+<span id="cb20-44"><a href="#cb20-44"></a></span>
+<span id="cb20-47"><a href="#cb20-47"></a><span class="in">```{r}</span></span>
+<span id="cb20-48"><a href="#cb20-48"></a><span class="co"># d'un point de vue esthétique je choisis d'appliquer un fond noir à mes cartes</span></span>
+<span id="cb20-49"><a href="#cb20-49"></a><span class="fu">mf_theme</span>(<span class="st">"darkula"</span>)</span>
+<span id="cb20-50"><a href="#cb20-50"></a></span>
+<span id="cb20-51"><a href="#cb20-51"></a></span>
+<span id="cb20-52"><a href="#cb20-52"></a><span class="in">```</span></span>
+<span id="cb20-53"><a href="#cb20-53"></a>__Les différents type de cartes__</span>
+<span id="cb20-54"><a href="#cb20-54"></a></span>
+<span id="cb20-55"><a href="#cb20-55"></a></span>
+<span id="cb20-56"><a href="#cb20-56"></a><span class="kw">&lt;img</span> <span class="er">src</span><span class="ot">=</span><span class="st">"arbre_type_data.png"</span> <span class="er">alt</span><span class="ot">=</span><span class="st">"Texte alternatif de l'image"</span> <span class="er">title</span><span class="ot">=</span><span class="st">"Titre de l'image"</span> <span class="er">width</span><span class="ot">=</span><span class="st">"700"</span> <span class="er">height</span><span class="ot">=</span><span class="st">"500"</span> <span class="kw">/&gt;</span></span>
+<span id="cb20-57"><a href="#cb20-57"></a></span>
+<span id="cb20-58"><a href="#cb20-58"></a>__Les cartes à symboles proportionels__</span>
+<span id="cb20-59"><a href="#cb20-59"></a></span>
+<span id="cb20-60"><a href="#cb20-60"></a>Les cartes à symboles proportionnels sont une méthode de représentation graphique utilisée pour visualiser les variables de stocks, ce qui correspond à des variables quantitatives absolues pour lesquelles la somme et la moyenne ont une signification.</span>
+<span id="cb20-61"><a href="#cb20-61"></a></span>
+<span id="cb20-62"><a href="#cb20-62"></a><span class="in">```{r results= 'hide'}</span></span>
+<span id="cb20-63"><a href="#cb20-63"></a>arrondissements<span class="sc">$</span>pop <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1012687</span>, <span class="dv">903036</span>, <span class="dv">1369857</span>, <span class="dv">1491027</span>, <span class="dv">1672009</span>, <span class="dv">1506475</span>, <span class="dv">1637163</span>, <span class="dv">1603380</span>, <span class="dv">1637542</span>, <span class="dv">1059282</span>, <span class="dv">1494945</span>, <span class="dv">1436205</span>, <span class="dv">1705774</span>, <span class="dv">1425805</span>, <span class="dv">236769</span>, <span class="dv">1668605</span>, <span class="dv">1674568</span>, <span class="dv">1539668</span>, <span class="dv">1421827</span>, <span class="dv">1829526</span>) <span class="co">#INSEE,2021</span></span>
+<span id="cb20-64"><a href="#cb20-64"></a><span class="fu">mf_map</span>(<span class="at">x =</span> arrondissements, <span class="at">border =</span> <span class="st">"black"</span>)</span>
+<span id="cb20-65"><a href="#cb20-65"></a><span class="fu">mf_map</span>(<span class="at">x=</span>cours_deau,<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">border=</span><span class="st">"lightblue"</span>,<span class="at">col=</span><span class="st">"lightblue"</span>,<span class="at">add=</span><span class="cn">TRUE</span>)</span>
+<span id="cb20-66"><a href="#cb20-66"></a><span class="fu">mf_map</span>(</span>
+<span id="cb20-67"><a href="#cb20-67"></a>  <span class="at">x =</span> arrondissements,</span>
+<span id="cb20-68"><a href="#cb20-68"></a>  <span class="at">var =</span> <span class="st">"pop"</span>,</span>
+<span id="cb20-69"><a href="#cb20-69"></a>  <span class="at">type =</span> <span class="st">"prop"</span>,</span>
+<span id="cb20-70"><a href="#cb20-70"></a>  <span class="at">leg_title =</span> <span class="st">"Population totale\12 271 794"</span>,</span>
+<span id="cb20-71"><a href="#cb20-71"></a>  <span class="at">col=</span><span class="st">"#F39487"</span>,</span>
+<span id="cb20-72"><a href="#cb20-72"></a>  <span class="at">add=</span> <span class="cn">TRUE</span></span>
+<span id="cb20-73"><a href="#cb20-73"></a>)</span>
+<span id="cb20-74"><a href="#cb20-74"></a></span>
+<span id="cb20-75"><a href="#cb20-75"></a><span class="fu">mf_title</span>(<span class="st">"Distribution de la population dans Paris"</span>)</span>
+<span id="cb20-76"><a href="#cb20-76"></a><span class="in">```</span></span>
+<span id="cb20-77"><a href="#cb20-77"></a>__Les cartes choroplètes__</span>
+<span id="cb20-78"><a href="#cb20-78"></a></span>
+<span id="cb20-79"><a href="#cb20-79"></a></span>
+<span id="cb20-80"><a href="#cb20-80"></a>Les cartes choroplèthes sont une méthode courante de représentation graphique utilisée pour visualiser les variables de ratios, qui correspondent à des variables quantitatives relatives pour lesquelles la moyenne a un sens, mais la somme n'a pas de sens.</span>
+<span id="cb20-81"><a href="#cb20-81"></a></span>
+<span id="cb20-84"><a href="#cb20-84"></a><span class="in">```{r}</span></span>
+<span id="cb20-85"><a href="#cb20-85"></a><span class="co">#création de la variable densite </span></span>
+<span id="cb20-86"><a href="#cb20-86"></a>arrondissements<span class="sc">$</span>DENS <span class="ot">&lt;-</span> <span class="fl">1e6</span> <span class="sc">*</span> arrondissements<span class="sc">$</span>pop <span class="sc">/</span> <span class="fu">as.numeric</span>(<span class="fu">st_area</span>(arrondissements))</span>
+<span id="cb20-87"><a href="#cb20-87"></a><span class="fu">mf_map</span>(</span>
+<span id="cb20-88"><a href="#cb20-88"></a>  <span class="at">x =</span> arrondissements,</span>
+<span id="cb20-89"><a href="#cb20-89"></a>  <span class="at">var =</span> <span class="st">"DENS"</span>,</span>
+<span id="cb20-90"><a href="#cb20-90"></a>  <span class="at">type =</span> <span class="st">"choro"</span>,</span>
+<span id="cb20-91"><a href="#cb20-91"></a>  <span class="at">breaks =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb20-92"><a href="#cb20-92"></a>  <span class="at">pal =</span> <span class="st">"Reds"</span>,</span>
+<span id="cb20-93"><a href="#cb20-93"></a>  <span class="at">lwd =</span> <span class="dv">1</span>,</span>
+<span id="cb20-94"><a href="#cb20-94"></a>  <span class="at">leg_title =</span> <span class="st">"Densité de population</span><span class="sc">\n</span><span class="st">(habitants par km2)"</span>, </span>
+<span id="cb20-95"><a href="#cb20-95"></a>  <span class="at">leg_val_rnd =</span> <span class="dv">0</span></span>
+<span id="cb20-96"><a href="#cb20-96"></a>)</span>
+<span id="cb20-97"><a href="#cb20-97"></a></span>
+<span id="cb20-98"><a href="#cb20-98"></a><span class="fu">mf_title</span>(<span class="st">"Distribution de la population dans Paris (INSEE,2021)"</span>)</span>
+<span id="cb20-99"><a href="#cb20-99"></a></span>
+<span id="cb20-100"><a href="#cb20-100"></a><span class="in">```</span></span>
+<span id="cb20-101"><a href="#cb20-101"></a>On peut aussi représenter ces variables sous d'autres forme: </span>
+<span id="cb20-102"><a href="#cb20-102"></a></span>
+<span id="cb20-105"><a href="#cb20-105"></a><span class="in">```{r}</span></span>
+<span id="cb20-106"><a href="#cb20-106"></a>arr_c<span class="ot">&lt;-</span><span class="fu">st_centroid</span>(arrondissements)</span>
+<span id="cb20-107"><a href="#cb20-107"></a><span class="fu">mf_map</span>(<span class="at">x =</span> arrondissements, <span class="at">border =</span> <span class="st">"black"</span>)</span>
+<span id="cb20-108"><a href="#cb20-108"></a><span class="fu">mf_map</span>(<span class="at">x=</span>cours_deau,<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">border=</span><span class="st">"lightblue"</span>,<span class="at">col=</span><span class="st">"lightblue"</span>,<span class="at">add=</span><span class="cn">TRUE</span>)</span>
+<span id="cb20-109"><a href="#cb20-109"></a><span class="fu">mf_map</span>(</span>
+<span id="cb20-110"><a href="#cb20-110"></a>  <span class="at">x =</span> arr_c,</span>
+<span id="cb20-111"><a href="#cb20-111"></a>  <span class="at">var =</span> <span class="st">"DENS"</span>,</span>
+<span id="cb20-112"><a href="#cb20-112"></a>  <span class="at">type =</span> <span class="st">"choro"</span>,</span>
+<span id="cb20-113"><a href="#cb20-113"></a>  <span class="at">breaks =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb20-114"><a href="#cb20-114"></a>  <span class="at">pal =</span> <span class="st">"Inferno"</span>,</span>
+<span id="cb20-115"><a href="#cb20-115"></a>  <span class="at">pch =</span> <span class="dv">24</span>,</span>
+<span id="cb20-116"><a href="#cb20-116"></a>  <span class="at">cex =</span> <span class="dv">2</span>,</span>
+<span id="cb20-117"><a href="#cb20-117"></a>  <span class="at">border =</span> <span class="st">"#F29094"</span>,</span>
+<span id="cb20-118"><a href="#cb20-118"></a>  <span class="at">lwd =</span> <span class="dv">1</span>,</span>
+<span id="cb20-119"><a href="#cb20-119"></a>  <span class="at">leg_title =</span> <span class="st">"Densité de population</span><span class="sc">\n</span><span class="st">(habitants par km2)"</span>, </span>
+<span id="cb20-120"><a href="#cb20-120"></a>  <span class="at">leg_val_rnd =</span> <span class="dv">0</span>,</span>
+<span id="cb20-121"><a href="#cb20-121"></a>  <span class="at">add=</span> <span class="cn">TRUE</span></span>
+<span id="cb20-122"><a href="#cb20-122"></a>)</span>
+<span id="cb20-123"><a href="#cb20-123"></a></span>
+<span id="cb20-124"><a href="#cb20-124"></a><span class="in">```</span></span>
+<span id="cb20-125"><a href="#cb20-125"></a></span>
+<span id="cb20-126"><a href="#cb20-126"></a></span>
+<span id="cb20-127"><a href="#cb20-127"></a>Et si on regroupait deux arrondissemtns ?</span>
+<span id="cb20-128"><a href="#cb20-128"></a></span>
+<span id="cb20-129"><a href="#cb20-129"></a>Le code ci-dessous montre la fusion du 15e et 16e arrondissement.</span>
+<span id="cb20-130"><a href="#cb20-130"></a>L’idée globale du code c’est de fusionner les deux polygones (celui du 15e et du 16e). </span>
+<span id="cb20-131"><a href="#cb20-131"></a>Ensuite, on recrée toute la ligne de notre tableau de donnée pour pouvoir la fusionner avec celui-ci.</span>
+<span id="cb20-132"><a href="#cb20-132"></a></span>
+<span id="cb20-133"><a href="#cb20-133"></a><span class="in">```{r results= 'hide'}</span></span>
+<span id="cb20-134"><a href="#cb20-134"></a></span>
+<span id="cb20-135"><a href="#cb20-135"></a></span>
+<span id="cb20-136"><a href="#cb20-136"></a><span class="co"># ---- Fusionner deux polygones ---- #</span></span>
+<span id="cb20-137"><a href="#cb20-137"></a></span>
+<span id="cb20-138"><a href="#cb20-138"></a><span class="co"># Sélectionner les deux polygones que vous souhaitez fusionner</span></span>
+<span id="cb20-139"><a href="#cb20-139"></a>poly1 <span class="ot">&lt;-</span> arrondissements[arrondissements<span class="sc">$</span>l_aroff <span class="sc">==</span> <span class="st">"Passy"</span>, ] <span class="co"># sélectionne le polygone avec le nom "Passy"</span></span>
+<span id="cb20-140"><a href="#cb20-140"></a>poly2 <span class="ot">&lt;-</span> arrondissements[arrondissements<span class="sc">$</span>l_aroff <span class="sc">==</span> <span class="st">"Vaugirard"</span>, ] <span class="co"># sélectionne le polygone avec le nom "Vaugirard"</span></span>
+<span id="cb20-141"><a href="#cb20-141"></a></span>
+<span id="cb20-142"><a href="#cb20-142"></a><span class="co"># Fusionner les polygones</span></span>
+<span id="cb20-143"><a href="#cb20-143"></a>new_poly <span class="ot">&lt;-</span> <span class="fu">st_union</span>(poly1, poly2) <span class="co"># fusionne les deux polygones sélectionnés en un seul polygone</span></span>
+<span id="cb20-144"><a href="#cb20-144"></a></span>
+<span id="cb20-145"><a href="#cb20-145"></a><span class="co"># Ajouter la surface, la population, le périmètre et les coordonnées géographiques des deux polygones </span></span>
+<span id="cb20-146"><a href="#cb20-146"></a></span>
+<span id="cb20-147"><a href="#cb20-147"></a><span class="co">#l'idée c'est de recréer une nouvelle ligne pour notre nouveau polygone pour qu'on puisse le reinsérer dans notre tableau. </span></span>
+<span id="cb20-148"><a href="#cb20-148"></a></span>
+<span id="cb20-149"><a href="#cb20-149"></a>new_poly<span class="sc">$</span>surface <span class="ot">&lt;-</span> new_poly<span class="sc">$</span>surface <span class="sc">+</span> new_poly<span class="sc">$</span>surface<span class="fl">.1</span> <span class="co"># ajouter la surface des deux polygones</span></span>
+<span id="cb20-150"><a href="#cb20-150"></a>new_poly<span class="sc">$</span>n_sq_co <span class="ot">&lt;-</span> new_poly<span class="sc">$</span>n_sq_co <span class="sc">+</span> new_poly<span class="sc">$</span>n_sq_co<span class="fl">.1</span> <span class="co"># ajouter la population des deux polygones</span></span>
+<span id="cb20-151"><a href="#cb20-151"></a>new_poly<span class="sc">$</span>perimetre <span class="ot">&lt;-</span> new_poly<span class="sc">$</span>perimetre <span class="sc">+</span> new_poly<span class="sc">$</span>perimetre<span class="fl">.1</span> <span class="co"># ajouter le périmètre des deux polygones</span></span>
+<span id="cb20-152"><a href="#cb20-152"></a>new_poly<span class="sc">$</span>n_sq_ar <span class="ot">&lt;-</span> new_poly<span class="sc">$</span>n_sq_ar <span class="sc">+</span> new_poly<span class="sc">$</span>n_sq_ar<span class="fl">.1</span> <span class="co"># ajouter les coordonnées géographiques des deux polygones</span></span>
+<span id="cb20-153"><a href="#cb20-153"></a></span>
+<span id="cb20-154"><a href="#cb20-154"></a><span class="co"># Modifier les informations de localisation</span></span>
+<span id="cb20-155"><a href="#cb20-155"></a>new_poly<span class="sc">$</span>l_aroff <span class="ot">&lt;-</span> <span class="st">"un nouvel arrondissement"</span> <span class="co"># changer le nom de l'arrondissement</span></span>
+<span id="cb20-156"><a href="#cb20-156"></a>new_poly<span class="sc">$</span>l_ar <span class="ot">&lt;-</span> <span class="st">"xxème Ardt"</span> <span class="co"># changer le numéro de l'arrondissement</span></span>
+<span id="cb20-157"><a href="#cb20-157"></a>new_poly<span class="sc">$</span>c_ar <span class="ot">&lt;-</span> <span class="st">"xx"</span> <span class="co"># changer le code de l'arrondissement</span></span>
+<span id="cb20-158"><a href="#cb20-158"></a>new_poly<span class="sc">$</span>c_arinsee <span class="ot">&lt;-</span> <span class="st">"75xxxx"</span> <span class="co"># changer le code INSEE de la commune</span></span>
+<span id="cb20-159"><a href="#cb20-159"></a></span>
+<span id="cb20-160"><a href="#cb20-160"></a><span class="co"># Sélectionner certaines colonnes pour créer un nouvel objet de données</span></span>
+<span id="cb20-161"><a href="#cb20-161"></a>arrondissements_test <span class="ot">&lt;-</span> <span class="fu">subset</span>(new_poly, <span class="at">select =</span> <span class="fu">c</span>(c_ar, l_aroff, surface, l_ar, n_sq_co, c_arinsee, n_sq_ar, perimetre, geom_x_y))</span>
+<span id="cb20-162"><a href="#cb20-162"></a><span class="co"># à noter qu'il est très important de mettre les éléments dans le même ordre que celui du tableau</span></span>
+<span id="cb20-163"><a href="#cb20-163"></a></span>
+<span id="cb20-164"><a href="#cb20-164"></a><span class="co"># Remplacer les informations de l'arrondissement "Passy" dans l'objet "arrondissements" par les nouvelles informations</span></span>
+<span id="cb20-165"><a href="#cb20-165"></a>arrondissements[arrondissements<span class="sc">$</span>l_aroff <span class="sc">==</span> <span class="st">"Passy"</span>, ] <span class="ot">&lt;-</span> arrondissements_test</span>
+<span id="cb20-166"><a href="#cb20-166"></a></span>
+<span id="cb20-167"><a href="#cb20-167"></a><span class="co"># Afficher la carte de l'objet "arrondissements" avec les frontières en noir</span></span>
+<span id="cb20-168"><a href="#cb20-168"></a><span class="fu">mf_map</span>(<span class="at">x =</span> arrondissements, <span class="at">border =</span> <span class="st">"black"</span>)</span>
+<span id="cb20-169"><a href="#cb20-169"></a></span>
+<span id="cb20-170"><a href="#cb20-170"></a><span class="in">```</span></span>
+<span id="cb20-171"><a href="#cb20-171"></a>Pour la rédaction de cet article je me suis grandement inspirée du travail de Timothée Giraud.</span>
+<span id="cb20-172"><a href="#cb20-172"></a></span>
+<span id="cb20-173"><a href="#cb20-173"></a></span>
+<span id="cb20-174"><a href="#cb20-174"></a></span>
+<span id="cb20-175"><a href="#cb20-175"></a><span class="ot">&lt;https://rcarto.github.io/ined2022/07_mise_en_page.html&gt;</span></span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

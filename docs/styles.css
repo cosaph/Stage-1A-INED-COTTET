@@ -18,3 +18,11 @@ h3 {
 a {
   color: white;
 }
+
+.navbar-nav .nav-link {
+  background-image: url('outil_R.PNG');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  padding-left: 1000px;
+}
