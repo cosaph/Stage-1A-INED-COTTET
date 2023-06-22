@@ -4,6 +4,7 @@
   padding-top: 0px;
   padding-bottom: 0px;
   font-family: 'Open sans', sans-serif;
+  background-color: #131311;
   font-size: 1.75em;
 }
 
@@ -90,7 +91,7 @@
   clear: both;
   font-weight: 400;
   font-size: 25px;
-  color: #37424a;
+  color: white;
   text-align: inherit;
   /* text-decoration: none; */
   text-transform: uppercase;
@@ -101,13 +102,14 @@
 
 /*-- quarto titles --*/
 
+/* -- Page principale R */
 #title-block-header {
   margin-block-end: 1rem;
   position: relative;
   margin-top: -1px;
   margin-bottom: 1.8em;
   border-bottom: 1px solid white;
-  background-color: white;;
+  background-color: black;;
 }
 
 .quarto-title-banner {
@@ -130,14 +132,14 @@
 
 .quarto-title-banner .quarto-title .title {
   font-weight: 1000;
-  color:  #37424a;
+  color:  white;
 }
 
 #title-block-header.quarto-title-block.default .description {
   margin-top: 1.5em;
   font-weight: 400;
   font-size: 1.2em;
-  color: black;
+  color: white;
 }
 
 
@@ -156,7 +158,7 @@
   font-family: 'Roboto', sans-serif;
   font-size: .9em;
   font-weight: 400;
-  color: #37424a;
+  color: white;
   text-transform: uppercase;
   border: solid 1px;
   border-radius: 0.25rem;
@@ -167,6 +169,8 @@
   margin-bottom: 2.5em;
 }
 
+/* -- Auteur,affiliation ,publication -- */
+
 #title-block-header.quarto-title-block.default .quarto-title-meta-heading {
   font-family: 'Open Sans', sans-serif;
   text-transform: uppercase;
@@ -174,7 +178,7 @@
   font-size: 0.9em;
   opacity: 1;
   font-weight: 400;
-  color: black;
+  color: white;
 }
 
 #title-block-header.quarto-title-block.default .quarto-title-meta-contents {
@@ -183,7 +187,7 @@
   font-weight: 400;
   opacity: 0.8;
   font-size: 0.9em;
-  color: #37424a;
+  color: white;
 }
 
 
@@ -195,11 +199,13 @@ body.nav-fixed {
 }
 
 #quarto-content {
-  background-color: white;
+  background-color: black;
+  color: white;
 }
 
 #quarto-content>* {
   padding-top: 0;
+  
 }
 
 h2.anchored {
@@ -216,7 +222,7 @@ blockquote {
   font-size: inherit;
   padding-left: 1rem;
   padding-right: 1.5rem;
-  color: black;
+  color: white;
 }
 
 .panel-caption, .figure-caption, figcaption {
@@ -289,7 +295,7 @@ div.csl-entry {
 
 .page-item.active .page-link {
     z-index: 3;
-    color: #fff;
+    color:white;
     background-color: #37424a;
     border-color: black;
 }
@@ -406,12 +412,12 @@ div.csl-entry {
 }
 
 .table-caption, caption {
-  color: black;
+  color: white;
   font-size: 0.825rem;
 }
 
 .table-caption, caption b {
-  color: black;
+  color: white;
 }
 
 
@@ -431,7 +437,7 @@ h6,
 h1, .h1 {
   font-family: 'Open Sans', sans-serif;
   font-weight: 500;
-  color: black;
+  color: white;
   text-transform: uppercase;
   letter-spacing: normal;
 }
@@ -439,7 +445,7 @@ h1, .h1 {
 h2, .h2 {
   font-family: 'Open Sans', sans-serif;
   font-weight: 500;
-  color: black;
+  color: white;
   text-transform: none;
   border-bottom: none;
   letter-spacing: normal;
@@ -448,6 +454,7 @@ h2, .h2 {
 @media (max-width: 991.98px) {
 #quarto-content section:first-of-type h2:first-of-type, #quarto-content section:first-of-type .h2:first-of-type {
     margin-top: 1.5rem;
+    
 }
 }
 
@@ -459,12 +466,13 @@ h5,
   font-weight: 500;
   text-transform: none;
   letter-spacing: normal;
+  ;
 }
 
 body {
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
-  color: black;
+  color: white;
   letter-spacing: normal;
 }
 
@@ -473,34 +481,35 @@ a {
 }
 
 p > a {
-  color: #37424a;
+  color: white;
   font-weight: 700;
   /* text-decoration: none;  */
 }
 
 b, strong a {
   /* text-decoration: none; */
-  color: #37424a;
+  color: white;
 }
 
 ul a {
-  color: #37424a;
+  color:white;
   font-weight: 700;
   /* text-decoration: none;  */
 }
 
 dd a {
-  color: #37424a;
+  color: white;
   font-weight: 700;
-  /* text-decoration: none;  */
+  /* text-decoration: none;  */ 
 }
 
-/* a.listing-title {
+ a.listing-title {
   text-decoration: none;
-} */
-
+  color: white;
+} 
+ /* concerne le menu d'acceuil de R  */ 
 .table {
-  color: black;
+  color: white;
 }
 
 .table th, .table td {
@@ -512,14 +521,14 @@ th {
 }
 
 tr {
-  border-color: black;
+  border-color: white;
 }
 
 
 /*-- listing styles --*/
 
 div.quarto-post {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid white;
 }
 
 div.quarto-post .metadata {
@@ -529,8 +538,8 @@ div.quarto-post .metadata {
 }
 
 div.quarto-post .listing-categories .listing-category {
-  color: #37424a;
-  border: solid 1px #37424a;
+  color: white;
+  border: solid 1px white;
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   font-size: .75em;
@@ -553,18 +562,18 @@ div.quarto-post a {
 
 .quarto-listing-category .category.active {
   font-weight: 500;
-  color: #37424a;
+  color: white;
 }
 
 .nav-page .nav-page-text {
   font-family: 'Open Sans', sans-serif;
   font-weight: 500;
   text-transform: uppercase;
-  color: black;
+  color: white;
 }
 
 .nav-page .bi {
-  color: black;
+  color: white;
 }
 
 
@@ -574,7 +583,7 @@ div.quarto-post a {
   border: solid 0px ;
   border-color: gainsboro;
   border-radius: 1px ;
-  background-color: black;
+  background-color: white;
   overflow: hidden;
   filter:grayscale(2%);
   box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0), 0 0 0 2px rgb(255, 255, 255),
@@ -598,14 +607,15 @@ div.quarto-post a {
 }
 
 .quarto-grid-item .listing-categories {
+  background-color: white;
   display: flex;
   flex-wrap: wrap;
   padding-bottom: .5em;
 }
 
 .quarto-grid-item .listing-categories .listing-category {
-  color: #37424a;
-  border: solid 1px #37424a !important;
+  color: white;
+  border: solid 1px white !important;
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   font-size: .75em;
@@ -621,7 +631,7 @@ div.quarto-post a {
 .quarto-grid-item .card-attribution {
   font-family: 'Open Sans', sans-serif;
   font-weight: 500;
-  color: #37424A;
+  color: white;
   flex-grow: 10;
   align-items: flex-end;
 }
@@ -639,7 +649,7 @@ div.quarto-post a {
 
 /*-- callout styles --*/
 .callout {
-  background-color: white;
+  background-color: black;
 }
 
 
@@ -760,6 +770,7 @@ div.quarto-post a {
   position: relative;
   display: flex;
   justify-content: center;
+  background-color:black;
 }
 
 .header-banner .header-image {
@@ -787,17 +798,17 @@ div.quarto-post a {
   margin: 0 auto;
   padding-bottom: 1.8em; 
   box-sizing: border-box;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid white;
 }
 
 .listing-block h2 {
   /* margin-top: 1.5em; */
-  color: black;
+  color: white;
   text-transform: uppercase;
 }
 
 .listing-block h2:hover {
-  color: #37424a;
+  color: white;
 }
 
 
@@ -833,7 +844,7 @@ div.quarto-post a {
   margin-right: 1.5em;
   text-transform: none;
   text-decoration: none;
-  text-decoration-color:#37424a;
+  text-decoration-color:white;
   text-decoration-thickness: 3px;
   margin-bottom: 1.5rem;
 }
@@ -841,7 +852,7 @@ div.quarto-post a {
 .button {
   border: none;
   border-radius: 0px;
-  color: #37424A;
+  color: white;
   background-color: white;
   padding: 15px 32px;
   text-align: center;
@@ -853,7 +864,7 @@ div.quarto-post a {
 }
 
 .button p {
-  color: #37424A;
+  color:white;
   font-family: 'Open Sans', sans-serif;
   font-size: 1.3em;
   text-transform: uppercase;
@@ -862,7 +873,7 @@ div.quarto-post a {
 }
 
 .button a {
-  color: #37424A;
+  color: white;
   font-weight: 500;
 }
 

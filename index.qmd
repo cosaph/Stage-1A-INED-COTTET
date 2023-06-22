@@ -22,18 +22,14 @@ Ce site a été créé dans le cadre de mon stage de première année à l'INED.
 
 R est un langage de programmation et un environnement statistique largement utilisé dans le domaine de la recherche. Il est particulièrement populaire dans les domaines des statistiques, de la bioinformatique, de l'économétrie, de la finance et de l'analyse des données en général.
 
-
-
-<a href="mailto:vcoralie.cottet@hotmail.fr">
-  <img src="mail.PNG" alt="Logo email" width=65 lenght=65>
-</a>
-
-
-<a href="https://www.linkedin.com/in/coralie-c-05926b130">
-  <img src="logo_linkedin.png" alt="Logo LinkedIn" width=50 lenght=50>
-</a>
-
-
+<div>
+  <a href="mailto:vcoralie.cottet@hotmail.fr">
+    <img src="mail.PNG" alt="Logo email" width="40" height="36">
+  </a>
+    <a href="https://www.linkedin.com/in/coralie-c-05926b130">
+    <img src="logo_linkedin.png" alt="Logo LinkedIn" width="35" height="35">
+  </a>
+</div>
 
 
 
