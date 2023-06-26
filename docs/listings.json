@@ -2,12 +2,11 @@
   {
     "listing": "/R/index.html",
     "items": [
-      "/R/Package_mapsf/map_sf.html",
-      "/R/Package_mapsf/R_cartographie.html",
-      "/R/Nuage_de_mot/nuage_de_mot_rtemis.html",
-      "/R/Nuage_de_mot/nuage_de_mot.html",
+      "/R/Package_purrr/package_purrr.html",
       "/R/Package_dplyr/quarto_dplyr.html",
-      "/R/Package_purrr/package_purrr.html"
+      "/R/Nuage_de_mot/nuage_de_mot_rtemis.html",
+      "/R/Package_mapsf/map_sf.html",
+      "/R/Package_mapsf/R_cartographie.html"
     ]
   }
 ]

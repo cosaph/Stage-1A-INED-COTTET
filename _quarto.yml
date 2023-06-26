@@ -14,13 +14,11 @@ website:
             href: R/Package_mapsf/map_sf.qmd
           - text: "Package cartographie en R"
             href: R/Package_mapsf/R_cartographie.qmd
-          - text: "Nuage de mots avec R"
-            href: R/Nuage_de_mot/nuage_de_mot.qmd
           - text: "Nuage de mots avec RTemis"
             href: R/Nuage_de_mot/nuage_de_mot_rtemis.qmd
-          - text: "Package purrr"
+          - text: "Appliquer une même fonction à chaque élément d'un ensemble avec Purrr"
             href: R/Package_purrr/package_purrr.qmd
-          - text: "Package dplyr"
+          - text: "Comment manipuler les données avec Dplyr"
             href: R/Package_dplyr/quarto_dplyr.qmd
           - text: "Package rio"
             href: R/Package_rio/Rio_package.qmd
@@ -42,5 +40,6 @@ format:
     code-tools:
       source: true
 highlight-style: dracula
+
    
 

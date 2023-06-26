@@ -1,9 +1,9 @@
 ---
-title: "Nuage de mot (R.temis)"
+title: "Générer un nuage de mot à partir d'un texte avec R.temis"
 toc-title: ""
 categories:
-  - R
-  - VSCode
+- R
+- Rstudio
 author: "COTTET Coralie"
 affiliations: INED
 
@@ -11,49 +11,83 @@ date: 06/06/2023
 
 ---
 
+# 1. Travail préliminaire 
 
-```{r}
+  Comme dans tout bon code R il est nécessaire au début d'installer (une fois sur un ordinateur): (dans le terminal de commande )
+install.packages("R.temis") 
+install.packages("RColorBrewer") # Palettes de couleurs
+les packages recquis pour le code et de charger (à chaque fois ) les librairies requisent pour le code.
 
 
-# ----- Librairies ----
+```{r warning=FALSE, message= FALSE}
 library("R.temis")
-library("RColorBrewer") # pour charger des couleurs dans le nuage de mot
+```
+
+
+Concernant le choix des données, j’ai choisis une publication de Mathieu Trachman datant de 2022 intitulé _“Très masculin, pas très féminine. Les variations sociales du genre”_, Population et Sociétés: 1-4, pour illustrer mon exemple.
+
+```{r results= FALSE }
+
+corpus <- import_corpus("genre.csv", format="csv", textcolumn=1, language ="fr")
 
 ```
 
 
+# 2. Nettoyage du texte
 
-(N'oubliez pas d'installer les packages avant d'exéctuer les libraries si ceux-ci sont nouveaux!)
-Concernant le choix des données, j’ai choisis une publication de Mathieu Trachman datant de 2022 intitulé “Très masculin, pas très féminine. Les variations sociales du genre”, Population et Sociétés: 1-4, pour illustrer mon exemple.
-
-```{r results='hide'}
-# ---- Import des données ----
-
-corpus <- import_corpus("genre.csv",format="csv",textcolumn=1,language="fr")
-
-```
 C'est quoi les __stop_words__?
 
 Les stop words (ou mots vides) sont des mots très courants dans un langage donné, comme les prépositions, les articles, les pronoms, etc., qui sont souvent omis lors de l'analyse de texte car ils ne portent pas de sens important pour la compréhension globale du texte.
 
+La fonction build_dtm est utilisée pour construire une matrice de termes-document à partir d'un corpus de textes. La matrice de termes-document est une représentation quantitative des termes présents dans un corpus de textes, où chaque ligne représente un terme et chaque colonne représente un document.
 
-```{r results='hide'}
+```{r results=FALSE}
 # ---- traitement des données ----
-dtmsmo <-build_dtm(corpus, remove_stopwords = T, min_length = 0)
+dtm <-build_dtm(corpus, remove_stopwords = T, min_length = 0)
 
-dic <-dictionary(dtmsmo) #création d'un dictionnaire de mot 
+dic <-dictionary(dtm) #création d'un dictionnaire de mot 
 
-frequent_terms(dtmsmo) #fréquence d'apparition des mots dans le texte en question
+#frequent_terms(m_termes_doc) #fréquence apparition des mots dans le texte en question
 
 ```
-__Il est possible de faire un traitement plus poussé des données__
 
 
 
+# 3. Construction du Nuage
 
 
 ```{r}
-# ---- Générateur du Nuage ---- 
-cloud<-word_cloud(dtmsmo, color=brewer.pal(10, "OrRd"), min.freq=0) 
-terms_graph(dtmsmo, min_occ=1,interactive=T) #pour obtenir un graph de mots.
+
+cloud<-word_cloud(dtm, color= 'black', min.freq=1) 
+
 ```
+
+# 4. Analyse descriptive 
+
+
+Cherche les termes co-occurrents à un ou plusieurs termes (mais pas entre ces termes) pour l’ensemble du corpus ou par sous partie avec la fonction cooc_terms. 
+
+```{r results= FALSE}
+
+cooc_terms(dtm, "très")
+```
+
+Parmi les réponses contenant le mot "très", le mot masculin représente 5,63% de l’ensemble des occurrences. 80% des occurrences du mot "masculin" sont citées quand le mot "très" est aussi cité.
+
+
+La fonction terms_graph du package R.temis permet de générer un réseau de mots qui est affiché dans une fenêtre interactive igraph. Les termes ou mots sont représentés par des sommets ou nœuds dans le graphe. Leur placement dans l'espace graphique est déterminé par un algorithme d'énergie, qui prend en compte les co-occurrences des termes dans le corpus. Les liens dans le graphe représentent les co-occurrences entre les termes.
+
+```{r results=FALSE}
+terms_graph(dtm, min_occ=3,interactive=F)
+
+
+
+```
+
+
+
+
+
+
+
+

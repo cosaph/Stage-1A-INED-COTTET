@@ -1,5 +1,5 @@
 ---
-title: "Package Dplyr"
+title: "Faciliter la manipulation de données avec Dplyr"
 toc-title: ""
 categories:
   - R

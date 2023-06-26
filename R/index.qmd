@@ -8,7 +8,6 @@ listing:
   - Package_dplyr/quarto_dplyr.qmd
   - Package_purrr/package_purrr.qmd
   - Nuage_de_mot/nuage_de_mot_rtemis.qmd
-  - Nuage_de_mot/nuage_de_mot.qmd
   - Package_mapsf/R_cartographie.qmd
   type: table
   categories: true

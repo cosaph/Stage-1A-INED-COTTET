@@ -1,5 +1,5 @@
 ---
-title: "Package Purrr"
+title: "Comment faire de la programmation fonctionelle avec Purrr"
 toc-title: ""
 categories:
   - R
