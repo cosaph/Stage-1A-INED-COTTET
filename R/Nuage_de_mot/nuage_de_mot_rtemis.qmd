@@ -28,7 +28,7 @@ Concernant le choix des données, j’ai choisis une publication de Mathieu Trac
 
 ```{r results= FALSE }
 
-corpus <- import_corpus("genre.csv", format="csv", textcolumn=1, language ="fr")
+corpus <- import_corpus("texte", format="txt", language ="fr")
 
 ```
 
@@ -47,13 +47,33 @@ dtm <-build_dtm(corpus, remove_stopwords = T, min_length = 0)
 
 dic <-dictionary(dtm) #création d'un dictionnaire de mot 
 
-#frequent_terms(m_termes_doc) #fréquence apparition des mots dans le texte en question
+frequent_terms(dtm) #fréquence apparition des mots dans le texte en question
+
 
 ```
 
+# 3. Traitement du corpus
+
+J'aimerai retirer le mot "a", "" et "plus" à titre d'exemple
+
+```{r}
+# Identifier l'index du mot "genre" (celui que l'on veut supprimer) dans la liste des termes
+termes <- colnames(dtm)
+index <- match(c("a","","plus"), termes)
+
+# Supprimer l'index de la liste des termes
+termes <- termes[-index]
+
+# Supprimer la colonne correspondant à l'index dans la matrice
+dtm <- dtm[,-index]
+
+# Réorganiser les colonnes pour correspondre à l'ordre des termes restants
+dtm <- dtm[,order(termes)]
 
 
-# 3. Construction du Nuage
+```
+
+# 4. Construction du Nuage
 
 
 ```{r}
@@ -62,29 +82,26 @@ cloud<-word_cloud(dtm, color= 'black', min.freq=1)
 
 ```
 
-# 4. Analyse descriptive 
 
 
-Cherche les termes co-occurrents à un ou plusieurs termes (mais pas entre ces termes) pour l’ensemble du corpus ou par sous partie avec la fonction cooc_terms. 
 
-```{r results= FALSE}
-
-cooc_terms(dtm, "très")
-```
-
-Parmi les réponses contenant le mot "très", le mot masculin représente 5,63% de l’ensemble des occurrences. 80% des occurrences du mot "masculin" sont citées quand le mot "très" est aussi cité.
+# 5. Analyse descriptive 
 
 
 La fonction terms_graph du package R.temis permet de générer un réseau de mots qui est affiché dans une fenêtre interactive igraph. Les termes ou mots sont représentés par des sommets ou nœuds dans le graphe. Leur placement dans l'espace graphique est déterminé par un algorithme d'énergie, qui prend en compte les co-occurrences des termes dans le corpus. Les liens dans le graphe représentent les co-occurrences entre les termes.
+Ici,ce n'est pas très représentatif mais ça donne globalement une idée de ce que peut nous fournir un tel graphe: l'idée globale des thématiques et des sujets traités dans le corpus.
 
-```{r results=FALSE}
-terms_graph(dtm, min_occ=3,interactive=F)
+```{r}
+# Créer un graphique d'analyse de co-occurrences de termes
+Tree<-terms_graph(dtm, min_occ = 30, interactive = T,
+            vertex.size = 0.01, vertex.color = "lightblue",
+            label.cex = 0.1)
 
 
 
 ```
 
-
+<img src="tree.PNG" alt="Texte alternatif de l'image" title="Titre de l'image" width=800 lenght=800/>
 
 
 

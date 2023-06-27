@@ -138,8 +138,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#travail-préliminaire" id="toc-travail-préliminaire" class="nav-link active" data-scroll-target="#travail-préliminaire">1. Travail préliminaire</a></li>
   <li><a href="#nettoyage-du-texte" id="toc-nettoyage-du-texte" class="nav-link" data-scroll-target="#nettoyage-du-texte">2. Nettoyage du texte</a></li>
-  <li><a href="#construction-du-nuage" id="toc-construction-du-nuage" class="nav-link" data-scroll-target="#construction-du-nuage">3. Construction du Nuage</a></li>
-  <li><a href="#analyse-descriptive" id="toc-analyse-descriptive" class="nav-link" data-scroll-target="#analyse-descriptive">4. Analyse descriptive</a></li>
+  <li><a href="#traitement-du-corpus" id="toc-traitement-du-corpus" class="nav-link" data-scroll-target="#traitement-du-corpus">3. Traitement du corpus</a></li>
+  <li><a href="#construction-du-nuage" id="toc-construction-du-nuage" class="nav-link" data-scroll-target="#construction-du-nuage">4. Construction du Nuage</a></li>
+  <li><a href="#analyse-descriptive" id="toc-analyse-descriptive" class="nav-link" data-scroll-target="#analyse-descriptive">5. Analyse descriptive</a></li>
   </ul>
 </nav>
     </div>
@@ -189,7 +190,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Concernant le choix des données, j’ai choisis une publication de Mathieu Trachman datant de 2022 intitulé <em>“Très masculin, pas très féminine. Les variations sociales du genre”</em>, Population et Sociétés: 1-4, pour illustrer mon exemple.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">import_corpus</span>(<span class="st">"genre.csv"</span>, <span class="at">format=</span><span class="st">"csv"</span>, <span class="at">textcolumn=</span><span class="dv">1</span>, <span class="at">language =</span><span class="st">"fr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">import_corpus</span>(<span class="st">"texte"</span>, <span class="at">format=</span><span class="st">"txt"</span>, <span class="at">language =</span><span class="st">"fr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="nettoyage-du-texte" class="level1">
@@ -203,32 +204,46 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-3"><a href="#cb3-3"></a></span>
 <span id="cb3-4"><a href="#cb3-4"></a>dic <span class="ot">&lt;-</span><span class="fu">dictionary</span>(dtm) <span class="co">#création d'un dictionnaire de mot </span></span>
 <span id="cb3-5"><a href="#cb3-5"></a></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#frequent_terms(m_termes_doc) #fréquence apparition des mots dans le texte en question</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="fu">frequent_terms</span>(dtm) <span class="co">#fréquence apparition des mots dans le texte en question</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="traitement-du-corpus" class="level1">
+<h1>3. Traitement du corpus</h1>
+<p>J’aimerai retirer le mot “a”, “” et “plus” à titre d’exemple</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Identifier l'index du mot "genre" (celui que l'on veut supprimer) dans la liste des termes</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>termes <span class="ot">&lt;-</span> <span class="fu">colnames</span>(dtm)</span>
+<span id="cb4-3"><a href="#cb4-3"></a>index <span class="ot">&lt;-</span> <span class="fu">match</span>(<span class="fu">c</span>(<span class="st">"a"</span>,<span class="st">""</span>,<span class="st">"plus"</span>), termes)</span>
+<span id="cb4-4"><a href="#cb4-4"></a></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co"># Supprimer l'index de la liste des termes</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>termes <span class="ot">&lt;-</span> termes[<span class="sc">-</span>index]</span>
+<span id="cb4-7"><a href="#cb4-7"></a></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co"># Supprimer la colonne correspondant à l'index dans la matrice</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>dtm <span class="ot">&lt;-</span> dtm[,<span class="sc">-</span>index]</span>
+<span id="cb4-10"><a href="#cb4-10"></a></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="co"># Réorganiser les colonnes pour correspondre à l'ordre des termes restants</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a>dtm <span class="ot">&lt;-</span> dtm[,<span class="fu">order</span>(termes)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="construction-du-nuage" class="level1">
-<h1>3. Construction du Nuage</h1>
+<h1>4. Construction du Nuage</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>cloud<span class="ot">&lt;-</span><span class="fu">word_cloud</span>(dtm, <span class="at">color=</span> <span class="st">'black'</span>, <span class="at">min.freq=</span><span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>cloud<span class="ot">&lt;-</span><span class="fu">word_cloud</span>(dtm, <span class="at">color=</span> <span class="st">'black'</span>, <span class="at">min.freq=</span><span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="nuage_de_mot_rtemis_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<p><img src="nuage_de_mot_rtemis_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
 <section id="analyse-descriptive" class="level1">
-<h1>4. Analyse descriptive</h1>
-<p>Cherche les termes co-occurrents à un ou plusieurs termes (mais pas entre ces termes) pour l’ensemble du corpus ou par sous partie avec la fonction cooc_terms.</p>
+<h1>5. Analyse descriptive</h1>
+<p>La fonction terms_graph du package R.temis permet de générer un réseau de mots qui est affiché dans une fenêtre interactive igraph. Les termes ou mots sont représentés par des sommets ou nœuds dans le graphe. Leur placement dans l’espace graphique est déterminé par un algorithme d’énergie, qui prend en compte les co-occurrences des termes dans le corpus. Les liens dans le graphe représentent les co-occurrences entre les termes. Ici,ce n’est pas très représentatif mais ça donne globalement une idée de ce que peut nous fournir un tel graphe: l’idée globale des thématiques et des sujets traités dans le corpus.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">cooc_terms</span>(dtm, <span class="st">"très"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Créer un graphique d'analyse de co-occurrences de termes</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>Tree<span class="ot">&lt;-</span><span class="fu">terms_graph</span>(dtm, <span class="at">min_occ =</span> <span class="dv">30</span>, <span class="at">interactive =</span> T,</span>
+<span id="cb6-3"><a href="#cb6-3"></a>            <span class="at">vertex.size =</span> <span class="fl">0.01</span>, <span class="at">vertex.color =</span> <span class="st">"lightblue"</span>,</span>
+<span id="cb6-4"><a href="#cb6-4"></a>            <span class="at">label.cex =</span> <span class="fl">0.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Parmi les réponses contenant le mot “très”, le mot masculin représente 5,63% de l’ensemble des occurrences. 80% des occurrences du mot “masculin” sont citées quand le mot “très” est aussi cité.</p>
-<p>La fonction terms_graph du package R.temis permet de générer un réseau de mots qui est affiché dans une fenêtre interactive igraph. Les termes ou mots sont représentés par des sommets ou nœuds dans le graphe. Leur placement dans l’espace graphique est déterminé par un algorithme d’énergie, qui prend en compte les co-occurrences des termes dans le corpus. Les liens dans le graphe représentent les co-occurrences entre les termes.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">terms_graph</span>(dtm, <span class="at">min_occ=</span><span class="dv">3</span>,<span class="at">interactive=</span>F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="nuage_de_mot_rtemis_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
+<p><img src="tree.PNG" alt="Texte alternatif de l'image" title="Titre de l'image" width="800" lenght="800/"></p>
 
 
 <!-- -->
@@ -550,7 +565,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb7-28"><a href="#cb7-28"></a></span>
 <span id="cb7-29"><a href="#cb7-29"></a><span class="in">```{r results= FALSE }</span></span>
 <span id="cb7-30"><a href="#cb7-30"></a></span>
-<span id="cb7-31"><a href="#cb7-31"></a>corpus <span class="ot">&lt;-</span> <span class="fu">import_corpus</span>(<span class="st">"genre.csv"</span>, <span class="at">format=</span><span class="st">"csv"</span>, <span class="at">textcolumn=</span><span class="dv">1</span>, <span class="at">language =</span><span class="st">"fr"</span>)</span>
+<span id="cb7-31"><a href="#cb7-31"></a>corpus <span class="ot">&lt;-</span> <span class="fu">import_corpus</span>(<span class="st">"texte"</span>, <span class="at">format=</span><span class="st">"txt"</span>, <span class="at">language =</span><span class="st">"fr"</span>)</span>
 <span id="cb7-32"><a href="#cb7-32"></a></span>
 <span id="cb7-33"><a href="#cb7-33"></a><span class="in">```</span></span>
 <span id="cb7-34"><a href="#cb7-34"></a></span>
@@ -569,48 +584,65 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb7-47"><a href="#cb7-47"></a></span>
 <span id="cb7-48"><a href="#cb7-48"></a>dic <span class="ot">&lt;-</span><span class="fu">dictionary</span>(dtm) <span class="co">#création d'un dictionnaire de mot </span></span>
 <span id="cb7-49"><a href="#cb7-49"></a></span>
-<span id="cb7-50"><a href="#cb7-50"></a><span class="co">#frequent_terms(m_termes_doc) #fréquence apparition des mots dans le texte en question</span></span>
+<span id="cb7-50"><a href="#cb7-50"></a><span class="fu">frequent_terms</span>(dtm) <span class="co">#fréquence apparition des mots dans le texte en question</span></span>
 <span id="cb7-51"><a href="#cb7-51"></a></span>
-<span id="cb7-52"><a href="#cb7-52"></a><span class="in">```</span></span>
-<span id="cb7-53"><a href="#cb7-53"></a></span>
+<span id="cb7-52"><a href="#cb7-52"></a></span>
+<span id="cb7-53"><a href="#cb7-53"></a><span class="in">```</span></span>
 <span id="cb7-54"><a href="#cb7-54"></a></span>
-<span id="cb7-55"><a href="#cb7-55"></a></span>
-<span id="cb7-56"><a href="#cb7-56"></a><span class="fu"># 3. Construction du Nuage</span></span>
-<span id="cb7-57"><a href="#cb7-57"></a></span>
+<span id="cb7-55"><a href="#cb7-55"></a><span class="fu"># 3. Traitement du corpus</span></span>
+<span id="cb7-56"><a href="#cb7-56"></a></span>
+<span id="cb7-57"><a href="#cb7-57"></a>J'aimerai retirer le mot "a", "" et "plus" à titre d'exemple</span>
 <span id="cb7-58"><a href="#cb7-58"></a></span>
 <span id="cb7-61"><a href="#cb7-61"></a><span class="in">```{r}</span></span>
-<span id="cb7-62"><a href="#cb7-62"></a>cloud<span class="ot">&lt;-</span><span class="fu">word_cloud</span>(dtm, <span class="at">color=</span> <span class="st">'black'</span>, <span class="at">min.freq=</span><span class="dv">1</span>) </span>
-<span id="cb7-63"><a href="#cb7-63"></a></span>
-<span id="cb7-64"><a href="#cb7-64"></a><span class="in">```</span></span>
+<span id="cb7-62"><a href="#cb7-62"></a><span class="co"># Identifier l'index du mot "genre" (celui que l'on veut supprimer) dans la liste des termes</span></span>
+<span id="cb7-63"><a href="#cb7-63"></a>termes <span class="ot">&lt;-</span> <span class="fu">colnames</span>(dtm)</span>
+<span id="cb7-64"><a href="#cb7-64"></a>index <span class="ot">&lt;-</span> <span class="fu">match</span>(<span class="fu">c</span>(<span class="st">"a"</span>,<span class="st">""</span>,<span class="st">"plus"</span>), termes)</span>
 <span id="cb7-65"><a href="#cb7-65"></a></span>
-<span id="cb7-66"><a href="#cb7-66"></a><span class="fu"># 4. Analyse descriptive </span></span>
-<span id="cb7-67"><a href="#cb7-67"></a></span>
+<span id="cb7-66"><a href="#cb7-66"></a><span class="co"># Supprimer l'index de la liste des termes</span></span>
+<span id="cb7-67"><a href="#cb7-67"></a>termes <span class="ot">&lt;-</span> termes[<span class="sc">-</span>index]</span>
 <span id="cb7-68"><a href="#cb7-68"></a></span>
-<span id="cb7-69"><a href="#cb7-69"></a>Cherche les termes co-occurrents à un ou plusieurs termes (mais pas entre ces termes) pour l’ensemble du corpus ou par sous partie avec la fonction cooc_terms. </span>
-<span id="cb7-70"><a href="#cb7-70"></a></span>
-<span id="cb7-71"><a href="#cb7-71"></a><span class="in">```{r results= FALSE}</span></span>
-<span id="cb7-72"><a href="#cb7-72"></a></span>
-<span id="cb7-73"><a href="#cb7-73"></a><span class="fu">cooc_terms</span>(dtm, <span class="st">"très"</span>)</span>
-<span id="cb7-74"><a href="#cb7-74"></a><span class="in">```</span></span>
+<span id="cb7-69"><a href="#cb7-69"></a><span class="co"># Supprimer la colonne correspondant à l'index dans la matrice</span></span>
+<span id="cb7-70"><a href="#cb7-70"></a>dtm <span class="ot">&lt;-</span> dtm[,<span class="sc">-</span>index]</span>
+<span id="cb7-71"><a href="#cb7-71"></a></span>
+<span id="cb7-72"><a href="#cb7-72"></a><span class="co"># Réorganiser les colonnes pour correspondre à l'ordre des termes restants</span></span>
+<span id="cb7-73"><a href="#cb7-73"></a>dtm <span class="ot">&lt;-</span> dtm[,<span class="fu">order</span>(termes)]</span>
+<span id="cb7-74"><a href="#cb7-74"></a></span>
 <span id="cb7-75"><a href="#cb7-75"></a></span>
-<span id="cb7-76"><a href="#cb7-76"></a>Parmi les réponses contenant le mot "très", le mot masculin représente 5,63% de l’ensemble des occurrences. 80% des occurrences du mot "masculin" sont citées quand le mot "très" est aussi cité.</span>
+<span id="cb7-76"><a href="#cb7-76"></a><span class="in">```</span></span>
 <span id="cb7-77"><a href="#cb7-77"></a></span>
-<span id="cb7-78"><a href="#cb7-78"></a></span>
-<span id="cb7-79"><a href="#cb7-79"></a>La fonction terms_graph du package R.temis permet de générer un réseau de mots qui est affiché dans une fenêtre interactive igraph. Les termes ou mots sont représentés par des sommets ou nœuds dans le graphe. Leur placement dans l'espace graphique est déterminé par un algorithme d'énergie, qui prend en compte les co-occurrences des termes dans le corpus. Les liens dans le graphe représentent les co-occurrences entre les termes.</span>
+<span id="cb7-78"><a href="#cb7-78"></a><span class="fu"># 4. Construction du Nuage</span></span>
+<span id="cb7-79"><a href="#cb7-79"></a></span>
 <span id="cb7-80"><a href="#cb7-80"></a></span>
-<span id="cb7-81"><a href="#cb7-81"></a><span class="in">```{r results=FALSE}</span></span>
-<span id="cb7-82"><a href="#cb7-82"></a><span class="fu">terms_graph</span>(dtm, <span class="at">min_occ=</span><span class="dv">3</span>,<span class="at">interactive=</span>F)</span>
-<span id="cb7-83"><a href="#cb7-83"></a></span>
-<span id="cb7-84"><a href="#cb7-84"></a></span>
+<span id="cb7-83"><a href="#cb7-83"></a><span class="in">```{r}</span></span>
+<span id="cb7-84"><a href="#cb7-84"></a>cloud<span class="ot">&lt;-</span><span class="fu">word_cloud</span>(dtm, <span class="at">color=</span> <span class="st">'black'</span>, <span class="at">min.freq=</span><span class="dv">1</span>) </span>
 <span id="cb7-85"><a href="#cb7-85"></a></span>
 <span id="cb7-86"><a href="#cb7-86"></a><span class="in">```</span></span>
 <span id="cb7-87"><a href="#cb7-87"></a></span>
 <span id="cb7-88"><a href="#cb7-88"></a></span>
 <span id="cb7-89"><a href="#cb7-89"></a></span>
 <span id="cb7-90"><a href="#cb7-90"></a></span>
-<span id="cb7-91"><a href="#cb7-91"></a></span>
+<span id="cb7-91"><a href="#cb7-91"></a><span class="fu"># 5. Analyse descriptive </span></span>
 <span id="cb7-92"><a href="#cb7-92"></a></span>
 <span id="cb7-93"><a href="#cb7-93"></a></span>
+<span id="cb7-94"><a href="#cb7-94"></a>La fonction terms_graph du package R.temis permet de générer un réseau de mots qui est affiché dans une fenêtre interactive igraph. Les termes ou mots sont représentés par des sommets ou nœuds dans le graphe. Leur placement dans l'espace graphique est déterminé par un algorithme d'énergie, qui prend en compte les co-occurrences des termes dans le corpus. Les liens dans le graphe représentent les co-occurrences entre les termes.</span>
+<span id="cb7-95"><a href="#cb7-95"></a>Ici,ce n'est pas très représentatif mais ça donne globalement une idée de ce que peut nous fournir un tel graphe: l'idée globale des thématiques et des sujets traités dans le corpus.</span>
+<span id="cb7-96"><a href="#cb7-96"></a></span>
+<span id="cb7-99"><a href="#cb7-99"></a><span class="in">```{r}</span></span>
+<span id="cb7-100"><a href="#cb7-100"></a><span class="co"># Créer un graphique d'analyse de co-occurrences de termes</span></span>
+<span id="cb7-101"><a href="#cb7-101"></a>Tree<span class="ot">&lt;-</span><span class="fu">terms_graph</span>(dtm, <span class="at">min_occ =</span> <span class="dv">30</span>, <span class="at">interactive =</span> T,</span>
+<span id="cb7-102"><a href="#cb7-102"></a>            <span class="at">vertex.size =</span> <span class="fl">0.01</span>, <span class="at">vertex.color =</span> <span class="st">"lightblue"</span>,</span>
+<span id="cb7-103"><a href="#cb7-103"></a>            <span class="at">label.cex =</span> <span class="fl">0.1</span>)</span>
+<span id="cb7-104"><a href="#cb7-104"></a></span>
+<span id="cb7-105"><a href="#cb7-105"></a></span>
+<span id="cb7-106"><a href="#cb7-106"></a></span>
+<span id="cb7-107"><a href="#cb7-107"></a><span class="in">```</span></span>
+<span id="cb7-108"><a href="#cb7-108"></a></span>
+<span id="cb7-109"><a href="#cb7-109"></a><span class="kw">&lt;img</span> <span class="er">src</span><span class="ot">=</span><span class="st">"tree.PNG"</span> <span class="er">alt</span><span class="ot">=</span><span class="st">"Texte alternatif de l'image"</span> <span class="er">title</span><span class="ot">=</span><span class="st">"Titre de l'image"</span> <span class="er">width</span><span class="ot">=</span><span class="st">800</span> <span class="er">lenght</span><span class="ot">=</span><span class="st">800</span><span class="kw">/&gt;</span></span>
+<span id="cb7-110"><a href="#cb7-110"></a></span>
+<span id="cb7-111"><a href="#cb7-111"></a></span>
+<span id="cb7-112"><a href="#cb7-112"></a></span>
+<span id="cb7-113"><a href="#cb7-113"></a></span>
+<span id="cb7-114"><a href="#cb7-114"></a></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
