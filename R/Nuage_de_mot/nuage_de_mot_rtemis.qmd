@@ -21,10 +21,12 @@ les packages recquis pour le code et de charger (à chaque fois ) les librairies
 
 ```{r warning=FALSE, message= FALSE}
 library("R.temis")
+library("dplyr")
+library("tibble")
 ```
 
 
-Concernant le choix des données, j’ai choisis une publication de Mathieu Trachman datant de 2022 intitulé _“Très masculin, pas très féminine. Les variations sociales du genre”_, Population et Sociétés: 1-4, pour illustrer mon exemple.
+Concernant le choix des données, j’ai choisis les voeux d'Emmanuel Macron pour l'année 2021,2022,2023.
 
 ```{r results= FALSE }
 
@@ -41,7 +43,7 @@ Les stop words (ou mots vides) sont des mots très courants dans un langage donn
 
 La fonction build_dtm est utilisée pour construire une matrice de termes-document à partir d'un corpus de textes. La matrice de termes-document est une représentation quantitative des termes présents dans un corpus de textes, où chaque ligne représente un terme et chaque colonne représente un document.
 
-```{r results=FALSE}
+```{r}
 # ---- traitement des données ----
 dtm <-build_dtm(corpus, remove_stopwords = T, min_length = 0)
 
@@ -54,34 +56,45 @@ frequent_terms(dtm) #fréquence apparition des mots dans le texte en question
 
 # 3. Traitement du corpus
 
-J'aimerai retirer le mot "a", "" et "plus" à titre d'exemple
+J'aimerai retirer le mot "a", " ","e","c","v","re","pr","ea","r"   à titre d'exemple
 
 ```{r}
-# Identifier l'index du mot "genre" (celui que l'on veut supprimer) dans la liste des termes
-termes <- colnames(dtm)
-index <- match(c("a","","plus"), termes)
-
-# Supprimer l'index de la liste des termes
-termes <- termes[-index]
-
-# Supprimer la colonne correspondant à l'index dans la matrice
-dtm <- dtm[,-index]
-
-# Réorganiser les colonnes pour correspondre à l'ordre des termes restants
-dtm <- dtm[,order(termes)]
 
 
+dic2 = dic %>%
+  rownames_to_column(var="word") %>% 
+  mutate(Term = word)
+
+row.names(dic2) <- dic2$word
+
+# Remplacer les mots spécifiés par "Année"
+dic2$Term[dic2$word == "ann"] <- "Année"
+dic2$Term[dic2$word == "année"] <- "Année"
+dic2$Term[dic2$word == "an"] <- "Année"
+
+
+dic2$Term[dic2$word == "tre"] <- "très"
+dic2$Term[dic2$word == "france"] <- "France"
+
+dtmlem <-combine_terms(dtm, dic2)
+
+mots_a_retirer <- c("a", " ", "e", "c", "v", "re", "pr", "ea", "r","o","f")
+
+dtm2<-dtmlem[, !colnames(dtmlem) %in% mots_a_retirer]
+
+
+frequent_terms(dtm2)
 ```
 
 # 4. Construction du Nuage
 
 
-```{r}
+```{r results=FALSE}
 
-cloud<-word_cloud(dtm, color= 'black', min.freq=1) 
+cloud<-word_cloud(dtm2, color= 'black', min.freq=1,n =50) 
+
 
 ```
-
 
 
 
@@ -93,7 +106,7 @@ Ici,ce n'est pas très représentatif mais ça donne globalement une idée de ce
 
 ```{r}
 # Créer un graphique d'analyse de co-occurrences de termes
-Tree<-terms_graph(dtm, min_occ = 30, interactive = T,
+Tree<-terms_graph(dtm2, min_occ = 50, interactive = T,
             vertex.size = 0.01, vertex.color = "lightblue",
             label.cex = 0.1)
 
@@ -101,7 +114,14 @@ Tree<-terms_graph(dtm, min_occ = 30, interactive = T,
 
 ```
 
-<img src="tree.PNG" alt="Texte alternatif de l'image" title="Titre de l'image" width=800 lenght=800/>
+
+
+<img src="tree.png" alt="Texte alternatif de l'image" title="Titre de l'image" width=700 lenght=700/>
+
+
+# 6. Pour aller plus loin
+
+<https://rtemis.hypotheses.org/r-temis-dans-rstudio>
 
 
 
