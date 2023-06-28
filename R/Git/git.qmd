@@ -1,0 +1,113 @@
+---
+title: "Comment utiliser GitHub"
+toc-title: ""
+categories:
+  - Git
+author: "COTTET Coralie"
+affiliations: INED
+
+date: 06/06/2023
+
+css: "sms.css"
+---
+
+
+<div>
+<a href="https://github.com/cosaph">
+<img src="github.png" alt="Texte alternatif de l'image" title="logo de Pixel perfect" width="100" height="100"/>
+</a>
+</div>
+
+
+GitHub est une plateforme de développement collaboratif de logiciels qui facilite le partage, la gestion et la collaboration sur des projets de développement de logiciels.
+
+
+# 1. Créer un nouveau dépot
+
+__Repository ou Projet ?__
+
+ un repository est l'endroit où est stocké le code source d'un projet, tandis qu'un projet est une fonctionnalité pour organiser les tâches, les problèmes et les notes liés à ce projet.
+
+Nous allons créer un repository qui permmettra de stocker toutes les fiches R déjà faites. Il faut donc cliquer sur le petit plus dans la barre de navigation et selectionner "new repository".
+
+<img src="debut.png" alt="Texte alternatif de l'image" title="Titre de l'image" width="160" height="180" />
+
+# 2. Le repository
+
+Pour créer le nouveau repository il faudra choisir un nom (_repository name_)
+Une description, une visibilité (publique ou privé).
+
+Je fais le choix d'ajouter directement le fichier README.md à mon repository. Le fichier README.md est un fichier texte présent à la racine d'un dépôt GitHub qui décrit le projet et fournit des informations importantes aux utilisateurs et aux contributeurs du projet. Le fichier README est généralement écrit en format Markdown, qui permet de formater le texte avec des titres, des listes, des liens, des images, etc.
+
+<img src="repository.png" alt="Texte alternatif de l'image" title="Titre de l'image" width="460" height="480" />
+
+
+Voici ce que vous obtiendrez par la suite
+
+<img src="interface.png" alt="Texte alternatif de l'image" title="Titre de l'image" width="460" height="230" />
+
+
+# 3. Un premier ajout de fichier
+
+Il faut a présent se placer dans votre terminal (VScode ou autre) et  exectuer les commandes suivantes:
+
+
+
+
+git __init__ 
+
+_Cette commande initialise un nouveau dépôt Git dans le répertoire courant. Elle crée un sous-répertoire nommé .git qui contient tous les fichiers nécessaires pour gérer le dépôt Git._
+
+git __add READ.md__ 
+
+_Cette commande initialise un nouveau dépôt Git dans le répertoire courant. Elle crée un sous-répertoire nommé .git qui contient tous les fichiers nécessaires pour gérer le dépôt Git._
+
+git __commit -m "first commit"__
+
+_Cette commande initialise un nouveau dépôt Git dans le répertoire courant. Elle crée un sous-répertoire nommé .git qui contient tous les fichiers nécessaires pour gérer le dépôt Git._
+
+git __branch -M main__
+
+_Cette commande renomme la branche par défaut de "master" à "main"._
+
+
+git __remote add origin "https://github.com/nom_utilisateur/test_git.git"__
+
+_Cette commande ajoute un nouveau référentiel Git distant appelé "origin". Le nom "origin" est généralement utilisé pour le référentiel distant principal. L'URL est celle de votre dépôt GitHub et s'obtient en cliquant sur le petit bouton bleu code_
+
+git __push -u origin main__
+
+_Cette commande envoie les modifications du dépôt local vers le dépôt distant sur GitHub. L'option "-u" permet d'associer la branche locale "main" avec la branche distante "main" sur le référentiel "origin". Cette étape ne sera nécessaire que pour le premier push, les pushs suivants, la commande sera simplement git push._
+
+
+# 4. Pour des ajouts réguliers
+
+
+
+git __add__ lien_du_fichier_a_ajouter
+
+git __commit__ -m "ajout du jour"
+
+git __push origin main__
+
+
+# 5. Comment fusionner deux branches ?
+
+Ici, on cherche à fusionner la branche main et master.
+
+git __checkout main__
+
+_Cette commande change de branche pour la branche "main". Cette commande doit être exécutée avant de fusionner la branche "master" pour s'assurer que les modifications sont apportées à la bonne branche._
+
+git __merge master__
+
+_Cette commande fusionne la branche "master" avec la branche "main". Si Git détecte un conflit entre les deux branches, il vous informera que la fusion ne peut pas être effectuée automatiquement et qu'il est nécessaire de résoudre le conflit manuellement._
+
+git add lien_du_fichier_a_ajouter
+
+git commit -m "resolution de conflit"
+
+git push origin main
+
+
+

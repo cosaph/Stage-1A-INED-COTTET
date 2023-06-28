@@ -9,10 +9,11 @@ listing:
   - Package_purrr/package_purrr.qmd
   - Nuage_de_mot/nuage_de_mot_rtemis.qmd
   - Package_mapsf/R_cartographie.qmd
+  - Git/git.qmd
   type: table
   categories: true
   filter-ui: true
-  page-size: 80
+  page-size: 100
   max-items: 20
   max-description-length: 300
 ---

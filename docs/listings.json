@@ -3,6 +3,7 @@
     "listing": "/R/index.html",
     "items": [
       "/R/Package_purrr/package_purrr.html",
+      "/R/Git/git.html",
       "/R/Package_dplyr/quarto_dplyr.html",
       "/R/Nuage_de_mot/nuage_de_mot_rtemis.html",
       "/R/Package_mapsf/map_sf.html",
