@@ -23,10 +23,13 @@ R est un langage de programmation et un environnement statistique largement util
 
 <div>
   <a href="mailto:vcoralie.cottet@hotmail.fr">
-    <img src="mail.PNG" alt="Logo email" width="40" height="36">
+    <img src="mail.PNG" alt="made by: Those Icons" width="40" height="36">
   </a>
     <a href="https://www.linkedin.com/in/coralie-c-05926b130">
-    <img src="logo_linkedin.png" alt="Logo LinkedIn" width="35" height="35">
+    <img src="logo_linkedin.png" alt="made by: Google" width="35" height="35">
+  </a>
+    <a href="https://github.com/cosaph">
+    <img src="github.png" alt="made by:Pixel Perfect" width="35" height="35">
   </a>
 </div>
 
