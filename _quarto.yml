@@ -18,6 +18,10 @@ website:
             href: R/Package_dplyr/quarto_dplyr.qmd
           - text: "Package rio"
             href: R/Package_rio/Rio_package.qmd
+          - text: "Produire des cartes thématiques avec Mapsf"
+            href: R/Package_mapsf/map_sf.qmd
+          - text: "Afficher des cartes interactives avec Mapview"
+            href: R/Package_mapsf/R_cartographie.qmd
     
 
 
