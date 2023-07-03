@@ -103,11 +103,11 @@ git __merge master__
 
 _Cette commande fusionne la branche "master" avec la branche "main". Si Git détecte un conflit entre les deux branches, il vous informera que la fusion ne peut pas être effectuée automatiquement et qu'il est nécessaire de résoudre le conflit manuellement._
 
-git add lien_du_fichier_a_ajouter
+git __add lien_du_fichier_a_ajouter__
 
-git commit -m "resolution de conflit"
+git __commit -m "resolution de conflit"__
 
-git push origin main
+git __push origin main__
 
 
 

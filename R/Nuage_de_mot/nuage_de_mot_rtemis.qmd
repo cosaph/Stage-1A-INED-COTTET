@@ -3,7 +3,7 @@ title: "Générer un nuage de mot à partir d'un texte avec R.temis"
 toc-title: ""
 categories:
 - R
-- Rstudio
+- R-Studio
 author: "COTTET Coralie"
 affiliations: INED
 
@@ -22,15 +22,14 @@ les packages recquis pour le code et de charger (à chaque fois ) les librairies
 
 ```{r warning=FALSE, message= FALSE}
 library("R.temis")
-library("dplyr")
+library("dplyr") #Pour le traitement du texte voir la fiche "Faciliter la manipulation de données avec Dplyr".
 library("tibble")
-library("readr")
 ```
 
 
 Concernant le choix des données, j’ai choisis les voeux de François Hollande allant de 2013 à 2017. Les textes retranscrits dans des fichiers de type texte (.txt) et placé dans un seul dossier nommé _texte_. Il est important de vérifer l'encodage de vos textes pour la suite du code. Ici, l'encodage est _UTF-8_.
 
-```{r results= FALSE }
+```{r message=FALSE }
 
 corpus <- import_corpus("texte", format="txt", language ="fr")
 
