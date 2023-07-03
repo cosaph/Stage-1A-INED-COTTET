@@ -23,12 +23,13 @@ le site de Paris Data :
 
 Affichage du fond de carte correspondant aux limites des arrondissements auquel je vais ajouter les voies d'eau en couche d'habillage.
 
-```{r results=FALSE, warning=FALSE}
+```{r}
 # ----- Import des données -----
 
 arrondissements <- st_read(dsn = "https://opendata.paris.fr/explore/dataset/arrondissements/download/?format=geojson&timezone=Europe/Berlin&lang=fr")
 
 cours_deau<-st_read(dsn="https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/plan-de-voirie-voies-deau/exports/geojson?lang=fr&timezone=Europe%2FBerlin")
+
 
 ```
 
@@ -190,4 +191,5 @@ Pour la rédaction de cet article je me suis grandement inspirée du travail de 
 <https://rcarto.github.io/ined2022/07_mise_en_page.html>
 
 <http://riatelab.github.io/mapsf>
+
 <http://rgeomatic.hypotheses.org/2077>
