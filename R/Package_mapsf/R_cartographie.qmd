@@ -9,10 +9,11 @@ affiliations: INED
 
 date: 06/06/2023
 
-css: "style.css"
+css: "sms.css"
 ---
 
-Nous allons vous présenter trois packages permettant de générer des cartes interactives : __sf__ , __mapview__ et __oceanis__. Il faut donc au préalable installer ces deux packages. 
+Nous allons vous présenter trois packages permettant de générer des cartes interactives : __sf__ , __mapview___. 
+Il faut donc au préalable installer ces deux packages. 
 install.packages("sf")
 install.packages("mapview")
 install.packages("stringr") #qui sera utilisé pour traiter les données. 
