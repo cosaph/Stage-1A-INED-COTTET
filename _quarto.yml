@@ -10,10 +10,6 @@ website:
       - text: "R"
         href: R/index.qmd
         menu:
-          - text: "Package mapsf"
-            href: R/Package_mapsf/map_sf.qmd
-          - text: "Package cartographie en R"
-            href: R/Package_mapsf/R_cartographie.qmd
           - text: "Nuage de mots avec RTemis"
             href: R/Nuage_de_mot/nuage_de_mot_rtemis.qmd
           - text: "Appliquer une même fonction à chaque élément d'un ensemble avec Purrr"
