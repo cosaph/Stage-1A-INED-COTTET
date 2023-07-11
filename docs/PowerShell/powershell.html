@@ -9,7 +9,7 @@
 <meta name="author" content="COTTET Coralie">
 <meta name="dcterms.date" content="2023-06-06">
 
-<title>Package Rio</title>
+<title>Comment utiliser PowerShell</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -59,22 +59,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -97,8 +97,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<link rel="stylesheet" href="../../sms.css">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../sms.css">
+<link rel="stylesheet" href="sms.css">
 </head>
 
 <body class="nav-fixed">
@@ -108,8 +108,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../outil_R.PNG" alt="" class="navbar-logo">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../outil_R.PNG" alt="" class="navbar-logo">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -119,7 +119,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../R/index.html" rel="" target="">
+    <a class="nav-link" href="../R/index.html" rel="" target="">
  <span class="menu-text">R</span></a>
   </li>  
 </ul>
@@ -141,9 +141,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Package Rio</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">Comment utiliser PowerShell</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
   <div class="quarto-categories">
-    <div class="quarto-category">R</div>
+    <div class="quarto-category">PowerShell</div>
   </div>
   </div>
 
@@ -173,37 +173,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p><img src="logo_rio.png" alt="Texte alternatif de l'image" title="Titre de l'image"></p>
-<p>L’import de données est la base de tout programme informatique portant sur le traitement de données. Le package “rio” est une collection de fonctions pour importer et exporter des données dans différents formats avec R. Il permet d’importer facilement des fichiers de données à partir de diverses sources, notamment des fichiers plats, des bases de données, des fichiers SAS, SPSS et Stata, ainsi que des fichiers Excel et RData. Il faut au préalable installer le package avec la commande suivante: ” install.packages(“rio”)“.</p>
-<div class="cell" data-result="hide">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># ---- Librairie ---- </span></span>
-<span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(rio)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: le package 'rio' a été compilé avec la version R 4.2.3</code></pre>
+<p>PowerShell, ou Windows PowerShell, anciennement Microsoft Command Shell (MSH), est une suite logicielle développée par Microsoft qui intègre une interface en ligne de commande, un langage de script nommé PowerShell ainsi qu’un kit de développement. Il est inclus depuis Windows 7 et s’appuie sur le framework Microsoft.NET.</p>
+<p>Pour utiliser PowerShell, vous pouvez procéder de plusieurs manières. Par exemple, il est tout à fait possible de lancer PowerShell depuis l’invite de commande MS-DOS, comme je vous ai montré précédemment, en tapant powershell.</p>
+<div class="my-code-box">
+<pre><code>$val= Read-Host "Rentrer une chaîne de caractère"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">install_formats</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># --- import de données --- </span></span>
-<span id="cb5-2"><a href="#cb5-2"></a></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#Pour des données au format xlsx</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a></span>
-<span id="cb5-5"><a href="#cb5-5"></a>data_xslx<span class="ot">&lt;-</span><span class="fu">import</span>(<span class="st">"election_leg.xlsx"</span>) </span>
-<span id="cb5-6"><a href="#cb5-6"></a></span>
-<span id="cb5-7"><a href="#cb5-7"></a></span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="co">#Pour des données au format SAS (ou autre), c'est la même chose.</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a>data_sas<span class="ot">&lt;-</span><span class="fu">import</span>(<span class="st">"adherent.sas7bdat"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Pour exporter une base de données dans un fichier, il est recommandé d’utiliser la méthode “export” en utilisant le dataframe que vous voulez exporter, ici “data_sas” (comme illustré ci-dessous), et en spécifiant le chemin où vous souhaitez le sauvegarder. Cette méthode est généralement utilisée lorsque vous apportez des modifications directes à votre dataframe et que vous souhaitez enregistrer les changements quelque part.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># --- export de données ---</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a></span>
-<span id="cb6-3"><a href="#cb6-3"></a>chemin_acces<span class="ot">&lt;-</span><span class="fu">export</span>(data_sas,<span class="st">"election_leg.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Pour en apprendre plus sur le package rio <a href="https://rdocumentation.org/packages/rio/versions/0.5.29" class="uri">https://rdocumentation.org/packages/rio/versions/0.5.29</a></p>
-<p>To learn more about Quarto websites visit <a href="https://quarto.org/docs/websites" class="uri">https://quarto.org/docs/websites</a>.</p>
 
 
 <!-- -->
@@ -494,60 +468,26 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb7" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">---</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="an">title:</span><span class="co"> "Package Rio"</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="an">toc-title:</span><span class="co"> ""</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="an">categories:</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="co">  - R</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="an">author:</span><span class="co"> "COTTET Coralie"</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="an">affiliations:</span><span class="co"> INED</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a></span>
-<span id="cb7-9"><a href="#cb7-9"></a><span class="an">date:</span><span class="co"> 06/06/2023</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a></span>
-<span id="cb7-11"><a href="#cb7-11"></a><span class="an">css:</span><span class="co"> "style.css"</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a><span class="co">---</span></span>
-<span id="cb7-13"><a href="#cb7-13"></a><span class="kw">&lt;img</span> <span class="er">src</span><span class="ot">=</span><span class="st">"logo_rio.png"</span> <span class="er">alt</span><span class="ot">=</span><span class="st">"Texte alternatif de l'image"</span> <span class="er">title</span><span class="ot">=</span><span class="st">"Titre de l'image"</span> <span class="kw">/&gt;</span></span>
-<span id="cb7-14"><a href="#cb7-14"></a></span>
-<span id="cb7-15"><a href="#cb7-15"></a></span>
-<span id="cb7-16"><a href="#cb7-16"></a>L'import de données est la base de tout programme informatique portant sur le traitement de données.</span>
-<span id="cb7-17"><a href="#cb7-17"></a>Le package "rio" est une collection de fonctions pour importer et exporter des données dans différents formats avec R. Il permet d'importer facilement des fichiers de données à partir de diverses sources, notamment des fichiers plats, des bases de données, des fichiers SAS, SPSS et Stata, ainsi que des fichiers Excel et RData.</span>
-<span id="cb7-18"><a href="#cb7-18"></a>Il faut au préalable installer le package avec la commande suivante: " install.packages("rio")".</span>
-<span id="cb7-19"><a href="#cb7-19"></a></span>
-<span id="cb7-20"><a href="#cb7-20"></a></span>
-<span id="cb7-21"><a href="#cb7-21"></a><span class="in">```{r result='hide'}</span></span>
-<span id="cb7-22"><a href="#cb7-22"></a></span>
-<span id="cb7-23"><a href="#cb7-23"></a></span>
-<span id="cb7-24"><a href="#cb7-24"></a><span class="co"># ---- Librairie ---- </span></span>
-<span id="cb7-25"><a href="#cb7-25"></a></span>
-<span id="cb7-26"><a href="#cb7-26"></a><span class="fu">library</span>(rio)</span>
-<span id="cb7-27"><a href="#cb7-27"></a><span class="fu">install_formats</span>()</span>
-<span id="cb7-28"><a href="#cb7-28"></a></span>
-<span id="cb7-29"><a href="#cb7-29"></a><span class="co"># --- import de données --- </span></span>
-<span id="cb7-30"><a href="#cb7-30"></a></span>
-<span id="cb7-31"><a href="#cb7-31"></a><span class="co">#Pour des données au format xlsx</span></span>
-<span id="cb7-32"><a href="#cb7-32"></a></span>
-<span id="cb7-33"><a href="#cb7-33"></a>data_xslx<span class="ot">&lt;-</span><span class="fu">import</span>(<span class="st">"election_leg.xlsx"</span>) </span>
-<span id="cb7-34"><a href="#cb7-34"></a></span>
-<span id="cb7-35"><a href="#cb7-35"></a></span>
-<span id="cb7-36"><a href="#cb7-36"></a><span class="co">#Pour des données au format SAS (ou autre), c'est la même chose.</span></span>
-<span id="cb7-37"><a href="#cb7-37"></a>data_sas<span class="ot">&lt;-</span><span class="fu">import</span>(<span class="st">"adherent.sas7bdat"</span>)</span>
-<span id="cb7-38"><a href="#cb7-38"></a></span>
-<span id="cb7-39"><a href="#cb7-39"></a></span>
-<span id="cb7-40"><a href="#cb7-40"></a><span class="in">```</span></span>
-<span id="cb7-41"><a href="#cb7-41"></a>Pour exporter une base de données dans un fichier, il est recommandé d'utiliser la méthode "export" en utilisant le dataframe que vous voulez exporter, ici "data_sas"  (comme illustré ci-dessous), et en spécifiant le chemin où vous souhaitez le sauvegarder. Cette méthode est généralement utilisée lorsque vous apportez des modifications directes à votre dataframe et que vous souhaitez enregistrer les changements quelque part.</span>
-<span id="cb7-42"><a href="#cb7-42"></a></span>
-<span id="cb7-43"><a href="#cb7-43"></a><span class="in">```{r results='hide'}</span></span>
-<span id="cb7-44"><a href="#cb7-44"></a></span>
-<span id="cb7-45"><a href="#cb7-45"></a><span class="co"># --- export de données ---</span></span>
-<span id="cb7-46"><a href="#cb7-46"></a></span>
-<span id="cb7-47"><a href="#cb7-47"></a>chemin_acces<span class="ot">&lt;-</span><span class="fu">export</span>(data_sas,<span class="st">"election_leg.xlsx"</span>)</span>
-<span id="cb7-48"><a href="#cb7-48"></a></span>
-<span id="cb7-49"><a href="#cb7-49"></a></span>
-<span id="cb7-50"><a href="#cb7-50"></a><span class="in">```</span></span>
-<span id="cb7-51"><a href="#cb7-51"></a></span>
-<span id="cb7-52"><a href="#cb7-52"></a>Pour en apprendre plus sur le package rio <span class="ot">&lt;https://rdocumentation.org/packages/rio/versions/0.5.29&gt;</span></span>
-<span id="cb7-53"><a href="#cb7-53"></a></span>
-<span id="cb7-54"><a href="#cb7-54"></a>To learn more about Quarto websites visit <span class="ot">&lt;https://quarto.org/docs/websites&gt;</span>.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="an">title:</span><span class="co"> "Comment utiliser PowerShell"</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="an">toc-title:</span><span class="co"> ""</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="an">categories:</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co">  - PowerShell</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="an">author:</span><span class="co"> "COTTET Coralie"</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="an">affiliations:</span><span class="co"> ENSAI</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="an">date:</span><span class="co"> 06/06/2023</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="an">css:</span><span class="co"> "sms.css"</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="co">---</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a></span>
+<span id="cb1-14"><a href="#cb1-14"></a>PowerShell, ou Windows PowerShell, anciennement Microsoft Command Shell (MSH), est une suite logicielle développée par Microsoft qui intègre une interface en ligne de commande, un langage de script nommé PowerShell ainsi qu’un kit de développement. Il est inclus depuis Windows 7 et s’appuie sur le framework Microsoft.NET. </span>
+<span id="cb1-15"><a href="#cb1-15"></a></span>
+<span id="cb1-16"><a href="#cb1-16"></a>Pour utiliser PowerShell, vous pouvez procéder de plusieurs manières. Par exemple, il est tout à fait possible de lancer PowerShell depuis l’invite de commande MS-DOS, comme je vous ai montré précédemment, en tapant powershell.</span>
+<span id="cb1-17"><a href="#cb1-17"></a></span>
+<span id="cb1-18"><a href="#cb1-18"></a><span class="kw">&lt;div</span> <span class="er">class</span><span class="ot">=</span><span class="st">"my-code-box"</span><span class="kw">&gt;</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a><span class="kw">&lt;pre&gt;&lt;code&gt;</span>$val= Read-Host "Rentrer une chaîne de caractère"<span class="kw">&lt;/code&gt;&lt;/pre&gt;</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a><span class="kw">&lt;/div&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

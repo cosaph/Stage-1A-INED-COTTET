@@ -57,7 +57,6 @@ on remarque qu'on gagne quand même pas mal de temps d'écriture en utilisant le
 
 ---
 
-<img src="purrr_cheatsheet.jpg" alt="Texte alternatif de l'image" title="Titre de l'image" width=800 lenght=800/>
 
 Pour en apprendre plus sur le package purr : 
 

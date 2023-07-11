@@ -34,7 +34,8 @@ data_xslx<-import("election_leg.xlsx")
 
 
 #Pour des données au format SAS (ou autre), c'est la même chose.
-data_sas<-import("chemin_d_acces.sas7bdat")
+data_sas<-import("adherent.sas7bdat")
+
 
 ```
 Pour exporter une base de données dans un fichier, il est recommandé d'utiliser la méthode "export" en utilisant le dataframe que vous voulez exporter, ici "data_sas"  (comme illustré ci-dessous), et en spécifiant le chemin où vous souhaitez le sauvegarder. Cette méthode est généralement utilisée lorsque vous apportez des modifications directes à votre dataframe et que vous souhaitez enregistrer les changements quelque part.

@@ -1,5 +1,6 @@
 /*-- navbar --*/
 
+
 .navbar {
   padding-top: 0px;
   padding-bottom: 0px;
@@ -928,6 +929,12 @@ div.quarto-post a {
   box-sizing: border-box;
 }
 
-
+/*Encadré de texte powershell*/
+.my-code-box {
+  background-color: grey;
+  color: white;
+  border: 1px solid white;
+  padding: 10px;
+}
 
 

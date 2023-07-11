@@ -1,0 +1,20 @@
+---
+title: "Comment utiliser PowerShell"
+toc-title: ""
+categories:
+  - PowerShell
+author: "COTTET Coralie"
+affiliations: ENSAI
+
+date: 06/06/2023
+
+css: "sms.css"
+---
+
+PowerShell, ou Windows PowerShell, anciennement Microsoft Command Shell (MSH), est une suite logicielle développée par Microsoft qui intègre une interface en ligne de commande, un langage de script nommé PowerShell ainsi qu’un kit de développement. Il est inclus depuis Windows 7 et s’appuie sur le framework Microsoft.NET. 
+
+Pour utiliser PowerShell, vous pouvez procéder de plusieurs manières. Par exemple, il est tout à fait possible de lancer PowerShell depuis l’invite de commande MS-DOS, comme je vous ai montré précédemment, en tapant powershell.
+
+<div class="my-code-box">
+<pre><code>$val= Read-Host "Rentrer une chaîne de caractère"</code></pre>
+</div>

@@ -9,7 +9,7 @@ affiliations: INED
 
 date: 06/06/2023
 ---
-Nous allons réaliser des cartes avec R à l'aide du package "mapsf". 
+Nous allons réaliser des cartes avec R à l'aide du package "mapsf" et du packages "sf". Le package "mapsf" est un outil très utile pour manipuler et visualiser des données spatiales en R, tandis que le package "sf" fournit une infrastructure pour stocker et manipuler ces données. Ces deux packages sont très utiles pour travailler avec des données spatiales dans R, ce qui en fait un choix idéal pour créer des cartes et réaliser des analyses spatiales. 
 
 ```{r warning=FALSE, message=FALSE}
 library(mapsf)
@@ -34,10 +34,10 @@ cours_deau<-st_read(dsn="https://opendata.paris.fr/api/explore/v2.1/catalog/data
 ```
 
 ```{r}
-#Dans un premier temps je réalise mon fond de carte avec les arrondissments de Paris 
+#Dans un premier temps je réalise mon fond de carte avec les arrondissements de Paris 
 mf_map(x = arrondissements, border = "black") 
 
-#Je rajoute les cours d'eau sur mon fond de carte avec l'argument "add=TRUE"
+#Je rajoute la couche des cours d'eau sur mon fond de carte avec l'argument "add=TRUE"
 mf_map(x=cours_deau,lwd=2,border="lightblue",col="lightblue",add=TRUE)
 
 ```
@@ -55,30 +55,30 @@ mf_theme("darkula")
 <img src="arbre_type_data.png" alt="Texte alternatif de l'image" title="Titre de l'image" width="800" height="500" />
 
 # __Les cartes à symboles proportionnels__
-
-Les cartes à symboles proportionnels sont les méthode de représentations graphiques à utiliser pour visualiser des variables de stocks (variables quantitatives absolues pour lesquelles la somme et la moyenne ont une signification).
+La  carte en symboles proportionnels est la méthode de représentation graphique à utiliser pour visualiser des variables de stocks (variables quantitatives absolues pour lesquelles la somme et la moyenne ont une signification).
 
 Sur la carte, j'affiche l'effectif de la population de chaque arrondissement et j'ajoute la légende et un titre.
 
 ```{r results= 'hide'}
 arrondissements$pop <- c(1012687, 903036, 1369857, 1491027, 1672009, 1506475, 1637163, 1603380, 1637542, 1059282, 1494945, 1436205, 1705774, 1425805, 236769, 1668605, 1674568, 1539668, 1421827, 1829526) #INSEE,2021
-mf_map(x = arrondissements, border = "black")
+mf_map(x = arrondissements)
 mf_map(x=cours_deau,lwd=2,border="lightblue",col="lightblue",add=TRUE)
 mf_map(
   x = arrondissements,
+# variable à représenter: population des arrondissements
   var = "pop",
+# type de carte : symboles proportionnels
   type = "prop",
   leg_title = "Population totale\12 271 794",
-  col="#F39487",
-  add= TRUE
-)
+  col="blue",
+  add= TRUE,
+  inches=0.2)
 
 mf_title("Distribution de la population dans Paris")
 ```
  # __Les cartes choroplèthes__
 
-
-Les cartes choroplèthes sont les représentations graphiques à utiliser pour visualiser des ratios (des variables quantitatives relatives pour lesquelles la moyenne a un sens, mais _dont_ la somme n'a pas de sens).
+La carte choroplèthe est la représentation graphique à utiliser pour visualiser des ratios (des variables quantitatives relatives pour lesquelles la moyenne a un sens, mais dont la somme n’a pas de sens) qui sont des variables qualitatives ordinales.
 
 Sur la carte, j'affiche la densité de population de chaque arrondissement. J'utilise la méthode des quantiles pour discréditer cette variable et j'utilise une palette de couleur avec dégradé pour représenter l'ordre entre mes valeurs.
 
@@ -87,36 +87,44 @@ Sur la carte, j'affiche la densité de population de chaque arrondissement. J'ut
 arrondissements$DENS <- 1e6 * arrondissements$pop / as.numeric(st_area(arrondissements))
 mf_map(
   x = arrondissements,
-  var = "DENS",
-  type = "choro",
+# variable à représenter: densité de population  
+var = "DENS",
+# type de carte  
+type = "choro",
+# méthode de dsicrétisation
   breaks = "quantile",
-  pal = "Reds",
+# palette de rouges  
+pal = "Reds",
   lwd = 1,
   leg_title = "Densité de population\n(habitants par km2)", 
   leg_val_rnd = 0
 )
 
-mf_title("Distribution de la population dans Paris (INSEE,2021)")
+
 
 ```
 __Remarque: la faible densité de population des 12e et 16e arrondissement est faible, notamment en raison des bois de Vincennes et de Boulogne qui les composent.__
 
-On peut aussi représenter ce type de variable sous d'autres forme:
-On travaille avec les bords politiques des mairies de chaque arrondissement.
-
-```{r message=FALSE , warning=FALSE}
-
-
+On peut aussi représenter un autre  type de variable: qualitative nominale ici les bords politiques des mairies de chaque arrondissement.
+Pour cela, on produit une carte choroplèthes mais avec des couleurs «sans dégradé»
+```{r}
 bords_politiques <- c("PS", "EELV", "PS", "PS", "DVD", "LR", "LR", "LR", "DVD", "PS", "PS", "PS", "PS", "EELV", "LR", "LR", "LR", "PS", "PS", "EELV")
 arrondissements <- cbind(arrondissements, bords_politiques)
+
+# choix des couleurs
+
 colors <- c("PS" = "#FF0066", "EELV" = "#00CC66", "DVD" = "#FF9933", "LR" = "#0066CC")
+
+# Pour placer les carrés sur les centroïdes des polygones représentant les arrondissements.
+
 arr_c<-st_centroid(arrondissements)
 mf_map(x = arrondissements, border = "black")
-mf_map(x=cours_deau,lwd=2,border="lightblue",col="lightblue",add=TRUE)
+
 # Ajouter des triangles remplis pour chaque arrondissement en fonction de son bord politique
 mf_map(
   x = arr_c,
-  var = "bords_politiques",
+# var à représenter  
+ var = "bords_politiques",
   pch = 15,
   cex = 2,
   col = colors,
@@ -125,17 +133,17 @@ mf_map(
   digits = 0,
   add = TRUE
 )
-
 ```
 
 
 # Et si on regroupait deux arrondissement ?
 
-Pour cet exemple nous prenons le cas où, dans les statistiques que nous avons à représenter, les données, des 15e et 16e doivent être sommées. Il faut que les polygones du fond de carte représentant ces deux arrondissements soient fusionnés.
+Pour cet exemple nous prenons le cas où, dans les statistiques que nous avons à représenter, les données, des 15e et 16e doivent être sommées. Il faut que les polygones du fond de carte représentant ces deux arrondissements soient alors aussi fusionnés.
 
+L’idée globale du code ci-dessous c’est de fusionner les deux polygones (celui du 15e _Vaugirard_ et du 16e _Passy_). 
 
-L’idée globale du code ci-dessous c’est de fusionner les deux polygones (celui du 15e _Vaugirard_ et du 16e _Passy_) et 
- on recré toute la ligne de notre tableau de donnée pour pouvoir la fusionner avec celui-ci.
+Quand je crée mon nouveau polygone (new_poly) j'ai une nouvelle geometrie "POLYGON" qui a concaténné les deux arrondissements. J'ai donc sur une ligne, toutes les informations relatives à mes deux polygones et en plus, une geometrie commune.
+ 
 
 ```{r results= 'hide'}
 
@@ -178,7 +186,18 @@ arrondissements_test <- subset(new_poly, select = c(c_ar, l_aroff, surface, l_ar
 arrondissements[arrondissements$l_aroff == "Passy", ] <- arrondissements_test
 
 # Afficher la carte de l'objet "arrondissements" avec les contours en noir
-mf_map(x = arrondissements, border = "black")
+mf_map(x = arrondissements)
+mf_map(x=arr_c,
+  # var à représenter  
+  var = "pop",
+  pch = 16,
+  cex = 2,
+  col = colors,
+  lwd = 1,
+  leg_title = "Distribution de la population dans Paris", 
+  digits = 0,
+  add = TRUE)
+
 
 ```
 

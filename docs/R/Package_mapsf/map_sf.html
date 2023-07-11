@@ -215,10 +215,10 @@ Geodetic CRS:  WGS 84</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">#Dans un premier temps je réalise mon fond de carte avec les arrondissments de Paris </span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">#Dans un premier temps je réalise mon fond de carte avec les arrondissements de Paris </span></span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="fu">mf_map</span>(<span class="at">x =</span> arrondissements, <span class="at">border =</span> <span class="st">"black"</span>) </span>
 <span id="cb6-3"><a href="#cb6-3"></a></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#Je rajoute les cours d'eau sur mon fond de carte avec l'argument "add=TRUE"</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#Je rajoute la couche des cours d'eau sur mon fond de carte avec l'argument "add=TRUE"</span></span>
 <span id="cb6-5"><a href="#cb6-5"></a><span class="fu">mf_map</span>(<span class="at">x=</span>cours_deau,<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">border=</span><span class="st">"lightblue"</span>,<span class="at">col=</span><span class="st">"lightblue"</span>,<span class="at">add=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="map_sf_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
@@ -234,69 +234,86 @@ Geodetic CRS:  WGS 84</code></pre>
 </section>
 <section id="les-cartes-à-symboles-proportionnels" class="level1">
 <h1><strong>Les cartes à symboles proportionnels</strong></h1>
-<p>Les cartes à symboles proportionnels sont les méthode de représentations graphiques à utiliser pour visualiser des variables de stocks (variables quantitatives absolues pour lesquelles la somme et la moyenne ont une signification).</p>
+<p>La carte en symboles proportionnels est la méthode de représentation graphique à utiliser pour visualiser des variables de stocks (variables quantitatives absolues pour lesquelles la somme et la moyenne ont une signification).</p>
 <p>Sur la carte, j’affiche l’effectif de la population de chaque arrondissement et j’ajoute la légende et un titre.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>arrondissements<span class="sc">$</span>pop <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1012687</span>, <span class="dv">903036</span>, <span class="dv">1369857</span>, <span class="dv">1491027</span>, <span class="dv">1672009</span>, <span class="dv">1506475</span>, <span class="dv">1637163</span>, <span class="dv">1603380</span>, <span class="dv">1637542</span>, <span class="dv">1059282</span>, <span class="dv">1494945</span>, <span class="dv">1436205</span>, <span class="dv">1705774</span>, <span class="dv">1425805</span>, <span class="dv">236769</span>, <span class="dv">1668605</span>, <span class="dv">1674568</span>, <span class="dv">1539668</span>, <span class="dv">1421827</span>, <span class="dv">1829526</span>) <span class="co">#INSEE,2021</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">mf_map</span>(<span class="at">x =</span> arrondissements, <span class="at">border =</span> <span class="st">"black"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">mf_map</span>(<span class="at">x =</span> arrondissements)</span>
 <span id="cb8-3"><a href="#cb8-3"></a><span class="fu">mf_map</span>(<span class="at">x=</span>cours_deau,<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">border=</span><span class="st">"lightblue"</span>,<span class="at">col=</span><span class="st">"lightblue"</span>,<span class="at">add=</span><span class="cn">TRUE</span>)</span>
 <span id="cb8-4"><a href="#cb8-4"></a><span class="fu">mf_map</span>(</span>
 <span id="cb8-5"><a href="#cb8-5"></a>  <span class="at">x =</span> arrondissements,</span>
-<span id="cb8-6"><a href="#cb8-6"></a>  <span class="at">var =</span> <span class="st">"pop"</span>,</span>
-<span id="cb8-7"><a href="#cb8-7"></a>  <span class="at">type =</span> <span class="st">"prop"</span>,</span>
-<span id="cb8-8"><a href="#cb8-8"></a>  <span class="at">leg_title =</span> <span class="st">"Population totale\12 271 794"</span>,</span>
-<span id="cb8-9"><a href="#cb8-9"></a>  <span class="at">col=</span><span class="st">"#F39487"</span>,</span>
-<span id="cb8-10"><a href="#cb8-10"></a>  <span class="at">add=</span> <span class="cn">TRUE</span></span>
-<span id="cb8-11"><a href="#cb8-11"></a>)</span>
-<span id="cb8-12"><a href="#cb8-12"></a></span>
-<span id="cb8-13"><a href="#cb8-13"></a><span class="fu">mf_title</span>(<span class="st">"Distribution de la population dans Paris"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="co"># variable à représenter: population des arrondissements</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>  <span class="at">var =</span> <span class="st">"pop"</span>,</span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="co"># type de carte : symboles proportionnels</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a>  <span class="at">type =</span> <span class="st">"prop"</span>,</span>
+<span id="cb8-10"><a href="#cb8-10"></a>  <span class="at">leg_title =</span> <span class="st">"Population totale\12 271 794"</span>,</span>
+<span id="cb8-11"><a href="#cb8-11"></a>  <span class="at">col=</span><span class="st">"blue"</span>,</span>
+<span id="cb8-12"><a href="#cb8-12"></a>  <span class="at">add=</span> <span class="cn">TRUE</span>,</span>
+<span id="cb8-13"><a href="#cb8-13"></a>  <span class="at">inches=</span><span class="fl">0.2</span>)</span>
+<span id="cb8-14"><a href="#cb8-14"></a></span>
+<span id="cb8-15"><a href="#cb8-15"></a><span class="fu">mf_title</span>(<span class="st">"Distribution de la population dans Paris"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="map_sf_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p># <strong>Les cartes choroplèthes</strong></p>
-<p>Les cartes choroplèthes sont les représentations graphiques à utiliser pour visualiser des ratios (des variables quantitatives relatives pour lesquelles la moyenne a un sens, mais <em>dont</em> la somme n’a pas de sens).</p>
+<p>La carte choroplèthe est la représentation graphique à utiliser pour visualiser des ratios (des variables quantitatives relatives pour lesquelles la moyenne a un sens, mais dont la somme n’a pas de sens) qui sont des variables qualitatives ordinales.</p>
 <p>Sur la carte, j’affiche la densité de population de chaque arrondissement. J’utilise la méthode des quantiles pour discréditer cette variable et j’utilise une palette de couleur avec dégradé pour représenter l’ordre entre mes valeurs.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">#création de la variable densite </span></span>
 <span id="cb9-2"><a href="#cb9-2"></a>arrondissements<span class="sc">$</span>DENS <span class="ot">&lt;-</span> <span class="fl">1e6</span> <span class="sc">*</span> arrondissements<span class="sc">$</span>pop <span class="sc">/</span> <span class="fu">as.numeric</span>(<span class="fu">st_area</span>(arrondissements))</span>
 <span id="cb9-3"><a href="#cb9-3"></a><span class="fu">mf_map</span>(</span>
 <span id="cb9-4"><a href="#cb9-4"></a>  <span class="at">x =</span> arrondissements,</span>
-<span id="cb9-5"><a href="#cb9-5"></a>  <span class="at">var =</span> <span class="st">"DENS"</span>,</span>
-<span id="cb9-6"><a href="#cb9-6"></a>  <span class="at">type =</span> <span class="st">"choro"</span>,</span>
-<span id="cb9-7"><a href="#cb9-7"></a>  <span class="at">breaks =</span> <span class="st">"quantile"</span>,</span>
-<span id="cb9-8"><a href="#cb9-8"></a>  <span class="at">pal =</span> <span class="st">"Reds"</span>,</span>
-<span id="cb9-9"><a href="#cb9-9"></a>  <span class="at">lwd =</span> <span class="dv">1</span>,</span>
-<span id="cb9-10"><a href="#cb9-10"></a>  <span class="at">leg_title =</span> <span class="st">"Densité de population</span><span class="sc">\n</span><span class="st">(habitants par km2)"</span>, </span>
-<span id="cb9-11"><a href="#cb9-11"></a>  <span class="at">leg_val_rnd =</span> <span class="dv">0</span></span>
-<span id="cb9-12"><a href="#cb9-12"></a>)</span>
-<span id="cb9-13"><a href="#cb9-13"></a></span>
-<span id="cb9-14"><a href="#cb9-14"></a><span class="fu">mf_title</span>(<span class="st">"Distribution de la population dans Paris (INSEE,2021)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co"># variable à représenter: densité de population  </span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="at">var =</span> <span class="st">"DENS"</span>,</span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co"># type de carte  </span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="at">type =</span> <span class="st">"choro"</span>,</span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="co"># méthode de dsicrétisation</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>  <span class="at">breaks =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="co"># palette de rouges  </span></span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="at">pal =</span> <span class="st">"Reds"</span>,</span>
+<span id="cb9-13"><a href="#cb9-13"></a>  <span class="at">lwd =</span> <span class="dv">1</span>,</span>
+<span id="cb9-14"><a href="#cb9-14"></a>  <span class="at">leg_title =</span> <span class="st">"Densité de population</span><span class="sc">\n</span><span class="st">(habitants par km2)"</span>, </span>
+<span id="cb9-15"><a href="#cb9-15"></a>  <span class="at">leg_val_rnd =</span> <span class="dv">0</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="map_sf_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p><strong>Remarque: la faible densité de population des 12e et 16e arrondissement est faible, notamment en raison des bois de Vincennes et de Boulogne qui les composent.</strong></p>
-<p>On peut aussi représenter ce type de variable sous d’autres forme: On travaille avec les bords politiques des mairies de chaque arrondissement.</p>
+<p>On peut aussi représenter un autre type de variable: qualitative nominale ici les bords politiques des mairies de chaque arrondissement. Pour cela, on produit une carte choroplèthes mais avec des couleurs «sans dégradé»</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>bords_politiques <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"PS"</span>, <span class="st">"EELV"</span>, <span class="st">"PS"</span>, <span class="st">"PS"</span>, <span class="st">"DVD"</span>, <span class="st">"LR"</span>, <span class="st">"LR"</span>, <span class="st">"LR"</span>, <span class="st">"DVD"</span>, <span class="st">"PS"</span>, <span class="st">"PS"</span>, <span class="st">"PS"</span>, <span class="st">"PS"</span>, <span class="st">"EELV"</span>, <span class="st">"LR"</span>, <span class="st">"LR"</span>, <span class="st">"LR"</span>, <span class="st">"PS"</span>, <span class="st">"PS"</span>, <span class="st">"EELV"</span>)</span>
 <span id="cb10-2"><a href="#cb10-2"></a>arrondissements <span class="ot">&lt;-</span> <span class="fu">cbind</span>(arrondissements, bords_politiques)</span>
-<span id="cb10-3"><a href="#cb10-3"></a>colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"PS"</span> <span class="ot">=</span> <span class="st">"#FF0066"</span>, <span class="st">"EELV"</span> <span class="ot">=</span> <span class="st">"#00CC66"</span>, <span class="st">"DVD"</span> <span class="ot">=</span> <span class="st">"#FF9933"</span>, <span class="st">"LR"</span> <span class="ot">=</span> <span class="st">"#0066CC"</span>)</span>
-<span id="cb10-4"><a href="#cb10-4"></a>arr_c<span class="ot">&lt;-</span><span class="fu">st_centroid</span>(arrondissements)</span>
-<span id="cb10-5"><a href="#cb10-5"></a><span class="fu">mf_map</span>(<span class="at">x =</span> arrondissements, <span class="at">border =</span> <span class="st">"black"</span>)</span>
-<span id="cb10-6"><a href="#cb10-6"></a><span class="fu">mf_map</span>(<span class="at">x=</span>cours_deau,<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">border=</span><span class="st">"lightblue"</span>,<span class="at">col=</span><span class="st">"lightblue"</span>,<span class="at">add=</span><span class="cn">TRUE</span>)</span>
-<span id="cb10-7"><a href="#cb10-7"></a><span class="co"># Ajouter des triangles remplis pour chaque arrondissement en fonction de son bord politique</span></span>
-<span id="cb10-8"><a href="#cb10-8"></a><span class="fu">mf_map</span>(</span>
-<span id="cb10-9"><a href="#cb10-9"></a>  <span class="at">x =</span> arr_c,</span>
-<span id="cb10-10"><a href="#cb10-10"></a>  <span class="at">var =</span> <span class="st">"bords_politiques"</span>,</span>
-<span id="cb10-11"><a href="#cb10-11"></a>  <span class="at">pch =</span> <span class="dv">15</span>,</span>
-<span id="cb10-12"><a href="#cb10-12"></a>  <span class="at">cex =</span> <span class="dv">2</span>,</span>
-<span id="cb10-13"><a href="#cb10-13"></a>  <span class="at">col =</span> colors,</span>
-<span id="cb10-14"><a href="#cb10-14"></a>  <span class="at">lwd =</span> <span class="dv">1</span>,</span>
-<span id="cb10-15"><a href="#cb10-15"></a>  <span class="at">leg_title =</span> <span class="st">"Densité de population</span><span class="sc">\n</span><span class="st">(habitants par km2)"</span>, </span>
-<span id="cb10-16"><a href="#cb10-16"></a>  <span class="at">digits =</span> <span class="dv">0</span>,</span>
-<span id="cb10-17"><a href="#cb10-17"></a>  <span class="at">add =</span> <span class="cn">TRUE</span></span>
-<span id="cb10-18"><a href="#cb10-18"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-3"><a href="#cb10-3"></a></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co"># choix des couleurs</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a></span>
+<span id="cb10-6"><a href="#cb10-6"></a>colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"PS"</span> <span class="ot">=</span> <span class="st">"#FF0066"</span>, <span class="st">"EELV"</span> <span class="ot">=</span> <span class="st">"#00CC66"</span>, <span class="st">"DVD"</span> <span class="ot">=</span> <span class="st">"#FF9933"</span>, <span class="st">"LR"</span> <span class="ot">=</span> <span class="st">"#0066CC"</span>)</span>
+<span id="cb10-7"><a href="#cb10-7"></a></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="co"># Pour placer les carrés sur les centroïdes des polygones représentant les arrondissements.</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a></span>
+<span id="cb10-10"><a href="#cb10-10"></a>arr_c<span class="ot">&lt;-</span><span class="fu">st_centroid</span>(arrondissements)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: st_centroid assumes attributes are constant over geometries</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">mf_map</span>(<span class="at">x =</span> arrondissements, <span class="at">border =</span> <span class="st">"black"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2"></a></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="co"># Ajouter des triangles remplis pour chaque arrondissement en fonction de son bord politique</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="fu">mf_map</span>(</span>
+<span id="cb12-5"><a href="#cb12-5"></a>  <span class="at">x =</span> arr_c,</span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="co"># var à représenter  </span></span>
+<span id="cb12-7"><a href="#cb12-7"></a> <span class="at">var =</span> <span class="st">"bords_politiques"</span>,</span>
+<span id="cb12-8"><a href="#cb12-8"></a>  <span class="at">pch =</span> <span class="dv">15</span>,</span>
+<span id="cb12-9"><a href="#cb12-9"></a>  <span class="at">cex =</span> <span class="dv">2</span>,</span>
+<span id="cb12-10"><a href="#cb12-10"></a>  <span class="at">col =</span> colors,</span>
+<span id="cb12-11"><a href="#cb12-11"></a>  <span class="at">lwd =</span> <span class="dv">1</span>,</span>
+<span id="cb12-12"><a href="#cb12-12"></a>  <span class="at">leg_title =</span> <span class="st">"Densité de population</span><span class="sc">\n</span><span class="st">(habitants par km2)"</span>, </span>
+<span id="cb12-13"><a href="#cb12-13"></a>  <span class="at">digits =</span> <span class="dv">0</span>,</span>
+<span id="cb12-14"><a href="#cb12-14"></a>  <span class="at">add =</span> <span class="cn">TRUE</span></span>
+<span id="cb12-15"><a href="#cb12-15"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Please use the 'type' argument to map variables.</code></pre>
+</div>
 <div class="cell-output-display">
 <p><img src="map_sf_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -304,51 +321,65 @@ Geodetic CRS:  WGS 84</code></pre>
 </section>
 <section id="et-si-on-regroupait-deux-arrondissement" class="level1">
 <h1>Et si on regroupait deux arrondissement ?</h1>
-<p>Pour cet exemple nous prenons le cas où, dans les statistiques que nous avons à représenter, les données, des 15e et 16e doivent être sommées. Il faut que les polygones du fond de carte représentant ces deux arrondissements soient fusionnés.</p>
-<p>L’idée globale du code ci-dessous c’est de fusionner les deux polygones (celui du 15e <em>Vaugirard</em> et du 16e <em>Passy</em>) et on recré toute la ligne de notre tableau de donnée pour pouvoir la fusionner avec celui-ci.</p>
+<p>Pour cet exemple nous prenons le cas où, dans les statistiques que nous avons à représenter, les données, des 15e et 16e doivent être sommées. Il faut que les polygones du fond de carte représentant ces deux arrondissements soient alors aussi fusionnés.</p>
+<p>L’idée globale du code ci-dessous c’est de fusionner les deux polygones (celui du 15e <em>Vaugirard</em> et du 16e <em>Passy</em>).</p>
+<p>Quand je crée mon nouveau polygone (new_poly) j’ai une nouvelle geometrie “POLYGON” qui a concaténné les deux arrondissements. J’ai donc sur une ligne, toutes les informations relatives à mes deux polygones et en plus, une geometrie commune.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># ---- Fusionner deux polygones ---- #</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a></span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="co"># Sélectionner les deux polygones que vous souhaitez fusionner</span></span>
-<span id="cb11-4"><a href="#cb11-4"></a>poly1 <span class="ot">&lt;-</span> arrondissements[arrondissements<span class="sc">$</span>l_aroff <span class="sc">==</span> <span class="st">"Passy"</span>, ] <span class="co"># sélectionne le polygone avec le nom "Passy"</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a>poly2 <span class="ot">&lt;-</span> arrondissements[arrondissements<span class="sc">$</span>l_aroff <span class="sc">==</span> <span class="st">"Vaugirard"</span>, ] <span class="co"># sélectionne le polygone avec le nom "Vaugirard"</span></span>
-<span id="cb11-6"><a href="#cb11-6"></a></span>
-<span id="cb11-7"><a href="#cb11-7"></a><span class="co"># Fusionner les polygones</span></span>
-<span id="cb11-8"><a href="#cb11-8"></a>new_poly <span class="ot">&lt;-</span> <span class="fu">st_union</span>(poly1, poly2) <span class="co"># fusionne les deux polygones sélectionnés en un seul polygone</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># ---- Fusionner deux polygones ---- #</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="co"># Sélectionner les deux polygones que vous souhaitez fusionner</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>poly1 <span class="ot">&lt;-</span> arrondissements[arrondissements<span class="sc">$</span>l_aroff <span class="sc">==</span> <span class="st">"Passy"</span>, ] <span class="co"># sélectionne le polygone avec le nom "Passy"</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a>poly2 <span class="ot">&lt;-</span> arrondissements[arrondissements<span class="sc">$</span>l_aroff <span class="sc">==</span> <span class="st">"Vaugirard"</span>, ] <span class="co"># sélectionne le polygone avec le nom "Vaugirard"</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a></span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="co"># Fusionner les polygones</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a>new_poly <span class="ot">&lt;-</span> <span class="fu">st_union</span>(poly1, poly2) <span class="co"># fusionne les deux polygones sélectionnés en un seul polygone</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: attribute variables are assumed to be spatially constant throughout
 all geometries</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># Ajouter la surface, la population, le périmètre et les coordonnées géographiques des deux polygones </span></span>
-<span id="cb13-2"><a href="#cb13-2"></a></span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="co">#l'idée c'est de recréer une nouvelle ligne pour notre nouveau polygone pour qu'on puisse le réinsérer dans notre tableau. </span></span>
-<span id="cb13-4"><a href="#cb13-4"></a></span>
-<span id="cb13-5"><a href="#cb13-5"></a>new_poly<span class="sc">$</span>surface <span class="ot">&lt;-</span> new_poly<span class="sc">$</span>surface <span class="sc">+</span> new_poly<span class="sc">$</span>surface<span class="fl">.1</span> <span class="co"># ajouter la surface des deux polygones</span></span>
-<span id="cb13-6"><a href="#cb13-6"></a>new_poly<span class="sc">$</span>n_sq_co <span class="ot">&lt;-</span> new_poly<span class="sc">$</span>n_sq_co <span class="sc">+</span> new_poly<span class="sc">$</span>n_sq_co<span class="fl">.1</span> <span class="co"># ajouter la population des deux polygones</span></span>
-<span id="cb13-7"><a href="#cb13-7"></a>new_poly<span class="sc">$</span>perimetre <span class="ot">&lt;-</span> new_poly<span class="sc">$</span>perimetre <span class="sc">+</span> new_poly<span class="sc">$</span>perimetre<span class="fl">.1</span> <span class="co"># ajouter le périmètre des deux polygones</span></span>
-<span id="cb13-8"><a href="#cb13-8"></a>new_poly<span class="sc">$</span>n_sq_ar <span class="ot">&lt;-</span> new_poly<span class="sc">$</span>n_sq_ar <span class="sc">+</span> new_poly<span class="sc">$</span>n_sq_ar<span class="fl">.1</span> <span class="co"># ajouter les coordonnées géographiques des deux polygones</span></span>
-<span id="cb13-9"><a href="#cb13-9"></a></span>
-<span id="cb13-10"><a href="#cb13-10"></a>new_poly<span class="sc">$</span>pop<span class="ot">&lt;-</span>new_poly<span class="sc">$</span>pop<span class="sc">+</span> new_poly<span class="sc">$</span>pop<span class="fl">.1</span></span>
-<span id="cb13-11"><a href="#cb13-11"></a></span>
-<span id="cb13-12"><a href="#cb13-12"></a>new_poly<span class="sc">$</span>DENS<span class="ot">&lt;-</span>new_poly<span class="sc">$</span>DENS<span class="sc">+</span>new_poly<span class="sc">$</span>DENS<span class="fl">.1</span></span>
-<span id="cb13-13"><a href="#cb13-13"></a></span>
-<span id="cb13-14"><a href="#cb13-14"></a><span class="co"># Modifier les informations de localisation</span></span>
-<span id="cb13-15"><a href="#cb13-15"></a>new_poly<span class="sc">$</span>l_aroff <span class="ot">&lt;-</span> <span class="st">"un nouvel arrondissement"</span> <span class="co"># changer le nom de l'arrondissement</span></span>
-<span id="cb13-16"><a href="#cb13-16"></a>new_poly<span class="sc">$</span>l_ar <span class="ot">&lt;-</span> <span class="st">"xxème Ardt"</span> <span class="co"># changer le numéro de l'arrondissement</span></span>
-<span id="cb13-17"><a href="#cb13-17"></a>new_poly<span class="sc">$</span>c_ar <span class="ot">&lt;-</span> <span class="st">"xx"</span> <span class="co"># changer le code de l'arrondissement</span></span>
-<span id="cb13-18"><a href="#cb13-18"></a>new_poly<span class="sc">$</span>c_arinsee <span class="ot">&lt;-</span> <span class="st">"75xxxx"</span> <span class="co"># changer le code INSEE de la commune</span></span>
-<span id="cb13-19"><a href="#cb13-19"></a>new_poly<span class="sc">$</span>bords_politiques<span class="ot">&lt;-</span><span class="st">"PS"</span> <span class="co">#changer le bord politique du nouvel arrondissement</span></span>
-<span id="cb13-20"><a href="#cb13-20"></a></span>
-<span id="cb13-21"><a href="#cb13-21"></a></span>
-<span id="cb13-22"><a href="#cb13-22"></a><span class="co"># Sélectionner certaines colonnes pour créer un nouvel objet de données</span></span>
-<span id="cb13-23"><a href="#cb13-23"></a>arrondissements_test <span class="ot">&lt;-</span> <span class="fu">subset</span>(new_poly, <span class="at">select =</span> <span class="fu">c</span>(c_ar, l_aroff, surface, l_ar, n_sq_co, c_arinsee, n_sq_ar, perimetre, geom_x_y,pop, DENS,bords_politiques))</span>
-<span id="cb13-24"><a href="#cb13-24"></a><span class="co"># à noter qu'il est très important de mettre les éléments dans le même ordre que celui du tableau</span></span>
-<span id="cb13-25"><a href="#cb13-25"></a></span>
-<span id="cb13-26"><a href="#cb13-26"></a><span class="co"># Remplacer les informations de l'arrondissement "Passy" dans l'objet "arrondissements" par les nouvelles informations</span></span>
-<span id="cb13-27"><a href="#cb13-27"></a>arrondissements[arrondissements<span class="sc">$</span>l_aroff <span class="sc">==</span> <span class="st">"Passy"</span>, ] <span class="ot">&lt;-</span> arrondissements_test</span>
-<span id="cb13-28"><a href="#cb13-28"></a></span>
-<span id="cb13-29"><a href="#cb13-29"></a><span class="co"># Afficher la carte de l'objet "arrondissements" avec les contours en noir</span></span>
-<span id="cb13-30"><a href="#cb13-30"></a><span class="fu">mf_map</span>(<span class="at">x =</span> arrondissements, <span class="at">border =</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Ajouter la surface, la population, le périmètre et les coordonnées géographiques des deux polygones </span></span>
+<span id="cb16-2"><a href="#cb16-2"></a></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="co">#l'idée c'est de recréer une nouvelle ligne pour notre nouveau polygone pour qu'on puisse le réinsérer dans notre tableau. </span></span>
+<span id="cb16-4"><a href="#cb16-4"></a></span>
+<span id="cb16-5"><a href="#cb16-5"></a>new_poly<span class="sc">$</span>surface <span class="ot">&lt;-</span> new_poly<span class="sc">$</span>surface <span class="sc">+</span> new_poly<span class="sc">$</span>surface<span class="fl">.1</span> <span class="co"># ajouter la surface des deux polygones</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a>new_poly<span class="sc">$</span>n_sq_co <span class="ot">&lt;-</span> new_poly<span class="sc">$</span>n_sq_co <span class="sc">+</span> new_poly<span class="sc">$</span>n_sq_co<span class="fl">.1</span> <span class="co"># ajouter la population des deux polygones</span></span>
+<span id="cb16-7"><a href="#cb16-7"></a>new_poly<span class="sc">$</span>perimetre <span class="ot">&lt;-</span> new_poly<span class="sc">$</span>perimetre <span class="sc">+</span> new_poly<span class="sc">$</span>perimetre<span class="fl">.1</span> <span class="co"># ajouter le périmètre des deux polygones</span></span>
+<span id="cb16-8"><a href="#cb16-8"></a>new_poly<span class="sc">$</span>n_sq_ar <span class="ot">&lt;-</span> new_poly<span class="sc">$</span>n_sq_ar <span class="sc">+</span> new_poly<span class="sc">$</span>n_sq_ar<span class="fl">.1</span> <span class="co"># ajouter les coordonnées géographiques des deux polygones</span></span>
+<span id="cb16-9"><a href="#cb16-9"></a></span>
+<span id="cb16-10"><a href="#cb16-10"></a>new_poly<span class="sc">$</span>pop<span class="ot">&lt;-</span>new_poly<span class="sc">$</span>pop<span class="sc">+</span> new_poly<span class="sc">$</span>pop<span class="fl">.1</span></span>
+<span id="cb16-11"><a href="#cb16-11"></a></span>
+<span id="cb16-12"><a href="#cb16-12"></a>new_poly<span class="sc">$</span>DENS<span class="ot">&lt;-</span>new_poly<span class="sc">$</span>DENS<span class="sc">+</span>new_poly<span class="sc">$</span>DENS<span class="fl">.1</span></span>
+<span id="cb16-13"><a href="#cb16-13"></a></span>
+<span id="cb16-14"><a href="#cb16-14"></a><span class="co"># Modifier les informations de localisation</span></span>
+<span id="cb16-15"><a href="#cb16-15"></a>new_poly<span class="sc">$</span>l_aroff <span class="ot">&lt;-</span> <span class="st">"un nouvel arrondissement"</span> <span class="co"># changer le nom de l'arrondissement</span></span>
+<span id="cb16-16"><a href="#cb16-16"></a>new_poly<span class="sc">$</span>l_ar <span class="ot">&lt;-</span> <span class="st">"xxème Ardt"</span> <span class="co"># changer le numéro de l'arrondissement</span></span>
+<span id="cb16-17"><a href="#cb16-17"></a>new_poly<span class="sc">$</span>c_ar <span class="ot">&lt;-</span> <span class="st">"xx"</span> <span class="co"># changer le code de l'arrondissement</span></span>
+<span id="cb16-18"><a href="#cb16-18"></a>new_poly<span class="sc">$</span>c_arinsee <span class="ot">&lt;-</span> <span class="st">"75xxxx"</span> <span class="co"># changer le code INSEE de la commune</span></span>
+<span id="cb16-19"><a href="#cb16-19"></a>new_poly<span class="sc">$</span>bords_politiques<span class="ot">&lt;-</span><span class="st">"PS"</span> <span class="co">#changer le bord politique du nouvel arrondissement</span></span>
+<span id="cb16-20"><a href="#cb16-20"></a></span>
+<span id="cb16-21"><a href="#cb16-21"></a></span>
+<span id="cb16-22"><a href="#cb16-22"></a><span class="co"># Sélectionner certaines colonnes pour créer un nouvel objet de données</span></span>
+<span id="cb16-23"><a href="#cb16-23"></a>arrondissements_test <span class="ot">&lt;-</span> <span class="fu">subset</span>(new_poly, <span class="at">select =</span> <span class="fu">c</span>(c_ar, l_aroff, surface, l_ar, n_sq_co, c_arinsee, n_sq_ar, perimetre, geom_x_y,pop, DENS,bords_politiques))</span>
+<span id="cb16-24"><a href="#cb16-24"></a><span class="co"># à noter qu'il est très important de mettre les éléments dans le même ordre que celui du tableau</span></span>
+<span id="cb16-25"><a href="#cb16-25"></a></span>
+<span id="cb16-26"><a href="#cb16-26"></a><span class="co"># Remplacer les informations de l'arrondissement "Passy" dans l'objet "arrondissements" par les nouvelles informations</span></span>
+<span id="cb16-27"><a href="#cb16-27"></a>arrondissements[arrondissements<span class="sc">$</span>l_aroff <span class="sc">==</span> <span class="st">"Passy"</span>, ] <span class="ot">&lt;-</span> arrondissements_test</span>
+<span id="cb16-28"><a href="#cb16-28"></a></span>
+<span id="cb16-29"><a href="#cb16-29"></a><span class="co"># Afficher la carte de l'objet "arrondissements" avec les contours en noir</span></span>
+<span id="cb16-30"><a href="#cb16-30"></a><span class="fu">mf_map</span>(<span class="at">x =</span> arrondissements)</span>
+<span id="cb16-31"><a href="#cb16-31"></a><span class="fu">mf_map</span>(<span class="at">x=</span>arr_c,</span>
+<span id="cb16-32"><a href="#cb16-32"></a>  <span class="co"># var à représenter  </span></span>
+<span id="cb16-33"><a href="#cb16-33"></a>  <span class="at">var =</span> <span class="st">"pop"</span>,</span>
+<span id="cb16-34"><a href="#cb16-34"></a>  <span class="at">pch =</span> <span class="dv">16</span>,</span>
+<span id="cb16-35"><a href="#cb16-35"></a>  <span class="at">cex =</span> <span class="dv">2</span>,</span>
+<span id="cb16-36"><a href="#cb16-36"></a>  <span class="at">col =</span> colors,</span>
+<span id="cb16-37"><a href="#cb16-37"></a>  <span class="at">lwd =</span> <span class="dv">1</span>,</span>
+<span id="cb16-38"><a href="#cb16-38"></a>  <span class="at">leg_title =</span> <span class="st">"Distribution de la population dans Paris"</span>, </span>
+<span id="cb16-39"><a href="#cb16-39"></a>  <span class="at">digits =</span> <span class="dv">0</span>,</span>
+<span id="cb16-40"><a href="#cb16-40"></a>  <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Please use the 'type' argument to map variables.</code></pre>
+</div>
 <div class="cell-output-display">
 <p><img src="map_sf_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -651,200 +682,219 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb14" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1"></a><span class="co">---</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="an">title:</span><span class="co"> "Produire des cartes thématiques avec Mapsf"</span></span>
-<span id="cb14-3"><a href="#cb14-3"></a><span class="an">toc-title:</span><span class="co"> ""</span></span>
-<span id="cb14-4"><a href="#cb14-4"></a><span class="an">categories:</span></span>
-<span id="cb14-5"><a href="#cb14-5"></a><span class="co">  - R</span></span>
-<span id="cb14-6"><a href="#cb14-6"></a><span class="co">  - R-Studio</span></span>
-<span id="cb14-7"><a href="#cb14-7"></a><span class="an">author:</span><span class="co"> "COTTET Coralie"</span></span>
-<span id="cb14-8"><a href="#cb14-8"></a><span class="an">affiliations:</span><span class="co"> INED</span></span>
-<span id="cb14-9"><a href="#cb14-9"></a></span>
-<span id="cb14-10"><a href="#cb14-10"></a><span class="an">date:</span><span class="co"> 06/06/2023</span></span>
-<span id="cb14-11"><a href="#cb14-11"></a><span class="co">---</span></span>
-<span id="cb14-12"><a href="#cb14-12"></a>Nous allons réaliser des cartes avec R à l'aide du package "mapsf". </span>
-<span id="cb14-13"><a href="#cb14-13"></a></span>
-<span id="cb14-14"><a href="#cb14-14"></a><span class="in">```{r warning=FALSE, message=FALSE}</span></span>
-<span id="cb14-15"><a href="#cb14-15"></a><span class="fu">library</span>(mapsf)</span>
-<span id="cb14-16"><a href="#cb14-16"></a><span class="fu">library</span>(sf)</span>
-<span id="cb14-17"><a href="#cb14-17"></a></span>
-<span id="cb14-18"><a href="#cb14-18"></a><span class="in">```</span></span>
-<span id="cb14-19"><a href="#cb14-19"></a></span>
-<span id="cb14-20"><a href="#cb14-20"></a>Nous allons réaliser une carte de Paris. Pour cet exemple, j'ai récupéré les données sur </span>
-<span id="cb14-21"><a href="#cb14-21"></a>le site de Paris Data : </span>
-<span id="cb14-22"><a href="#cb14-22"></a><span class="ot">&lt;https://opendata.paris.fr/pages/catalogue/?disjunctive.theme&amp;disjunctive.publisher&gt;</span></span>
-<span id="cb14-23"><a href="#cb14-23"></a></span>
-<span id="cb14-24"><a href="#cb14-24"></a>Affichage du fond de carte correspondant aux limites des arrondissements auquel je vais ajouter les voies d'eau en couche d'habillage.</span>
-<span id="cb14-25"><a href="#cb14-25"></a></span>
-<span id="cb14-28"><a href="#cb14-28"></a><span class="in">```{r}</span></span>
-<span id="cb14-29"><a href="#cb14-29"></a><span class="co"># ----- Import des données -----</span></span>
-<span id="cb14-30"><a href="#cb14-30"></a></span>
-<span id="cb14-31"><a href="#cb14-31"></a>arrondissements <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">"https://opendata.paris.fr/explore/dataset/arrondissements/download/?format=geojson&amp;timezone=Europe/Berlin&amp;lang=fr"</span>)</span>
-<span id="cb14-32"><a href="#cb14-32"></a></span>
-<span id="cb14-33"><a href="#cb14-33"></a>cours_deau<span class="ot">&lt;-</span><span class="fu">st_read</span>(<span class="at">dsn=</span><span class="st">"https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/plan-de-voirie-voies-deau/exports/geojson?lang=fr&amp;timezone=Europe%2FBerlin"</span>)</span>
-<span id="cb14-34"><a href="#cb14-34"></a></span>
-<span id="cb14-35"><a href="#cb14-35"></a></span>
-<span id="cb14-36"><a href="#cb14-36"></a><span class="in">```</span></span>
-<span id="cb14-37"><a href="#cb14-37"></a></span>
-<span id="cb14-40"><a href="#cb14-40"></a><span class="in">```{r}</span></span>
-<span id="cb14-41"><a href="#cb14-41"></a><span class="co">#Dans un premier temps je réalise mon fond de carte avec les arrondissments de Paris </span></span>
-<span id="cb14-42"><a href="#cb14-42"></a><span class="fu">mf_map</span>(<span class="at">x =</span> arrondissements, <span class="at">border =</span> <span class="st">"black"</span>) </span>
-<span id="cb14-43"><a href="#cb14-43"></a></span>
-<span id="cb14-44"><a href="#cb14-44"></a><span class="co">#Je rajoute les cours d'eau sur mon fond de carte avec l'argument "add=TRUE"</span></span>
-<span id="cb14-45"><a href="#cb14-45"></a><span class="fu">mf_map</span>(<span class="at">x=</span>cours_deau,<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">border=</span><span class="st">"lightblue"</span>,<span class="at">col=</span><span class="st">"lightblue"</span>,<span class="at">add=</span><span class="cn">TRUE</span>)</span>
-<span id="cb14-46"><a href="#cb14-46"></a></span>
-<span id="cb14-47"><a href="#cb14-47"></a><span class="in">```</span></span>
-<span id="cb14-48"><a href="#cb14-48"></a></span>
-<span id="cb14-51"><a href="#cb14-51"></a><span class="in">```{r}</span></span>
-<span id="cb14-52"><a href="#cb14-52"></a><span class="co"># d'un point de vue esthétique je choisis d'appliquer un fond noir à mes cartes</span></span>
-<span id="cb14-53"><a href="#cb14-53"></a><span class="fu">mf_theme</span>(<span class="st">"darkula"</span>)</span>
-<span id="cb14-54"><a href="#cb14-54"></a></span>
-<span id="cb14-55"><a href="#cb14-55"></a></span>
-<span id="cb14-56"><a href="#cb14-56"></a><span class="in">```</span></span>
-<span id="cb14-57"><a href="#cb14-57"></a><span class="fu"># __Les différents types de cartes__</span></span>
-<span id="cb14-58"><a href="#cb14-58"></a></span>
-<span id="cb14-59"><a href="#cb14-59"></a></span>
-<span id="cb14-60"><a href="#cb14-60"></a><span class="kw">&lt;img</span> <span class="er">src</span><span class="ot">=</span><span class="st">"arbre_type_data.png"</span> <span class="er">alt</span><span class="ot">=</span><span class="st">"Texte alternatif de l'image"</span> <span class="er">title</span><span class="ot">=</span><span class="st">"Titre de l'image"</span> <span class="er">width</span><span class="ot">=</span><span class="st">"800"</span> <span class="er">height</span><span class="ot">=</span><span class="st">"500"</span> <span class="kw">/&gt;</span></span>
-<span id="cb14-61"><a href="#cb14-61"></a></span>
-<span id="cb14-62"><a href="#cb14-62"></a><span class="fu"># __Les cartes à symboles proportionnels__</span></span>
-<span id="cb14-63"><a href="#cb14-63"></a></span>
-<span id="cb14-64"><a href="#cb14-64"></a>Les cartes à symboles proportionnels sont les méthode de représentations graphiques à utiliser pour visualiser des variables de stocks (variables quantitatives absolues pour lesquelles la somme et la moyenne ont une signification).</span>
-<span id="cb14-65"><a href="#cb14-65"></a></span>
-<span id="cb14-66"><a href="#cb14-66"></a>Sur la carte, j'affiche l'effectif de la population de chaque arrondissement et j'ajoute la légende et un titre.</span>
-<span id="cb14-67"><a href="#cb14-67"></a></span>
-<span id="cb14-68"><a href="#cb14-68"></a><span class="in">```{r results= 'hide'}</span></span>
-<span id="cb14-69"><a href="#cb14-69"></a>arrondissements<span class="sc">$</span>pop <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1012687</span>, <span class="dv">903036</span>, <span class="dv">1369857</span>, <span class="dv">1491027</span>, <span class="dv">1672009</span>, <span class="dv">1506475</span>, <span class="dv">1637163</span>, <span class="dv">1603380</span>, <span class="dv">1637542</span>, <span class="dv">1059282</span>, <span class="dv">1494945</span>, <span class="dv">1436205</span>, <span class="dv">1705774</span>, <span class="dv">1425805</span>, <span class="dv">236769</span>, <span class="dv">1668605</span>, <span class="dv">1674568</span>, <span class="dv">1539668</span>, <span class="dv">1421827</span>, <span class="dv">1829526</span>) <span class="co">#INSEE,2021</span></span>
-<span id="cb14-70"><a href="#cb14-70"></a><span class="fu">mf_map</span>(<span class="at">x =</span> arrondissements, <span class="at">border =</span> <span class="st">"black"</span>)</span>
-<span id="cb14-71"><a href="#cb14-71"></a><span class="fu">mf_map</span>(<span class="at">x=</span>cours_deau,<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">border=</span><span class="st">"lightblue"</span>,<span class="at">col=</span><span class="st">"lightblue"</span>,<span class="at">add=</span><span class="cn">TRUE</span>)</span>
-<span id="cb14-72"><a href="#cb14-72"></a><span class="fu">mf_map</span>(</span>
-<span id="cb14-73"><a href="#cb14-73"></a>  <span class="at">x =</span> arrondissements,</span>
-<span id="cb14-74"><a href="#cb14-74"></a>  <span class="at">var =</span> <span class="st">"pop"</span>,</span>
-<span id="cb14-75"><a href="#cb14-75"></a>  <span class="at">type =</span> <span class="st">"prop"</span>,</span>
-<span id="cb14-76"><a href="#cb14-76"></a>  <span class="at">leg_title =</span> <span class="st">"Population totale\12 271 794"</span>,</span>
-<span id="cb14-77"><a href="#cb14-77"></a>  <span class="at">col=</span><span class="st">"#F39487"</span>,</span>
-<span id="cb14-78"><a href="#cb14-78"></a>  <span class="at">add=</span> <span class="cn">TRUE</span></span>
-<span id="cb14-79"><a href="#cb14-79"></a>)</span>
-<span id="cb14-80"><a href="#cb14-80"></a></span>
-<span id="cb14-81"><a href="#cb14-81"></a><span class="fu">mf_title</span>(<span class="st">"Distribution de la population dans Paris"</span>)</span>
-<span id="cb14-82"><a href="#cb14-82"></a><span class="in">```</span></span>
-<span id="cb14-83"><a href="#cb14-83"></a> # __Les cartes choroplèthes__</span>
-<span id="cb14-84"><a href="#cb14-84"></a></span>
-<span id="cb14-85"><a href="#cb14-85"></a></span>
-<span id="cb14-86"><a href="#cb14-86"></a>Les cartes choroplèthes sont les représentations graphiques à utiliser pour visualiser des ratios (des variables quantitatives relatives pour lesquelles la moyenne a un sens, mais _dont_ la somme n'a pas de sens).</span>
-<span id="cb14-87"><a href="#cb14-87"></a></span>
-<span id="cb14-88"><a href="#cb14-88"></a>Sur la carte, j'affiche la densité de population de chaque arrondissement. J'utilise la méthode des quantiles pour discréditer cette variable et j'utilise une palette de couleur avec dégradé pour représenter l'ordre entre mes valeurs.</span>
-<span id="cb14-89"><a href="#cb14-89"></a></span>
-<span id="cb14-92"><a href="#cb14-92"></a><span class="in">```{r}</span></span>
-<span id="cb14-93"><a href="#cb14-93"></a><span class="co">#création de la variable densite </span></span>
-<span id="cb14-94"><a href="#cb14-94"></a>arrondissements<span class="sc">$</span>DENS <span class="ot">&lt;-</span> <span class="fl">1e6</span> <span class="sc">*</span> arrondissements<span class="sc">$</span>pop <span class="sc">/</span> <span class="fu">as.numeric</span>(<span class="fu">st_area</span>(arrondissements))</span>
-<span id="cb14-95"><a href="#cb14-95"></a><span class="fu">mf_map</span>(</span>
-<span id="cb14-96"><a href="#cb14-96"></a>  <span class="at">x =</span> arrondissements,</span>
-<span id="cb14-97"><a href="#cb14-97"></a>  <span class="at">var =</span> <span class="st">"DENS"</span>,</span>
-<span id="cb14-98"><a href="#cb14-98"></a>  <span class="at">type =</span> <span class="st">"choro"</span>,</span>
-<span id="cb14-99"><a href="#cb14-99"></a>  <span class="at">breaks =</span> <span class="st">"quantile"</span>,</span>
-<span id="cb14-100"><a href="#cb14-100"></a>  <span class="at">pal =</span> <span class="st">"Reds"</span>,</span>
-<span id="cb14-101"><a href="#cb14-101"></a>  <span class="at">lwd =</span> <span class="dv">1</span>,</span>
-<span id="cb14-102"><a href="#cb14-102"></a>  <span class="at">leg_title =</span> <span class="st">"Densité de population</span><span class="sc">\n</span><span class="st">(habitants par km2)"</span>, </span>
-<span id="cb14-103"><a href="#cb14-103"></a>  <span class="at">leg_val_rnd =</span> <span class="dv">0</span></span>
-<span id="cb14-104"><a href="#cb14-104"></a>)</span>
-<span id="cb14-105"><a href="#cb14-105"></a></span>
-<span id="cb14-106"><a href="#cb14-106"></a><span class="fu">mf_title</span>(<span class="st">"Distribution de la population dans Paris (INSEE,2021)"</span>)</span>
-<span id="cb14-107"><a href="#cb14-107"></a></span>
-<span id="cb14-108"><a href="#cb14-108"></a><span class="in">```</span></span>
-<span id="cb14-109"><a href="#cb14-109"></a>__Remarque: la faible densité de population des 12e et 16e arrondissement est faible, notamment en raison des bois de Vincennes et de Boulogne qui les composent.__</span>
-<span id="cb14-110"><a href="#cb14-110"></a></span>
-<span id="cb14-111"><a href="#cb14-111"></a>On peut aussi représenter ce type de variable sous d'autres forme:</span>
-<span id="cb14-112"><a href="#cb14-112"></a>On travaille avec les bords politiques des mairies de chaque arrondissement.</span>
-<span id="cb14-113"><a href="#cb14-113"></a></span>
-<span id="cb14-114"><a href="#cb14-114"></a><span class="in">```{r message=FALSE , warning=FALSE}</span></span>
-<span id="cb14-115"><a href="#cb14-115"></a></span>
-<span id="cb14-116"><a href="#cb14-116"></a></span>
-<span id="cb14-117"><a href="#cb14-117"></a>bords_politiques <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"PS"</span>, <span class="st">"EELV"</span>, <span class="st">"PS"</span>, <span class="st">"PS"</span>, <span class="st">"DVD"</span>, <span class="st">"LR"</span>, <span class="st">"LR"</span>, <span class="st">"LR"</span>, <span class="st">"DVD"</span>, <span class="st">"PS"</span>, <span class="st">"PS"</span>, <span class="st">"PS"</span>, <span class="st">"PS"</span>, <span class="st">"EELV"</span>, <span class="st">"LR"</span>, <span class="st">"LR"</span>, <span class="st">"LR"</span>, <span class="st">"PS"</span>, <span class="st">"PS"</span>, <span class="st">"EELV"</span>)</span>
-<span id="cb14-118"><a href="#cb14-118"></a>arrondissements <span class="ot">&lt;-</span> <span class="fu">cbind</span>(arrondissements, bords_politiques)</span>
-<span id="cb14-119"><a href="#cb14-119"></a>colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"PS"</span> <span class="ot">=</span> <span class="st">"#FF0066"</span>, <span class="st">"EELV"</span> <span class="ot">=</span> <span class="st">"#00CC66"</span>, <span class="st">"DVD"</span> <span class="ot">=</span> <span class="st">"#FF9933"</span>, <span class="st">"LR"</span> <span class="ot">=</span> <span class="st">"#0066CC"</span>)</span>
-<span id="cb14-120"><a href="#cb14-120"></a>arr_c<span class="ot">&lt;-</span><span class="fu">st_centroid</span>(arrondissements)</span>
-<span id="cb14-121"><a href="#cb14-121"></a><span class="fu">mf_map</span>(<span class="at">x =</span> arrondissements, <span class="at">border =</span> <span class="st">"black"</span>)</span>
-<span id="cb14-122"><a href="#cb14-122"></a><span class="fu">mf_map</span>(<span class="at">x=</span>cours_deau,<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">border=</span><span class="st">"lightblue"</span>,<span class="at">col=</span><span class="st">"lightblue"</span>,<span class="at">add=</span><span class="cn">TRUE</span>)</span>
-<span id="cb14-123"><a href="#cb14-123"></a><span class="co"># Ajouter des triangles remplis pour chaque arrondissement en fonction de son bord politique</span></span>
-<span id="cb14-124"><a href="#cb14-124"></a><span class="fu">mf_map</span>(</span>
-<span id="cb14-125"><a href="#cb14-125"></a>  <span class="at">x =</span> arr_c,</span>
-<span id="cb14-126"><a href="#cb14-126"></a>  <span class="at">var =</span> <span class="st">"bords_politiques"</span>,</span>
-<span id="cb14-127"><a href="#cb14-127"></a>  <span class="at">pch =</span> <span class="dv">15</span>,</span>
-<span id="cb14-128"><a href="#cb14-128"></a>  <span class="at">cex =</span> <span class="dv">2</span>,</span>
-<span id="cb14-129"><a href="#cb14-129"></a>  <span class="at">col =</span> colors,</span>
-<span id="cb14-130"><a href="#cb14-130"></a>  <span class="at">lwd =</span> <span class="dv">1</span>,</span>
-<span id="cb14-131"><a href="#cb14-131"></a>  <span class="at">leg_title =</span> <span class="st">"Densité de population</span><span class="sc">\n</span><span class="st">(habitants par km2)"</span>, </span>
-<span id="cb14-132"><a href="#cb14-132"></a>  <span class="at">digits =</span> <span class="dv">0</span>,</span>
-<span id="cb14-133"><a href="#cb14-133"></a>  <span class="at">add =</span> <span class="cn">TRUE</span></span>
-<span id="cb14-134"><a href="#cb14-134"></a>)</span>
-<span id="cb14-135"><a href="#cb14-135"></a></span>
-<span id="cb14-136"><a href="#cb14-136"></a><span class="in">```</span></span>
-<span id="cb14-137"><a href="#cb14-137"></a></span>
-<span id="cb14-138"><a href="#cb14-138"></a></span>
-<span id="cb14-139"><a href="#cb14-139"></a><span class="fu"># Et si on regroupait deux arrondissement ?</span></span>
-<span id="cb14-140"><a href="#cb14-140"></a></span>
-<span id="cb14-141"><a href="#cb14-141"></a>Pour cet exemple nous prenons le cas où, dans les statistiques que nous avons à représenter, les données, des 15e et 16e doivent être sommées. Il faut que les polygones du fond de carte représentant ces deux arrondissements soient fusionnés.</span>
-<span id="cb14-142"><a href="#cb14-142"></a></span>
-<span id="cb14-143"><a href="#cb14-143"></a></span>
-<span id="cb14-144"><a href="#cb14-144"></a>L’idée globale du code ci-dessous c’est de fusionner les deux polygones (celui du 15e _Vaugirard_ et du 16e _Passy_) et </span>
-<span id="cb14-145"><a href="#cb14-145"></a> on recré toute la ligne de notre tableau de donnée pour pouvoir la fusionner avec celui-ci.</span>
-<span id="cb14-146"><a href="#cb14-146"></a></span>
-<span id="cb14-147"><a href="#cb14-147"></a><span class="in">```{r results= 'hide'}</span></span>
-<span id="cb14-148"><a href="#cb14-148"></a></span>
-<span id="cb14-149"><a href="#cb14-149"></a></span>
-<span id="cb14-150"><a href="#cb14-150"></a><span class="co"># ---- Fusionner deux polygones ---- #</span></span>
-<span id="cb14-151"><a href="#cb14-151"></a></span>
-<span id="cb14-152"><a href="#cb14-152"></a><span class="co"># Sélectionner les deux polygones que vous souhaitez fusionner</span></span>
-<span id="cb14-153"><a href="#cb14-153"></a>poly1 <span class="ot">&lt;-</span> arrondissements[arrondissements<span class="sc">$</span>l_aroff <span class="sc">==</span> <span class="st">"Passy"</span>, ] <span class="co"># sélectionne le polygone avec le nom "Passy"</span></span>
-<span id="cb14-154"><a href="#cb14-154"></a>poly2 <span class="ot">&lt;-</span> arrondissements[arrondissements<span class="sc">$</span>l_aroff <span class="sc">==</span> <span class="st">"Vaugirard"</span>, ] <span class="co"># sélectionne le polygone avec le nom "Vaugirard"</span></span>
-<span id="cb14-155"><a href="#cb14-155"></a></span>
-<span id="cb14-156"><a href="#cb14-156"></a><span class="co"># Fusionner les polygones</span></span>
-<span id="cb14-157"><a href="#cb14-157"></a>new_poly <span class="ot">&lt;-</span> <span class="fu">st_union</span>(poly1, poly2) <span class="co"># fusionne les deux polygones sélectionnés en un seul polygone</span></span>
-<span id="cb14-158"><a href="#cb14-158"></a></span>
-<span id="cb14-159"><a href="#cb14-159"></a><span class="co"># Ajouter la surface, la population, le périmètre et les coordonnées géographiques des deux polygones </span></span>
-<span id="cb14-160"><a href="#cb14-160"></a></span>
-<span id="cb14-161"><a href="#cb14-161"></a><span class="co">#l'idée c'est de recréer une nouvelle ligne pour notre nouveau polygone pour qu'on puisse le réinsérer dans notre tableau. </span></span>
-<span id="cb14-162"><a href="#cb14-162"></a></span>
-<span id="cb14-163"><a href="#cb14-163"></a>new_poly<span class="sc">$</span>surface <span class="ot">&lt;-</span> new_poly<span class="sc">$</span>surface <span class="sc">+</span> new_poly<span class="sc">$</span>surface<span class="fl">.1</span> <span class="co"># ajouter la surface des deux polygones</span></span>
-<span id="cb14-164"><a href="#cb14-164"></a>new_poly<span class="sc">$</span>n_sq_co <span class="ot">&lt;-</span> new_poly<span class="sc">$</span>n_sq_co <span class="sc">+</span> new_poly<span class="sc">$</span>n_sq_co<span class="fl">.1</span> <span class="co"># ajouter la population des deux polygones</span></span>
-<span id="cb14-165"><a href="#cb14-165"></a>new_poly<span class="sc">$</span>perimetre <span class="ot">&lt;-</span> new_poly<span class="sc">$</span>perimetre <span class="sc">+</span> new_poly<span class="sc">$</span>perimetre<span class="fl">.1</span> <span class="co"># ajouter le périmètre des deux polygones</span></span>
-<span id="cb14-166"><a href="#cb14-166"></a>new_poly<span class="sc">$</span>n_sq_ar <span class="ot">&lt;-</span> new_poly<span class="sc">$</span>n_sq_ar <span class="sc">+</span> new_poly<span class="sc">$</span>n_sq_ar<span class="fl">.1</span> <span class="co"># ajouter les coordonnées géographiques des deux polygones</span></span>
-<span id="cb14-167"><a href="#cb14-167"></a></span>
-<span id="cb14-168"><a href="#cb14-168"></a>new_poly<span class="sc">$</span>pop<span class="ot">&lt;-</span>new_poly<span class="sc">$</span>pop<span class="sc">+</span> new_poly<span class="sc">$</span>pop<span class="fl">.1</span></span>
-<span id="cb14-169"><a href="#cb14-169"></a></span>
-<span id="cb14-170"><a href="#cb14-170"></a>new_poly<span class="sc">$</span>DENS<span class="ot">&lt;-</span>new_poly<span class="sc">$</span>DENS<span class="sc">+</span>new_poly<span class="sc">$</span>DENS<span class="fl">.1</span></span>
-<span id="cb14-171"><a href="#cb14-171"></a></span>
-<span id="cb14-172"><a href="#cb14-172"></a><span class="co"># Modifier les informations de localisation</span></span>
-<span id="cb14-173"><a href="#cb14-173"></a>new_poly<span class="sc">$</span>l_aroff <span class="ot">&lt;-</span> <span class="st">"un nouvel arrondissement"</span> <span class="co"># changer le nom de l'arrondissement</span></span>
-<span id="cb14-174"><a href="#cb14-174"></a>new_poly<span class="sc">$</span>l_ar <span class="ot">&lt;-</span> <span class="st">"xxème Ardt"</span> <span class="co"># changer le numéro de l'arrondissement</span></span>
-<span id="cb14-175"><a href="#cb14-175"></a>new_poly<span class="sc">$</span>c_ar <span class="ot">&lt;-</span> <span class="st">"xx"</span> <span class="co"># changer le code de l'arrondissement</span></span>
-<span id="cb14-176"><a href="#cb14-176"></a>new_poly<span class="sc">$</span>c_arinsee <span class="ot">&lt;-</span> <span class="st">"75xxxx"</span> <span class="co"># changer le code INSEE de la commune</span></span>
-<span id="cb14-177"><a href="#cb14-177"></a>new_poly<span class="sc">$</span>bords_politiques<span class="ot">&lt;-</span><span class="st">"PS"</span> <span class="co">#changer le bord politique du nouvel arrondissement</span></span>
-<span id="cb14-178"><a href="#cb14-178"></a></span>
-<span id="cb14-179"><a href="#cb14-179"></a></span>
-<span id="cb14-180"><a href="#cb14-180"></a><span class="co"># Sélectionner certaines colonnes pour créer un nouvel objet de données</span></span>
-<span id="cb14-181"><a href="#cb14-181"></a>arrondissements_test <span class="ot">&lt;-</span> <span class="fu">subset</span>(new_poly, <span class="at">select =</span> <span class="fu">c</span>(c_ar, l_aroff, surface, l_ar, n_sq_co, c_arinsee, n_sq_ar, perimetre, geom_x_y,pop, DENS,bords_politiques))</span>
-<span id="cb14-182"><a href="#cb14-182"></a><span class="co"># à noter qu'il est très important de mettre les éléments dans le même ordre que celui du tableau</span></span>
-<span id="cb14-183"><a href="#cb14-183"></a></span>
-<span id="cb14-184"><a href="#cb14-184"></a><span class="co"># Remplacer les informations de l'arrondissement "Passy" dans l'objet "arrondissements" par les nouvelles informations</span></span>
-<span id="cb14-185"><a href="#cb14-185"></a>arrondissements[arrondissements<span class="sc">$</span>l_aroff <span class="sc">==</span> <span class="st">"Passy"</span>, ] <span class="ot">&lt;-</span> arrondissements_test</span>
-<span id="cb14-186"><a href="#cb14-186"></a></span>
-<span id="cb14-187"><a href="#cb14-187"></a><span class="co"># Afficher la carte de l'objet "arrondissements" avec les contours en noir</span></span>
-<span id="cb14-188"><a href="#cb14-188"></a><span class="fu">mf_map</span>(<span class="at">x =</span> arrondissements, <span class="at">border =</span> <span class="st">"black"</span>)</span>
-<span id="cb14-189"><a href="#cb14-189"></a></span>
-<span id="cb14-190"><a href="#cb14-190"></a><span class="in">```</span></span>
-<span id="cb14-191"><a href="#cb14-191"></a></span>
-<span id="cb14-192"><a href="#cb14-192"></a></span>
-<span id="cb14-193"><a href="#cb14-193"></a><span class="fu"># En savoir plus sur mapsf:</span></span>
-<span id="cb14-194"><a href="#cb14-194"></a></span>
-<span id="cb14-195"><a href="#cb14-195"></a>Pour la rédaction de cet article je me suis grandement inspirée du travail de Timothée Giraud.</span>
-<span id="cb14-196"><a href="#cb14-196"></a></span>
-<span id="cb14-197"><a href="#cb14-197"></a></span>
-<span id="cb14-198"><a href="#cb14-198"></a><span class="ot">&lt;https://rcarto.github.io/ined2022/07_mise_en_page.html&gt;</span></span>
-<span id="cb14-199"><a href="#cb14-199"></a></span>
-<span id="cb14-200"><a href="#cb14-200"></a><span class="ot">&lt;http://riatelab.github.io/mapsf&gt;</span></span>
-<span id="cb14-201"><a href="#cb14-201"></a></span>
-<span id="cb14-202"><a href="#cb14-202"></a><span class="ot">&lt;http://rgeomatic.hypotheses.org/2077&gt;</span></span>
+<div class="sourceCode" id="cb18" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1"></a><span class="co">---</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="an">title:</span><span class="co"> "Produire des cartes thématiques avec Mapsf"</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="an">toc-title:</span><span class="co"> ""</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="an">categories:</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="co">  - R</span></span>
+<span id="cb18-6"><a href="#cb18-6"></a><span class="co">  - R-Studio</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a><span class="an">author:</span><span class="co"> "COTTET Coralie"</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a><span class="an">affiliations:</span><span class="co"> INED</span></span>
+<span id="cb18-9"><a href="#cb18-9"></a></span>
+<span id="cb18-10"><a href="#cb18-10"></a><span class="an">date:</span><span class="co"> 06/06/2023</span></span>
+<span id="cb18-11"><a href="#cb18-11"></a><span class="co">---</span></span>
+<span id="cb18-12"><a href="#cb18-12"></a>Nous allons réaliser des cartes avec R à l'aide du package "mapsf". </span>
+<span id="cb18-13"><a href="#cb18-13"></a></span>
+<span id="cb18-14"><a href="#cb18-14"></a><span class="in">```{r warning=FALSE, message=FALSE}</span></span>
+<span id="cb18-15"><a href="#cb18-15"></a><span class="fu">library</span>(mapsf)</span>
+<span id="cb18-16"><a href="#cb18-16"></a><span class="fu">library</span>(sf)</span>
+<span id="cb18-17"><a href="#cb18-17"></a></span>
+<span id="cb18-18"><a href="#cb18-18"></a><span class="in">```</span></span>
+<span id="cb18-19"><a href="#cb18-19"></a></span>
+<span id="cb18-20"><a href="#cb18-20"></a>Nous allons réaliser une carte de Paris. Pour cet exemple, j'ai récupéré les données sur </span>
+<span id="cb18-21"><a href="#cb18-21"></a>le site de Paris Data : </span>
+<span id="cb18-22"><a href="#cb18-22"></a><span class="ot">&lt;https://opendata.paris.fr/pages/catalogue/?disjunctive.theme&amp;disjunctive.publisher&gt;</span></span>
+<span id="cb18-23"><a href="#cb18-23"></a></span>
+<span id="cb18-24"><a href="#cb18-24"></a>Affichage du fond de carte correspondant aux limites des arrondissements auquel je vais ajouter les voies d'eau en couche d'habillage.</span>
+<span id="cb18-25"><a href="#cb18-25"></a></span>
+<span id="cb18-28"><a href="#cb18-28"></a><span class="in">```{r}</span></span>
+<span id="cb18-29"><a href="#cb18-29"></a><span class="co"># ----- Import des données -----</span></span>
+<span id="cb18-30"><a href="#cb18-30"></a></span>
+<span id="cb18-31"><a href="#cb18-31"></a>arrondissements <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">"https://opendata.paris.fr/explore/dataset/arrondissements/download/?format=geojson&amp;timezone=Europe/Berlin&amp;lang=fr"</span>)</span>
+<span id="cb18-32"><a href="#cb18-32"></a></span>
+<span id="cb18-33"><a href="#cb18-33"></a>cours_deau<span class="ot">&lt;-</span><span class="fu">st_read</span>(<span class="at">dsn=</span><span class="st">"https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/plan-de-voirie-voies-deau/exports/geojson?lang=fr&amp;timezone=Europe%2FBerlin"</span>)</span>
+<span id="cb18-34"><a href="#cb18-34"></a></span>
+<span id="cb18-35"><a href="#cb18-35"></a></span>
+<span id="cb18-36"><a href="#cb18-36"></a><span class="in">```</span></span>
+<span id="cb18-37"><a href="#cb18-37"></a></span>
+<span id="cb18-40"><a href="#cb18-40"></a><span class="in">```{r}</span></span>
+<span id="cb18-41"><a href="#cb18-41"></a><span class="co">#Dans un premier temps je réalise mon fond de carte avec les arrondissements de Paris </span></span>
+<span id="cb18-42"><a href="#cb18-42"></a><span class="fu">mf_map</span>(<span class="at">x =</span> arrondissements, <span class="at">border =</span> <span class="st">"black"</span>) </span>
+<span id="cb18-43"><a href="#cb18-43"></a></span>
+<span id="cb18-44"><a href="#cb18-44"></a><span class="co">#Je rajoute la couche des cours d'eau sur mon fond de carte avec l'argument "add=TRUE"</span></span>
+<span id="cb18-45"><a href="#cb18-45"></a><span class="fu">mf_map</span>(<span class="at">x=</span>cours_deau,<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">border=</span><span class="st">"lightblue"</span>,<span class="at">col=</span><span class="st">"lightblue"</span>,<span class="at">add=</span><span class="cn">TRUE</span>)</span>
+<span id="cb18-46"><a href="#cb18-46"></a></span>
+<span id="cb18-47"><a href="#cb18-47"></a><span class="in">```</span></span>
+<span id="cb18-48"><a href="#cb18-48"></a></span>
+<span id="cb18-51"><a href="#cb18-51"></a><span class="in">```{r}</span></span>
+<span id="cb18-52"><a href="#cb18-52"></a><span class="co"># d'un point de vue esthétique je choisis d'appliquer un fond noir à mes cartes</span></span>
+<span id="cb18-53"><a href="#cb18-53"></a><span class="fu">mf_theme</span>(<span class="st">"darkula"</span>)</span>
+<span id="cb18-54"><a href="#cb18-54"></a></span>
+<span id="cb18-55"><a href="#cb18-55"></a></span>
+<span id="cb18-56"><a href="#cb18-56"></a><span class="in">```</span></span>
+<span id="cb18-57"><a href="#cb18-57"></a><span class="fu"># __Les différents types de cartes__</span></span>
+<span id="cb18-58"><a href="#cb18-58"></a></span>
+<span id="cb18-59"><a href="#cb18-59"></a></span>
+<span id="cb18-60"><a href="#cb18-60"></a><span class="kw">&lt;img</span> <span class="er">src</span><span class="ot">=</span><span class="st">"arbre_type_data.png"</span> <span class="er">alt</span><span class="ot">=</span><span class="st">"Texte alternatif de l'image"</span> <span class="er">title</span><span class="ot">=</span><span class="st">"Titre de l'image"</span> <span class="er">width</span><span class="ot">=</span><span class="st">"800"</span> <span class="er">height</span><span class="ot">=</span><span class="st">"500"</span> <span class="kw">/&gt;</span></span>
+<span id="cb18-61"><a href="#cb18-61"></a></span>
+<span id="cb18-62"><a href="#cb18-62"></a><span class="fu"># __Les cartes à symboles proportionnels__</span></span>
+<span id="cb18-63"><a href="#cb18-63"></a>La  carte en symboles proportionnels est la méthode de représentation graphique à utiliser pour visualiser des variables de stocks (variables quantitatives absolues pour lesquelles la somme et la moyenne ont une signification).</span>
+<span id="cb18-64"><a href="#cb18-64"></a></span>
+<span id="cb18-65"><a href="#cb18-65"></a>Sur la carte, j'affiche l'effectif de la population de chaque arrondissement et j'ajoute la légende et un titre.</span>
+<span id="cb18-66"><a href="#cb18-66"></a></span>
+<span id="cb18-67"><a href="#cb18-67"></a><span class="in">```{r results= 'hide'}</span></span>
+<span id="cb18-68"><a href="#cb18-68"></a>arrondissements<span class="sc">$</span>pop <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1012687</span>, <span class="dv">903036</span>, <span class="dv">1369857</span>, <span class="dv">1491027</span>, <span class="dv">1672009</span>, <span class="dv">1506475</span>, <span class="dv">1637163</span>, <span class="dv">1603380</span>, <span class="dv">1637542</span>, <span class="dv">1059282</span>, <span class="dv">1494945</span>, <span class="dv">1436205</span>, <span class="dv">1705774</span>, <span class="dv">1425805</span>, <span class="dv">236769</span>, <span class="dv">1668605</span>, <span class="dv">1674568</span>, <span class="dv">1539668</span>, <span class="dv">1421827</span>, <span class="dv">1829526</span>) <span class="co">#INSEE,2021</span></span>
+<span id="cb18-69"><a href="#cb18-69"></a><span class="fu">mf_map</span>(<span class="at">x =</span> arrondissements)</span>
+<span id="cb18-70"><a href="#cb18-70"></a><span class="fu">mf_map</span>(<span class="at">x=</span>cours_deau,<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">border=</span><span class="st">"lightblue"</span>,<span class="at">col=</span><span class="st">"lightblue"</span>,<span class="at">add=</span><span class="cn">TRUE</span>)</span>
+<span id="cb18-71"><a href="#cb18-71"></a><span class="fu">mf_map</span>(</span>
+<span id="cb18-72"><a href="#cb18-72"></a>  <span class="at">x =</span> arrondissements,</span>
+<span id="cb18-73"><a href="#cb18-73"></a><span class="co"># variable à représenter: population des arrondissements</span></span>
+<span id="cb18-74"><a href="#cb18-74"></a>  <span class="at">var =</span> <span class="st">"pop"</span>,</span>
+<span id="cb18-75"><a href="#cb18-75"></a><span class="co"># type de carte : symboles proportionnels</span></span>
+<span id="cb18-76"><a href="#cb18-76"></a>  <span class="at">type =</span> <span class="st">"prop"</span>,</span>
+<span id="cb18-77"><a href="#cb18-77"></a>  <span class="at">leg_title =</span> <span class="st">"Population totale\12 271 794"</span>,</span>
+<span id="cb18-78"><a href="#cb18-78"></a>  <span class="at">col=</span><span class="st">"blue"</span>,</span>
+<span id="cb18-79"><a href="#cb18-79"></a>  <span class="at">add=</span> <span class="cn">TRUE</span>,</span>
+<span id="cb18-80"><a href="#cb18-80"></a>  <span class="at">inches=</span><span class="fl">0.2</span>)</span>
+<span id="cb18-81"><a href="#cb18-81"></a></span>
+<span id="cb18-82"><a href="#cb18-82"></a><span class="fu">mf_title</span>(<span class="st">"Distribution de la population dans Paris"</span>)</span>
+<span id="cb18-83"><a href="#cb18-83"></a><span class="in">```</span></span>
+<span id="cb18-84"><a href="#cb18-84"></a> # __Les cartes choroplèthes__</span>
+<span id="cb18-85"><a href="#cb18-85"></a></span>
+<span id="cb18-86"><a href="#cb18-86"></a>La carte choroplèthe est la représentation graphique à utiliser pour visualiser des ratios (des variables quantitatives relatives pour lesquelles la moyenne a un sens, mais dont la somme n’a pas de sens) qui sont des variables qualitatives ordinales.</span>
+<span id="cb18-87"><a href="#cb18-87"></a></span>
+<span id="cb18-88"><a href="#cb18-88"></a>Sur la carte, j'affiche la densité de population de chaque arrondissement. J'utilise la méthode des quantiles pour discréditer cette variable et j'utilise une palette de couleur avec dégradé pour représenter l'ordre entre mes valeurs.</span>
+<span id="cb18-89"><a href="#cb18-89"></a></span>
+<span id="cb18-92"><a href="#cb18-92"></a><span class="in">```{r}</span></span>
+<span id="cb18-93"><a href="#cb18-93"></a><span class="co">#création de la variable densite </span></span>
+<span id="cb18-94"><a href="#cb18-94"></a>arrondissements<span class="sc">$</span>DENS <span class="ot">&lt;-</span> <span class="fl">1e6</span> <span class="sc">*</span> arrondissements<span class="sc">$</span>pop <span class="sc">/</span> <span class="fu">as.numeric</span>(<span class="fu">st_area</span>(arrondissements))</span>
+<span id="cb18-95"><a href="#cb18-95"></a><span class="fu">mf_map</span>(</span>
+<span id="cb18-96"><a href="#cb18-96"></a>  <span class="at">x =</span> arrondissements,</span>
+<span id="cb18-97"><a href="#cb18-97"></a><span class="co"># variable à représenter: densité de population  </span></span>
+<span id="cb18-98"><a href="#cb18-98"></a><span class="at">var =</span> <span class="st">"DENS"</span>,</span>
+<span id="cb18-99"><a href="#cb18-99"></a><span class="co"># type de carte  </span></span>
+<span id="cb18-100"><a href="#cb18-100"></a><span class="at">type =</span> <span class="st">"choro"</span>,</span>
+<span id="cb18-101"><a href="#cb18-101"></a><span class="co"># méthode de dsicrétisation</span></span>
+<span id="cb18-102"><a href="#cb18-102"></a>  <span class="at">breaks =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb18-103"><a href="#cb18-103"></a><span class="co"># palette de rouges  </span></span>
+<span id="cb18-104"><a href="#cb18-104"></a><span class="at">pal =</span> <span class="st">"Reds"</span>,</span>
+<span id="cb18-105"><a href="#cb18-105"></a>  <span class="at">lwd =</span> <span class="dv">1</span>,</span>
+<span id="cb18-106"><a href="#cb18-106"></a>  <span class="at">leg_title =</span> <span class="st">"Densité de population</span><span class="sc">\n</span><span class="st">(habitants par km2)"</span>, </span>
+<span id="cb18-107"><a href="#cb18-107"></a>  <span class="at">leg_val_rnd =</span> <span class="dv">0</span></span>
+<span id="cb18-108"><a href="#cb18-108"></a>)</span>
+<span id="cb18-109"><a href="#cb18-109"></a></span>
+<span id="cb18-110"><a href="#cb18-110"></a></span>
+<span id="cb18-111"><a href="#cb18-111"></a></span>
+<span id="cb18-112"><a href="#cb18-112"></a><span class="in">```</span></span>
+<span id="cb18-113"><a href="#cb18-113"></a>__Remarque: la faible densité de population des 12e et 16e arrondissement est faible, notamment en raison des bois de Vincennes et de Boulogne qui les composent.__</span>
+<span id="cb18-114"><a href="#cb18-114"></a></span>
+<span id="cb18-115"><a href="#cb18-115"></a>On peut aussi représenter un autre  type de variable: qualitative nominale ici les bords politiques des mairies de chaque arrondissement.</span>
+<span id="cb18-116"><a href="#cb18-116"></a>Pour cela, on produit une carte choroplèthes mais avec des couleurs «sans dégradé»</span>
+<span id="cb18-119"><a href="#cb18-119"></a><span class="in">```{r}</span></span>
+<span id="cb18-120"><a href="#cb18-120"></a>bords_politiques <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"PS"</span>, <span class="st">"EELV"</span>, <span class="st">"PS"</span>, <span class="st">"PS"</span>, <span class="st">"DVD"</span>, <span class="st">"LR"</span>, <span class="st">"LR"</span>, <span class="st">"LR"</span>, <span class="st">"DVD"</span>, <span class="st">"PS"</span>, <span class="st">"PS"</span>, <span class="st">"PS"</span>, <span class="st">"PS"</span>, <span class="st">"EELV"</span>, <span class="st">"LR"</span>, <span class="st">"LR"</span>, <span class="st">"LR"</span>, <span class="st">"PS"</span>, <span class="st">"PS"</span>, <span class="st">"EELV"</span>)</span>
+<span id="cb18-121"><a href="#cb18-121"></a>arrondissements <span class="ot">&lt;-</span> <span class="fu">cbind</span>(arrondissements, bords_politiques)</span>
+<span id="cb18-122"><a href="#cb18-122"></a></span>
+<span id="cb18-123"><a href="#cb18-123"></a><span class="co"># choix des couleurs</span></span>
+<span id="cb18-124"><a href="#cb18-124"></a></span>
+<span id="cb18-125"><a href="#cb18-125"></a>colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"PS"</span> <span class="ot">=</span> <span class="st">"#FF0066"</span>, <span class="st">"EELV"</span> <span class="ot">=</span> <span class="st">"#00CC66"</span>, <span class="st">"DVD"</span> <span class="ot">=</span> <span class="st">"#FF9933"</span>, <span class="st">"LR"</span> <span class="ot">=</span> <span class="st">"#0066CC"</span>)</span>
+<span id="cb18-126"><a href="#cb18-126"></a></span>
+<span id="cb18-127"><a href="#cb18-127"></a><span class="co"># Pour placer les carrés sur les centroïdes des polygones représentant les arrondissements.</span></span>
+<span id="cb18-128"><a href="#cb18-128"></a></span>
+<span id="cb18-129"><a href="#cb18-129"></a>arr_c<span class="ot">&lt;-</span><span class="fu">st_centroid</span>(arrondissements)</span>
+<span id="cb18-130"><a href="#cb18-130"></a><span class="fu">mf_map</span>(<span class="at">x =</span> arrondissements, <span class="at">border =</span> <span class="st">"black"</span>)</span>
+<span id="cb18-131"><a href="#cb18-131"></a></span>
+<span id="cb18-132"><a href="#cb18-132"></a><span class="co"># Ajouter des triangles remplis pour chaque arrondissement en fonction de son bord politique</span></span>
+<span id="cb18-133"><a href="#cb18-133"></a><span class="fu">mf_map</span>(</span>
+<span id="cb18-134"><a href="#cb18-134"></a>  <span class="at">x =</span> arr_c,</span>
+<span id="cb18-135"><a href="#cb18-135"></a><span class="co"># var à représenter  </span></span>
+<span id="cb18-136"><a href="#cb18-136"></a> <span class="at">var =</span> <span class="st">"bords_politiques"</span>,</span>
+<span id="cb18-137"><a href="#cb18-137"></a>  <span class="at">pch =</span> <span class="dv">15</span>,</span>
+<span id="cb18-138"><a href="#cb18-138"></a>  <span class="at">cex =</span> <span class="dv">2</span>,</span>
+<span id="cb18-139"><a href="#cb18-139"></a>  <span class="at">col =</span> colors,</span>
+<span id="cb18-140"><a href="#cb18-140"></a>  <span class="at">lwd =</span> <span class="dv">1</span>,</span>
+<span id="cb18-141"><a href="#cb18-141"></a>  <span class="at">leg_title =</span> <span class="st">"Densité de population</span><span class="sc">\n</span><span class="st">(habitants par km2)"</span>, </span>
+<span id="cb18-142"><a href="#cb18-142"></a>  <span class="at">digits =</span> <span class="dv">0</span>,</span>
+<span id="cb18-143"><a href="#cb18-143"></a>  <span class="at">add =</span> <span class="cn">TRUE</span></span>
+<span id="cb18-144"><a href="#cb18-144"></a>)</span>
+<span id="cb18-145"><a href="#cb18-145"></a><span class="in">```</span></span>
+<span id="cb18-146"><a href="#cb18-146"></a></span>
+<span id="cb18-147"><a href="#cb18-147"></a></span>
+<span id="cb18-148"><a href="#cb18-148"></a><span class="fu"># Et si on regroupait deux arrondissement ?</span></span>
+<span id="cb18-149"><a href="#cb18-149"></a></span>
+<span id="cb18-150"><a href="#cb18-150"></a>Pour cet exemple nous prenons le cas où, dans les statistiques que nous avons à représenter, les données, des 15e et 16e doivent être sommées. Il faut que les polygones du fond de carte représentant ces deux arrondissements soient alors aussi fusionnés.</span>
+<span id="cb18-151"><a href="#cb18-151"></a></span>
+<span id="cb18-152"><a href="#cb18-152"></a>L’idée globale du code ci-dessous c’est de fusionner les deux polygones (celui du 15e _Vaugirard_ et du 16e _Passy_). </span>
+<span id="cb18-153"><a href="#cb18-153"></a></span>
+<span id="cb18-154"><a href="#cb18-154"></a>Quand je crée mon nouveau polygone (new_poly) j'ai une nouvelle geometrie "POLYGON" qui a concaténné les deux arrondissements. J'ai donc sur une ligne, toutes les informations relatives à mes deux polygones et en plus, une geometrie commune.</span>
+<span id="cb18-155"><a href="#cb18-155"></a> </span>
+<span id="cb18-156"><a href="#cb18-156"></a></span>
+<span id="cb18-157"><a href="#cb18-157"></a><span class="in">```{r results= 'hide'}</span></span>
+<span id="cb18-158"><a href="#cb18-158"></a></span>
+<span id="cb18-159"><a href="#cb18-159"></a></span>
+<span id="cb18-160"><a href="#cb18-160"></a><span class="co"># ---- Fusionner deux polygones ---- #</span></span>
+<span id="cb18-161"><a href="#cb18-161"></a></span>
+<span id="cb18-162"><a href="#cb18-162"></a><span class="co"># Sélectionner les deux polygones que vous souhaitez fusionner</span></span>
+<span id="cb18-163"><a href="#cb18-163"></a>poly1 <span class="ot">&lt;-</span> arrondissements[arrondissements<span class="sc">$</span>l_aroff <span class="sc">==</span> <span class="st">"Passy"</span>, ] <span class="co"># sélectionne le polygone avec le nom "Passy"</span></span>
+<span id="cb18-164"><a href="#cb18-164"></a>poly2 <span class="ot">&lt;-</span> arrondissements[arrondissements<span class="sc">$</span>l_aroff <span class="sc">==</span> <span class="st">"Vaugirard"</span>, ] <span class="co"># sélectionne le polygone avec le nom "Vaugirard"</span></span>
+<span id="cb18-165"><a href="#cb18-165"></a></span>
+<span id="cb18-166"><a href="#cb18-166"></a><span class="co"># Fusionner les polygones</span></span>
+<span id="cb18-167"><a href="#cb18-167"></a>new_poly <span class="ot">&lt;-</span> <span class="fu">st_union</span>(poly1, poly2) <span class="co"># fusionne les deux polygones sélectionnés en un seul polygone</span></span>
+<span id="cb18-168"><a href="#cb18-168"></a></span>
+<span id="cb18-169"><a href="#cb18-169"></a><span class="co"># Ajouter la surface, la population, le périmètre et les coordonnées géographiques des deux polygones </span></span>
+<span id="cb18-170"><a href="#cb18-170"></a></span>
+<span id="cb18-171"><a href="#cb18-171"></a><span class="co">#l'idée c'est de recréer une nouvelle ligne pour notre nouveau polygone pour qu'on puisse le réinsérer dans notre tableau. </span></span>
+<span id="cb18-172"><a href="#cb18-172"></a></span>
+<span id="cb18-173"><a href="#cb18-173"></a>new_poly<span class="sc">$</span>surface <span class="ot">&lt;-</span> new_poly<span class="sc">$</span>surface <span class="sc">+</span> new_poly<span class="sc">$</span>surface<span class="fl">.1</span> <span class="co"># ajouter la surface des deux polygones</span></span>
+<span id="cb18-174"><a href="#cb18-174"></a>new_poly<span class="sc">$</span>n_sq_co <span class="ot">&lt;-</span> new_poly<span class="sc">$</span>n_sq_co <span class="sc">+</span> new_poly<span class="sc">$</span>n_sq_co<span class="fl">.1</span> <span class="co"># ajouter la population des deux polygones</span></span>
+<span id="cb18-175"><a href="#cb18-175"></a>new_poly<span class="sc">$</span>perimetre <span class="ot">&lt;-</span> new_poly<span class="sc">$</span>perimetre <span class="sc">+</span> new_poly<span class="sc">$</span>perimetre<span class="fl">.1</span> <span class="co"># ajouter le périmètre des deux polygones</span></span>
+<span id="cb18-176"><a href="#cb18-176"></a>new_poly<span class="sc">$</span>n_sq_ar <span class="ot">&lt;-</span> new_poly<span class="sc">$</span>n_sq_ar <span class="sc">+</span> new_poly<span class="sc">$</span>n_sq_ar<span class="fl">.1</span> <span class="co"># ajouter les coordonnées géographiques des deux polygones</span></span>
+<span id="cb18-177"><a href="#cb18-177"></a></span>
+<span id="cb18-178"><a href="#cb18-178"></a>new_poly<span class="sc">$</span>pop<span class="ot">&lt;-</span>new_poly<span class="sc">$</span>pop<span class="sc">+</span> new_poly<span class="sc">$</span>pop<span class="fl">.1</span></span>
+<span id="cb18-179"><a href="#cb18-179"></a></span>
+<span id="cb18-180"><a href="#cb18-180"></a>new_poly<span class="sc">$</span>DENS<span class="ot">&lt;-</span>new_poly<span class="sc">$</span>DENS<span class="sc">+</span>new_poly<span class="sc">$</span>DENS<span class="fl">.1</span></span>
+<span id="cb18-181"><a href="#cb18-181"></a></span>
+<span id="cb18-182"><a href="#cb18-182"></a><span class="co"># Modifier les informations de localisation</span></span>
+<span id="cb18-183"><a href="#cb18-183"></a>new_poly<span class="sc">$</span>l_aroff <span class="ot">&lt;-</span> <span class="st">"un nouvel arrondissement"</span> <span class="co"># changer le nom de l'arrondissement</span></span>
+<span id="cb18-184"><a href="#cb18-184"></a>new_poly<span class="sc">$</span>l_ar <span class="ot">&lt;-</span> <span class="st">"xxème Ardt"</span> <span class="co"># changer le numéro de l'arrondissement</span></span>
+<span id="cb18-185"><a href="#cb18-185"></a>new_poly<span class="sc">$</span>c_ar <span class="ot">&lt;-</span> <span class="st">"xx"</span> <span class="co"># changer le code de l'arrondissement</span></span>
+<span id="cb18-186"><a href="#cb18-186"></a>new_poly<span class="sc">$</span>c_arinsee <span class="ot">&lt;-</span> <span class="st">"75xxxx"</span> <span class="co"># changer le code INSEE de la commune</span></span>
+<span id="cb18-187"><a href="#cb18-187"></a>new_poly<span class="sc">$</span>bords_politiques<span class="ot">&lt;-</span><span class="st">"PS"</span> <span class="co">#changer le bord politique du nouvel arrondissement</span></span>
+<span id="cb18-188"><a href="#cb18-188"></a></span>
+<span id="cb18-189"><a href="#cb18-189"></a></span>
+<span id="cb18-190"><a href="#cb18-190"></a><span class="co"># Sélectionner certaines colonnes pour créer un nouvel objet de données</span></span>
+<span id="cb18-191"><a href="#cb18-191"></a>arrondissements_test <span class="ot">&lt;-</span> <span class="fu">subset</span>(new_poly, <span class="at">select =</span> <span class="fu">c</span>(c_ar, l_aroff, surface, l_ar, n_sq_co, c_arinsee, n_sq_ar, perimetre, geom_x_y,pop, DENS,bords_politiques))</span>
+<span id="cb18-192"><a href="#cb18-192"></a><span class="co"># à noter qu'il est très important de mettre les éléments dans le même ordre que celui du tableau</span></span>
+<span id="cb18-193"><a href="#cb18-193"></a></span>
+<span id="cb18-194"><a href="#cb18-194"></a><span class="co"># Remplacer les informations de l'arrondissement "Passy" dans l'objet "arrondissements" par les nouvelles informations</span></span>
+<span id="cb18-195"><a href="#cb18-195"></a>arrondissements[arrondissements<span class="sc">$</span>l_aroff <span class="sc">==</span> <span class="st">"Passy"</span>, ] <span class="ot">&lt;-</span> arrondissements_test</span>
+<span id="cb18-196"><a href="#cb18-196"></a></span>
+<span id="cb18-197"><a href="#cb18-197"></a><span class="co"># Afficher la carte de l'objet "arrondissements" avec les contours en noir</span></span>
+<span id="cb18-198"><a href="#cb18-198"></a><span class="fu">mf_map</span>(<span class="at">x =</span> arrondissements)</span>
+<span id="cb18-199"><a href="#cb18-199"></a><span class="fu">mf_map</span>(<span class="at">x=</span>arr_c,</span>
+<span id="cb18-200"><a href="#cb18-200"></a>  <span class="co"># var à représenter  </span></span>
+<span id="cb18-201"><a href="#cb18-201"></a>  <span class="at">var =</span> <span class="st">"pop"</span>,</span>
+<span id="cb18-202"><a href="#cb18-202"></a>  <span class="at">pch =</span> <span class="dv">16</span>,</span>
+<span id="cb18-203"><a href="#cb18-203"></a>  <span class="at">cex =</span> <span class="dv">2</span>,</span>
+<span id="cb18-204"><a href="#cb18-204"></a>  <span class="at">col =</span> colors,</span>
+<span id="cb18-205"><a href="#cb18-205"></a>  <span class="at">lwd =</span> <span class="dv">1</span>,</span>
+<span id="cb18-206"><a href="#cb18-206"></a>  <span class="at">leg_title =</span> <span class="st">"Distribution de la population dans Paris"</span>, </span>
+<span id="cb18-207"><a href="#cb18-207"></a>  <span class="at">digits =</span> <span class="dv">0</span>,</span>
+<span id="cb18-208"><a href="#cb18-208"></a>  <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb18-209"><a href="#cb18-209"></a></span>
+<span id="cb18-210"><a href="#cb18-210"></a></span>
+<span id="cb18-211"><a href="#cb18-211"></a><span class="in">```</span></span>
+<span id="cb18-212"><a href="#cb18-212"></a></span>
+<span id="cb18-213"><a href="#cb18-213"></a></span>
+<span id="cb18-214"><a href="#cb18-214"></a><span class="fu"># En savoir plus sur mapsf:</span></span>
+<span id="cb18-215"><a href="#cb18-215"></a></span>
+<span id="cb18-216"><a href="#cb18-216"></a>Pour la rédaction de cet article je me suis grandement inspirée du travail de Timothée Giraud.</span>
+<span id="cb18-217"><a href="#cb18-217"></a></span>
+<span id="cb18-218"><a href="#cb18-218"></a></span>
+<span id="cb18-219"><a href="#cb18-219"></a><span class="ot">&lt;https://rcarto.github.io/ined2022/07_mise_en_page.html&gt;</span></span>
+<span id="cb18-220"><a href="#cb18-220"></a></span>
+<span id="cb18-221"><a href="#cb18-221"></a><span class="ot">&lt;http://riatelab.github.io/mapsf&gt;</span></span>
+<span id="cb18-222"><a href="#cb18-222"></a></span>
+<span id="cb18-223"><a href="#cb18-223"></a><span class="ot">&lt;http://rgeomatic.hypotheses.org/2077&gt;</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
