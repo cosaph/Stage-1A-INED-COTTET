@@ -139,8 +139,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#travail-préliminaire" id="toc-travail-préliminaire" class="nav-link active" data-scroll-target="#travail-préliminaire">1. Travail préliminaire</a></li>
   <li><a href="#nettoyage-du-texte" id="toc-nettoyage-du-texte" class="nav-link" data-scroll-target="#nettoyage-du-texte">2. Nettoyage du texte</a></li>
   <li><a href="#traitement-du-corpus" id="toc-traitement-du-corpus" class="nav-link" data-scroll-target="#traitement-du-corpus">3. Traitement du corpus</a></li>
-  <li><a href="#construction-du-nuage" id="toc-construction-du-nuage" class="nav-link" data-scroll-target="#construction-du-nuage">4. Construction du Nuage</a></li>
-  <li><a href="#analyse-descriptive" id="toc-analyse-descriptive" class="nav-link" data-scroll-target="#analyse-descriptive">5. Analyse descriptive</a></li>
+  <li><a href="#affichage-dun-graphe-de-mots" id="toc-affichage-dun-graphe-de-mots" class="nav-link" data-scroll-target="#affichage-dun-graphe-de-mots">5. Affichage d’un graphe de mots</a></li>
   <li><a href="#pour-aller-plus-loin" id="toc-pour-aller-plus-loin" class="nav-link" data-scroll-target="#pour-aller-plus-loin">6. Pour aller plus loin</a></li>
   </ul>
 </nav>
@@ -185,29 +184,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="travail-préliminaire" class="level1">
 <h1>1. Travail préliminaire</h1>
-<p>Comme dans tout bon code R il est nécessaire au début d’installer (une fois sur un ordinateur): (dans le terminal de commande ) install.packages(“R.temis”) install.packages(“dplyr”) install.packages(“tibble”) les packages recquis pour le code et de charger (à chaque fois ) les librairies requisent pour le code.</p>
+<p>Les packages “R.temis”, “dplyr” et “tibble” sont nécessaires pour ce code car ils contiennent des fonctions et des outils qui sont utilisés pour manipuler et analyser les données textuelles.</p>
+<p>Le package “R.temis” fournit des fonctions pour le traitement du langage naturel, telles que la lemmatisation, la tokenisation et l’analyse de sentiment. Ces fonctions sont utilisées dans le code pour analyser les tweets et extraire les mots clés.</p>
+<p>Le package “dplyr” fournit des fonctions pour la manipulation de données, telles que la sélection de colonnes, le filtrage de données et l’agrégation de données. Ces fonctions sont utilisées dans le code pour nettoyer et préparer les données textuelles.</p>
+<p>Le package “tibble” fournit une classe de données pour stocker des données tabulaires, qui est plus efficace que la classe de données par défaut de R. Cette classe de données est utilisée dans le code pour stocker les données textuelles nettoyées et préparées.</p>
+<p>Il est nécessaire d’installer ces packages une fois sur un ordinateur, car ils ne sont pas inclus dans l’installation de base de R. Ensuite, les packages doivent être chargés à chaque fois que le code est exécuté en utilisant la fonction “library”. Cela permet d’utiliser les fonctions et les outils fournis par les packages dans le code.</p>
+<p>install.packages(“R.temis”) install.packages(“dplyr”) install.packages(“tibble”)</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(<span class="st">"R.temis"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(<span class="st">"dplyr"</span>) <span class="co">#Pour le traitement du texte voir la fiche "Faciliter la manipulation de données avec Dplyr".</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(<span class="st">"tibble"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Concernant le choix des données, j’ai choisis les voeux de François Hollande allant de 2013 à 2017. Les textes retranscrits dans des fichiers de type texte (.txt) et placé dans un seul dossier nommé <em>texte</em>. Il est important de vérifer l’encodage de vos textes pour la suite du code. Ici, l’encodage est <em>UTF-8</em>.</p>
+<p>Concernant le choix des données, j’ai choisis les voeux de François Hollande allant de 2013 à 2017. Les textes retranscrits dans des fichiers de type texte (.txt) et placé dans un seul dossier nommé <em>dossier_de_texte</em>. Il est important de vérifer l’encodage de vos textes pour la suite du code. Ici, l’encodage est <em>UTF-8</em>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">import_corpus</span>(<span class="st">"texte"</span>, <span class="at">format=</span><span class="st">"txt"</span>, <span class="at">language =</span><span class="st">"fr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">import_corpus</span>(<span class="st">"dossier_de_texte"</span>, <span class="at">format=</span><span class="st">"txt"</span>, <span class="at">language =</span><span class="st">"fr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="nettoyage-du-texte" class="level1">
 <h1>2. Nettoyage du texte</h1>
 <p>C’est quoi les <strong>stop_words</strong>?</p>
-<p>Les stop words (ou mots vides) sont des mots très courants d’une langue, comme les prépositions, les articles, les pronoms, etc., qui sont souvent omis lors de l’analyse de texte car ils ne portent pas de sens important pour la compréhension globale du texte.</p>
-<p>La fonction build_dtm est utilisée pour construire une matrice de termes-document (ou tableau lexical) à partir d’un corpus de textes. La matrice de termes-document est une représentation quantitative des termes présents dans un corpus de textes, où chaque colonne représente un terme et chaque ligne représente un document.</p>
+<p>Les stop words (ou mots vides) sont des mots très courants d’une langue comme les prépositions, les articles, les pronoms, etc., qui sont souvent omis lors de l’analyse de texte car en général ils ne portent pas de sens important pour la compréhension globale du texte. La fonction build_dtm est utilisée pour construire une matrice de termes-document (ou tableau lexical) à partir d’un corpus de textes. La matrice de termes-document (ou Tableau Lexical) est une représentation quantitative d’un corpus de textes, où chaque colonne représente un terme et chaque ligne représente un document.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># ---- traitement des données ----</span></span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Création du tableau lexical sans mots outils et avec les mots d’au moins 1 lettre</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a>dtm <span class="ot">&lt;-</span><span class="fu">build_dtm</span>(corpus, <span class="at">remove_stopwords =</span> T, <span class="at">min_length =</span> <span class="dv">1</span>)</span>
-<span id="cb3-3"><a href="#cb3-3"></a></span>
-<span id="cb3-4"><a href="#cb3-4"></a>dic <span class="ot">&lt;-</span><span class="fu">dictionary</span>(dtm) <span class="co">#création d'un dictionnaire de mot </span></span>
-<span id="cb3-5"><a href="#cb3-5"></a></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="fu">frequent_terms</span>(dtm) <span class="co">#fréquence apparition des mots dans le corpus de texte</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="co"># Création d'un dictionnaire de mot</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>dic <span class="ot">&lt;-</span><span class="fu">dictionary</span>(dtm) </span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co"># Calcul des occurrences des mots dans le corpus de textes</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="fu">frequent_terms</span>(dtm) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             Global occ.  Global %
 france                66 1.9446081
@@ -240,7 +243,7 @@ ceux                  11 0.3241014</code></pre>
 </section>
 <section id="traitement-du-corpus" class="level1">
 <h1>3. Traitement du corpus</h1>
-<p>J’aimerai retirer les mots “a” et “plus” et combiner les termes “tout”, “toutes” et “tous” en “tous.tes” à titre d’exemple.</p>
+<p>J’aimerais aussi retirer les mots “a” et “plus” et rassembler sous un même mot les termes “tout”, “toutes” et “tous” en “tous.tes” à titre d’exemple.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>dic2 <span class="ot">=</span> dic <span class="sc">%&gt;%</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">rownames_to_column</span>(<span class="at">var=</span><span class="st">"word"</span>) <span class="sc">%&gt;%</span> </span>
@@ -248,19 +251,22 @@ ceux                  11 0.3241014</code></pre>
 <span id="cb5-4"><a href="#cb5-4"></a></span>
 <span id="cb5-5"><a href="#cb5-5"></a><span class="fu">row.names</span>(dic2) <span class="ot">&lt;-</span> dic2<span class="sc">$</span>word</span>
 <span id="cb5-6"><a href="#cb5-6"></a></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="co"># Remplacer les mots spécifiés par "Année"</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co"># Remplacer les mots spécifiés par tous.tes</span></span>
 <span id="cb5-8"><a href="#cb5-8"></a>dic2<span class="sc">$</span>Term[dic2<span class="sc">$</span>word <span class="sc">==</span> <span class="st">"toutes"</span>] <span class="ot">&lt;-</span> <span class="st">"tous.tes"</span></span>
 <span id="cb5-9"><a href="#cb5-9"></a>dic2<span class="sc">$</span>Term[dic2<span class="sc">$</span>word <span class="sc">==</span> <span class="st">"tout"</span>] <span class="ot">&lt;-</span> <span class="st">"tous.tes"</span></span>
 <span id="cb5-10"><a href="#cb5-10"></a>dic2<span class="sc">$</span>Term[dic2<span class="sc">$</span>word <span class="sc">==</span> <span class="st">"tous"</span>] <span class="ot">&lt;-</span> <span class="st">"tous.tes"</span></span>
 <span id="cb5-11"><a href="#cb5-11"></a></span>
-<span id="cb5-12"><a href="#cb5-12"></a>dtmlem <span class="ot">&lt;-</span><span class="fu">combine_terms</span>(dtm, dic2)</span>
-<span id="cb5-13"><a href="#cb5-13"></a></span>
-<span id="cb5-14"><a href="#cb5-14"></a>mots_a_retirer <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"plus"</span>)</span>
-<span id="cb5-15"><a href="#cb5-15"></a></span>
-<span id="cb5-16"><a href="#cb5-16"></a>dtm2<span class="ot">&lt;-</span>dtmlem[, <span class="sc">!</span><span class="fu">colnames</span>(dtmlem) <span class="sc">%in%</span> mots_a_retirer]</span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="co"># Lemmatisation</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a>dtmlem <span class="ot">&lt;-</span><span class="fu">combine_terms</span>(dtm, dic2)</span>
+<span id="cb5-14"><a href="#cb5-14"></a></span>
+<span id="cb5-15"><a href="#cb5-15"></a><span class="co"># Ensemble de mots à retirer</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a>mots_a_retirer <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"plus"</span>)</span>
 <span id="cb5-17"><a href="#cb5-17"></a></span>
-<span id="cb5-18"><a href="#cb5-18"></a></span>
-<span id="cb5-19"><a href="#cb5-19"></a><span class="fu">frequent_terms</span>(dtm2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-18"><a href="#cb5-18"></a><span class="co"># Suppression de mots dans le tablrau lexical</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a>dtm2<span class="ot">&lt;-</span>dtmlem[, <span class="sc">!</span><span class="fu">colnames</span>(dtmlem) <span class="sc">%in%</span> mots_a_retirer]</span>
+<span id="cb5-20"><a href="#cb5-20"></a></span>
+<span id="cb5-21"><a href="#cb5-21"></a></span>
+<span id="cb5-22"><a href="#cb5-22"></a><span class="fu">frequent_terms</span>(dtm2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             Global occ.  Global %
 france                66 2.0048603
@@ -290,19 +296,19 @@ là                    11 0.3341434
 soir                  11 0.3341434</code></pre>
 </div>
 </div>
-</section>
-<section id="construction-du-nuage" class="level1">
-<h1>4. Construction du Nuage</h1>
+<p>#4. Affichage du Nuage de mot</p>
+<p>Ce graphique permet de visualiser les mots les plus fréquents d’un corpus de textes (et préciser que tu as supprimé des mots, tu en as regroupés …)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>cloud<span class="ot">&lt;-</span><span class="fu">word_cloud</span>(dtm2, <span class="at">color=</span> <span class="st">'black'</span>, <span class="at">min.freq=</span><span class="dv">1</span>,<span class="at">n =</span><span class="dv">50</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># On affiche au maximum 50 mots et les mots d’au moins une occurrence</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>cloud<span class="ot">&lt;-</span><span class="fu">word_cloud</span>(dtm2, <span class="at">color=</span> <span class="st">'black'</span>, <span class="at">min.freq=</span><span class="dv">1</span>,<span class="at">n =</span><span class="dv">50</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="nuage_de_mot_rtemis_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
-<section id="analyse-descriptive" class="level1">
-<h1>5. Analyse descriptive</h1>
-<p>La fonction terms_graph du package R.temis permet de générer un réseau de mots qui est affiché dans une fenêtre interactive igraph. Les termes ou mots sont représentés par des sommets ou nœuds dans le graphe. Leur placement dans l’espace graphique est déterminé par un algorithme d’énergie, qui prend en compte les co-occurrences des termes dans le corpus et les liens représentent les co-occurrences entre les termes. Ici,ce n’est pas très représentatif mais ça donne globalement une idée de ce que peut nous fournir un tel graphe: l’idée globale des thématiques et des sujets traités dans le corpus.</p>
+<section id="affichage-dun-graphe-de-mots" class="level1">
+<h1>5. Affichage d’un graphe de mots</h1>
+<p>La fonction terms_graph du package R.temis permet de générer un réseau de mots qui est affiché dans une fenêtre interactive igraph. Les termes ou mots sont représentés par des sommets ou nœuds dans le graphe, les liens représentent les cooccurrences entre les mots dans les documents. Leur placement dans l’espace graphique est déterminé par un algorithme d’énergie. Ici,ce n’est pas très représentatif mais ça donne globalement une idée de ce que peut nous fournir un tel graphe: l’idée globale des thématiques et des sujets traités dans le corpus.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Créer un graphique d'analyse de co-occurrences de termes</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a>Tree<span class="ot">&lt;-</span><span class="fu">terms_graph</span>(dtm2, <span class="at">min_occ =</span> <span class="dv">10</span>, <span class="at">interactive =</span> T,</span>
@@ -620,116 +626,122 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb9-13"><a href="#cb9-13"></a></span>
 <span id="cb9-14"><a href="#cb9-14"></a><span class="fu"># 1. Travail préliminaire </span></span>
 <span id="cb9-15"><a href="#cb9-15"></a></span>
-<span id="cb9-16"><a href="#cb9-16"></a>  Comme dans tout bon code R il est nécessaire au début d'installer (une fois sur un ordinateur): (dans le terminal de commande )</span>
-<span id="cb9-17"><a href="#cb9-17"></a>install.packages("R.temis") </span>
-<span id="cb9-18"><a href="#cb9-18"></a>install.packages("dplyr")</span>
-<span id="cb9-19"><a href="#cb9-19"></a>install.packages("tibble")</span>
-<span id="cb9-20"><a href="#cb9-20"></a>les packages recquis pour le code et de charger (à chaque fois ) les librairies requisent pour le code.</span>
+<span id="cb9-16"><a href="#cb9-16"></a>Les packages "R.temis", "dplyr" et "tibble" sont nécessaires pour ce code car ils contiennent des fonctions et des outils qui sont utilisés pour manipuler et analyser les données textuelles.</span>
+<span id="cb9-17"><a href="#cb9-17"></a></span>
+<span id="cb9-18"><a href="#cb9-18"></a>Le package "R.temis" fournit des fonctions pour le traitement du langage naturel, telles que la lemmatisation, la tokenisation et l'analyse de sentiment. Ces fonctions sont utilisées dans le code pour analyser les tweets et extraire les mots clés.</span>
+<span id="cb9-19"><a href="#cb9-19"></a></span>
+<span id="cb9-20"><a href="#cb9-20"></a>Le package "dplyr" fournit des fonctions pour la manipulation de données, telles que la sélection de colonnes, le filtrage de données et l'agrégation de données. Ces fonctions sont utilisées dans le code pour nettoyer et préparer les données textuelles.</span>
 <span id="cb9-21"><a href="#cb9-21"></a></span>
-<span id="cb9-22"><a href="#cb9-22"></a></span>
-<span id="cb9-23"><a href="#cb9-23"></a><span class="in">```{r warning=FALSE, message= FALSE}</span></span>
-<span id="cb9-24"><a href="#cb9-24"></a><span class="fu">library</span>(<span class="st">"R.temis"</span>)</span>
-<span id="cb9-25"><a href="#cb9-25"></a><span class="fu">library</span>(<span class="st">"dplyr"</span>) <span class="co">#Pour le traitement du texte voir la fiche "Faciliter la manipulation de données avec Dplyr".</span></span>
-<span id="cb9-26"><a href="#cb9-26"></a><span class="fu">library</span>(<span class="st">"tibble"</span>)</span>
-<span id="cb9-27"><a href="#cb9-27"></a><span class="in">```</span></span>
-<span id="cb9-28"><a href="#cb9-28"></a></span>
+<span id="cb9-22"><a href="#cb9-22"></a>Le package "tibble" fournit une classe de données pour stocker des données tabulaires, qui est plus efficace que la classe de données par défaut de R. Cette classe de données est utilisée dans le code pour stocker les données textuelles nettoyées et préparées.</span>
+<span id="cb9-23"><a href="#cb9-23"></a></span>
+<span id="cb9-24"><a href="#cb9-24"></a>Il est nécessaire d'installer ces packages une fois sur un ordinateur, car ils ne sont pas inclus dans l'installation de base de R. Ensuite, les packages doivent être chargés à chaque fois que le code est exécuté en utilisant la fonction "library". Cela permet d'utiliser les fonctions et les outils fournis par les packages dans le code.</span>
+<span id="cb9-25"><a href="#cb9-25"></a></span>
+<span id="cb9-26"><a href="#cb9-26"></a>install.packages("R.temis") </span>
+<span id="cb9-27"><a href="#cb9-27"></a>install.packages("dplyr")</span>
+<span id="cb9-28"><a href="#cb9-28"></a>install.packages("tibble")</span>
 <span id="cb9-29"><a href="#cb9-29"></a></span>
-<span id="cb9-30"><a href="#cb9-30"></a>Concernant le choix des données, j’ai choisis les voeux de François Hollande allant de 2013 à 2017. Les textes retranscrits dans des fichiers de type texte (.txt) et placé dans un seul dossier nommé _texte_. Il est important de vérifer l'encodage de vos textes pour la suite du code. Ici, l'encodage est _UTF-8_.</span>
+<span id="cb9-30"><a href="#cb9-30"></a></span>
 <span id="cb9-31"><a href="#cb9-31"></a></span>
-<span id="cb9-32"><a href="#cb9-32"></a><span class="in">```{r message=FALSE }</span></span>
-<span id="cb9-33"><a href="#cb9-33"></a></span>
-<span id="cb9-34"><a href="#cb9-34"></a>corpus <span class="ot">&lt;-</span> <span class="fu">import_corpus</span>(<span class="st">"texte"</span>, <span class="at">format=</span><span class="st">"txt"</span>, <span class="at">language =</span><span class="st">"fr"</span>)</span>
-<span id="cb9-35"><a href="#cb9-35"></a></span>
-<span id="cb9-36"><a href="#cb9-36"></a></span>
-<span id="cb9-37"><a href="#cb9-37"></a><span class="in">```</span></span>
+<span id="cb9-32"><a href="#cb9-32"></a><span class="in">```{r warning=FALSE, message= FALSE}</span></span>
+<span id="cb9-33"><a href="#cb9-33"></a><span class="fu">library</span>(<span class="st">"R.temis"</span>)</span>
+<span id="cb9-34"><a href="#cb9-34"></a><span class="fu">library</span>(<span class="st">"dplyr"</span>) <span class="co">#Pour le traitement du texte voir la fiche "Faciliter la manipulation de données avec Dplyr".</span></span>
+<span id="cb9-35"><a href="#cb9-35"></a><span class="fu">library</span>(<span class="st">"tibble"</span>)</span>
+<span id="cb9-36"><a href="#cb9-36"></a><span class="in">```</span></span>
+<span id="cb9-37"><a href="#cb9-37"></a></span>
 <span id="cb9-38"><a href="#cb9-38"></a></span>
-<span id="cb9-39"><a href="#cb9-39"></a></span>
-<span id="cb9-40"><a href="#cb9-40"></a><span class="fu"># 2. Nettoyage du texte</span></span>
-<span id="cb9-41"><a href="#cb9-41"></a></span>
-<span id="cb9-42"><a href="#cb9-42"></a>C'est quoi les __stop_words__?</span>
-<span id="cb9-43"><a href="#cb9-43"></a></span>
-<span id="cb9-44"><a href="#cb9-44"></a>Les stop words (ou mots vides) sont des mots très courants d'une langue, comme les prépositions, les articles, les pronoms, etc., qui sont souvent omis lors de l'analyse de texte car ils ne portent pas de sens important pour la compréhension globale du texte.</span>
+<span id="cb9-39"><a href="#cb9-39"></a>Concernant le choix des données, j’ai choisis les voeux de François Hollande allant de 2013 à 2017. Les textes retranscrits dans des fichiers de type texte (.txt) et placé dans un seul dossier nommé _dossier_de_texte_. Il est important de vérifer l'encodage de vos textes pour la suite du code. Ici, l'encodage est _UTF-8_.</span>
+<span id="cb9-40"><a href="#cb9-40"></a></span>
+<span id="cb9-41"><a href="#cb9-41"></a><span class="in">```{r message=FALSE }</span></span>
+<span id="cb9-42"><a href="#cb9-42"></a></span>
+<span id="cb9-43"><a href="#cb9-43"></a>corpus <span class="ot">&lt;-</span> <span class="fu">import_corpus</span>(<span class="st">"dossier_de_texte"</span>, <span class="at">format=</span><span class="st">"txt"</span>, <span class="at">language =</span><span class="st">"fr"</span>)</span>
+<span id="cb9-44"><a href="#cb9-44"></a></span>
 <span id="cb9-45"><a href="#cb9-45"></a></span>
-<span id="cb9-46"><a href="#cb9-46"></a>La fonction build_dtm est utilisée pour construire une matrice de termes-document (ou tableau lexical) à partir d'un corpus de textes. La matrice de termes-document est une représentation quantitative des termes présents dans un corpus de textes, où chaque colonne représente un terme et chaque ligne représente un document.</span>
+<span id="cb9-46"><a href="#cb9-46"></a><span class="in">```</span></span>
 <span id="cb9-47"><a href="#cb9-47"></a></span>
-<span id="cb9-50"><a href="#cb9-50"></a><span class="in">```{r}</span></span>
-<span id="cb9-51"><a href="#cb9-51"></a><span class="co"># ---- traitement des données ----</span></span>
-<span id="cb9-52"><a href="#cb9-52"></a>dtm <span class="ot">&lt;-</span><span class="fu">build_dtm</span>(corpus, <span class="at">remove_stopwords =</span> T, <span class="at">min_length =</span> <span class="dv">1</span>)</span>
-<span id="cb9-53"><a href="#cb9-53"></a></span>
-<span id="cb9-54"><a href="#cb9-54"></a>dic <span class="ot">&lt;-</span><span class="fu">dictionary</span>(dtm) <span class="co">#création d'un dictionnaire de mot </span></span>
+<span id="cb9-48"><a href="#cb9-48"></a></span>
+<span id="cb9-49"><a href="#cb9-49"></a><span class="fu"># 2. Nettoyage du texte</span></span>
+<span id="cb9-50"><a href="#cb9-50"></a></span>
+<span id="cb9-51"><a href="#cb9-51"></a>C'est quoi les __stop_words__?</span>
+<span id="cb9-52"><a href="#cb9-52"></a></span>
+<span id="cb9-53"><a href="#cb9-53"></a>Les stop words (ou mots vides) sont des mots très courants d’une langue comme les prépositions, les articles, les pronoms, etc., qui sont souvent omis lors de l’analyse de texte car en général ils ne portent pas de sens important pour la compréhension globale du texte.</span>
+<span id="cb9-54"><a href="#cb9-54"></a>La fonction build_dtm est utilisée pour construire une matrice de termes-document (ou tableau lexical) à partir d’un corpus de textes. La matrice de termes-document (ou Tableau Lexical) est une représentation quantitative d'un corpus de textes, où chaque colonne représente un terme et chaque ligne représente un document.</span>
 <span id="cb9-55"><a href="#cb9-55"></a></span>
-<span id="cb9-56"><a href="#cb9-56"></a><span class="fu">frequent_terms</span>(dtm) <span class="co">#fréquence apparition des mots dans le corpus de texte</span></span>
-<span id="cb9-57"><a href="#cb9-57"></a></span>
-<span id="cb9-58"><a href="#cb9-58"></a></span>
-<span id="cb9-59"><a href="#cb9-59"></a><span class="in">```</span></span>
-<span id="cb9-60"><a href="#cb9-60"></a></span>
-<span id="cb9-61"><a href="#cb9-61"></a><span class="fu"># 3. Traitement du corpus</span></span>
-<span id="cb9-62"><a href="#cb9-62"></a></span>
-<span id="cb9-63"><a href="#cb9-63"></a>J'aimerai retirer les mots "a" et "plus" et combiner les termes "tout", "toutes" et "tous" en "tous.tes" à titre d'exemple.</span>
-<span id="cb9-64"><a href="#cb9-64"></a></span>
-<span id="cb9-67"><a href="#cb9-67"></a><span class="in">```{r}</span></span>
-<span id="cb9-68"><a href="#cb9-68"></a>dic2 <span class="ot">=</span> dic <span class="sc">%&gt;%</span></span>
-<span id="cb9-69"><a href="#cb9-69"></a>  <span class="fu">rownames_to_column</span>(<span class="at">var=</span><span class="st">"word"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb9-70"><a href="#cb9-70"></a>  <span class="fu">mutate</span>(<span class="at">Term =</span> word)</span>
+<span id="cb9-58"><a href="#cb9-58"></a><span class="in">```{r}</span></span>
+<span id="cb9-59"><a href="#cb9-59"></a><span class="co"># Création du tableau lexical sans mots outils et avec les mots d’au moins 1 lettre</span></span>
+<span id="cb9-60"><a href="#cb9-60"></a>dtm <span class="ot">&lt;-</span><span class="fu">build_dtm</span>(corpus, <span class="at">remove_stopwords =</span> T, <span class="at">min_length =</span> <span class="dv">1</span>)</span>
+<span id="cb9-61"><a href="#cb9-61"></a><span class="co"># Création d'un dictionnaire de mot</span></span>
+<span id="cb9-62"><a href="#cb9-62"></a>dic <span class="ot">&lt;-</span><span class="fu">dictionary</span>(dtm) </span>
+<span id="cb9-63"><a href="#cb9-63"></a><span class="co"># Calcul des occurrences des mots dans le corpus de textes</span></span>
+<span id="cb9-64"><a href="#cb9-64"></a><span class="fu">frequent_terms</span>(dtm) </span>
+<span id="cb9-65"><a href="#cb9-65"></a></span>
+<span id="cb9-66"><a href="#cb9-66"></a><span class="in">```</span></span>
+<span id="cb9-67"><a href="#cb9-67"></a></span>
+<span id="cb9-68"><a href="#cb9-68"></a><span class="fu"># 3. Traitement du corpus</span></span>
+<span id="cb9-69"><a href="#cb9-69"></a></span>
+<span id="cb9-70"><a href="#cb9-70"></a>J’aimerais aussi retirer les mots “a” et “plus” et rassembler sous un même mot  les termes “tout”, “toutes” et “tous” en “tous.tes” à titre d’exemple.</span>
 <span id="cb9-71"><a href="#cb9-71"></a></span>
-<span id="cb9-72"><a href="#cb9-72"></a><span class="fu">row.names</span>(dic2) <span class="ot">&lt;-</span> dic2<span class="sc">$</span>word</span>
-<span id="cb9-73"><a href="#cb9-73"></a></span>
-<span id="cb9-74"><a href="#cb9-74"></a><span class="co"># Remplacer les mots spécifiés par "Année"</span></span>
-<span id="cb9-75"><a href="#cb9-75"></a>dic2<span class="sc">$</span>Term[dic2<span class="sc">$</span>word <span class="sc">==</span> <span class="st">"toutes"</span>] <span class="ot">&lt;-</span> <span class="st">"tous.tes"</span></span>
-<span id="cb9-76"><a href="#cb9-76"></a>dic2<span class="sc">$</span>Term[dic2<span class="sc">$</span>word <span class="sc">==</span> <span class="st">"tout"</span>] <span class="ot">&lt;-</span> <span class="st">"tous.tes"</span></span>
-<span id="cb9-77"><a href="#cb9-77"></a>dic2<span class="sc">$</span>Term[dic2<span class="sc">$</span>word <span class="sc">==</span> <span class="st">"tous"</span>] <span class="ot">&lt;-</span> <span class="st">"tous.tes"</span></span>
+<span id="cb9-74"><a href="#cb9-74"></a><span class="in">```{r}</span></span>
+<span id="cb9-75"><a href="#cb9-75"></a>dic2 <span class="ot">=</span> dic <span class="sc">%&gt;%</span></span>
+<span id="cb9-76"><a href="#cb9-76"></a>  <span class="fu">rownames_to_column</span>(<span class="at">var=</span><span class="st">"word"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-77"><a href="#cb9-77"></a>  <span class="fu">mutate</span>(<span class="at">Term =</span> word)</span>
 <span id="cb9-78"><a href="#cb9-78"></a></span>
-<span id="cb9-79"><a href="#cb9-79"></a>dtmlem <span class="ot">&lt;-</span><span class="fu">combine_terms</span>(dtm, dic2)</span>
+<span id="cb9-79"><a href="#cb9-79"></a><span class="fu">row.names</span>(dic2) <span class="ot">&lt;-</span> dic2<span class="sc">$</span>word</span>
 <span id="cb9-80"><a href="#cb9-80"></a></span>
-<span id="cb9-81"><a href="#cb9-81"></a>mots_a_retirer <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"plus"</span>)</span>
-<span id="cb9-82"><a href="#cb9-82"></a></span>
-<span id="cb9-83"><a href="#cb9-83"></a>dtm2<span class="ot">&lt;-</span>dtmlem[, <span class="sc">!</span><span class="fu">colnames</span>(dtmlem) <span class="sc">%in%</span> mots_a_retirer]</span>
-<span id="cb9-84"><a href="#cb9-84"></a></span>
+<span id="cb9-81"><a href="#cb9-81"></a><span class="co"># Remplacer les mots spécifiés par tous.tes</span></span>
+<span id="cb9-82"><a href="#cb9-82"></a>dic2<span class="sc">$</span>Term[dic2<span class="sc">$</span>word <span class="sc">==</span> <span class="st">"toutes"</span>] <span class="ot">&lt;-</span> <span class="st">"tous.tes"</span></span>
+<span id="cb9-83"><a href="#cb9-83"></a>dic2<span class="sc">$</span>Term[dic2<span class="sc">$</span>word <span class="sc">==</span> <span class="st">"tout"</span>] <span class="ot">&lt;-</span> <span class="st">"tous.tes"</span></span>
+<span id="cb9-84"><a href="#cb9-84"></a>dic2<span class="sc">$</span>Term[dic2<span class="sc">$</span>word <span class="sc">==</span> <span class="st">"tous"</span>] <span class="ot">&lt;-</span> <span class="st">"tous.tes"</span></span>
 <span id="cb9-85"><a href="#cb9-85"></a></span>
-<span id="cb9-86"><a href="#cb9-86"></a><span class="fu">frequent_terms</span>(dtm2)</span>
-<span id="cb9-87"><a href="#cb9-87"></a><span class="in">```</span></span>
+<span id="cb9-86"><a href="#cb9-86"></a><span class="co"># Lemmatisation</span></span>
+<span id="cb9-87"><a href="#cb9-87"></a>dtmlem <span class="ot">&lt;-</span><span class="fu">combine_terms</span>(dtm, dic2)</span>
 <span id="cb9-88"><a href="#cb9-88"></a></span>
-<span id="cb9-89"><a href="#cb9-89"></a><span class="fu"># 4. Construction du Nuage</span></span>
-<span id="cb9-90"><a href="#cb9-90"></a></span>
+<span id="cb9-89"><a href="#cb9-89"></a><span class="co"># Ensemble de mots à retirer</span></span>
+<span id="cb9-90"><a href="#cb9-90"></a>mots_a_retirer <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"plus"</span>)</span>
 <span id="cb9-91"><a href="#cb9-91"></a></span>
-<span id="cb9-92"><a href="#cb9-92"></a><span class="in">```{r results=FALSE}</span></span>
-<span id="cb9-93"><a href="#cb9-93"></a></span>
-<span id="cb9-94"><a href="#cb9-94"></a>cloud<span class="ot">&lt;-</span><span class="fu">word_cloud</span>(dtm2, <span class="at">color=</span> <span class="st">'black'</span>, <span class="at">min.freq=</span><span class="dv">1</span>,<span class="at">n =</span><span class="dv">50</span>) </span>
+<span id="cb9-92"><a href="#cb9-92"></a><span class="co"># Suppression de mots dans le tablrau lexical</span></span>
+<span id="cb9-93"><a href="#cb9-93"></a>dtm2<span class="ot">&lt;-</span>dtmlem[, <span class="sc">!</span><span class="fu">colnames</span>(dtmlem) <span class="sc">%in%</span> mots_a_retirer]</span>
+<span id="cb9-94"><a href="#cb9-94"></a></span>
 <span id="cb9-95"><a href="#cb9-95"></a></span>
-<span id="cb9-96"><a href="#cb9-96"></a></span>
+<span id="cb9-96"><a href="#cb9-96"></a><span class="fu">frequent_terms</span>(dtm2)</span>
 <span id="cb9-97"><a href="#cb9-97"></a><span class="in">```</span></span>
 <span id="cb9-98"><a href="#cb9-98"></a></span>
-<span id="cb9-99"><a href="#cb9-99"></a></span>
+<span id="cb9-99"><a href="#cb9-99"></a>#4. Affichage du Nuage de mot</span>
 <span id="cb9-100"><a href="#cb9-100"></a></span>
-<span id="cb9-101"><a href="#cb9-101"></a><span class="fu"># 5. Analyse descriptive </span></span>
-<span id="cb9-102"><a href="#cb9-102"></a></span>
-<span id="cb9-103"><a href="#cb9-103"></a></span>
-<span id="cb9-104"><a href="#cb9-104"></a>La fonction terms_graph du package R.temis permet de générer un réseau de mots qui est affiché dans une fenêtre interactive igraph. Les termes ou mots sont représentés par des sommets ou nœuds dans le graphe. Leur placement dans l'espace graphique est déterminé par un algorithme d'énergie, qui prend en compte les co-occurrences des termes dans le corpus et les liens représentent les co-occurrences entre les termes.</span>
-<span id="cb9-105"><a href="#cb9-105"></a>Ici,ce n'est pas très représentatif mais ça donne globalement une idée de ce que peut nous fournir un tel graphe: l'idée globale des thématiques et des sujets traités dans le corpus.</span>
-<span id="cb9-106"><a href="#cb9-106"></a></span>
-<span id="cb9-109"><a href="#cb9-109"></a><span class="in">```{r}</span></span>
-<span id="cb9-110"><a href="#cb9-110"></a><span class="co"># Créer un graphique d'analyse de co-occurrences de termes</span></span>
-<span id="cb9-111"><a href="#cb9-111"></a>Tree<span class="ot">&lt;-</span><span class="fu">terms_graph</span>(dtm2, <span class="at">min_occ =</span> <span class="dv">10</span>, <span class="at">interactive =</span> T,</span>
-<span id="cb9-112"><a href="#cb9-112"></a>            <span class="at">vertex.size =</span> <span class="fl">0.01</span>, <span class="at">vertex.color =</span> <span class="st">"lightblue"</span>,</span>
-<span id="cb9-113"><a href="#cb9-113"></a>            <span class="at">label.cex =</span> <span class="fl">0.1</span>)</span>
-<span id="cb9-114"><a href="#cb9-114"></a></span>
-<span id="cb9-115"><a href="#cb9-115"></a></span>
+<span id="cb9-101"><a href="#cb9-101"></a>Ce graphique permet de visualiser les mots les plus fréquents d’un corpus de textes (et préciser que tu as supprimé des mots, tu en as regroupés …) </span>
+<span id="cb9-104"><a href="#cb9-104"></a><span class="in">```{r}</span></span>
+<span id="cb9-105"><a href="#cb9-105"></a><span class="co"># On affiche au maximum 50 mots et les mots d’au moins une occurrence</span></span>
+<span id="cb9-106"><a href="#cb9-106"></a>cloud<span class="ot">&lt;-</span><span class="fu">word_cloud</span>(dtm2, <span class="at">color=</span> <span class="st">'black'</span>, <span class="at">min.freq=</span><span class="dv">1</span>,<span class="at">n =</span><span class="dv">50</span>) </span>
+<span id="cb9-107"><a href="#cb9-107"></a></span>
+<span id="cb9-108"><a href="#cb9-108"></a><span class="in">```</span></span>
+<span id="cb9-109"><a href="#cb9-109"></a></span>
+<span id="cb9-110"><a href="#cb9-110"></a></span>
+<span id="cb9-111"><a href="#cb9-111"></a></span>
+<span id="cb9-112"><a href="#cb9-112"></a><span class="fu"># 5. Affichage d’un graphe de mots</span></span>
+<span id="cb9-113"><a href="#cb9-113"></a></span>
+<span id="cb9-114"><a href="#cb9-114"></a>La fonction terms_graph du package R.temis permet de générer un réseau de mots qui est affiché dans une fenêtre interactive igraph. Les termes ou mots sont représentés par des sommets ou nœuds dans le graphe, les liens représentent les cooccurrences entre les mots dans les documents. Leur placement dans l’espace graphique est déterminé par un algorithme d’énergie. Ici,ce n’est pas très représentatif mais ça donne globalement une idée de ce que peut nous fournir un tel graphe: l’idée globale des thématiques et des sujets traités dans le</span>
+<span id="cb9-115"><a href="#cb9-115"></a>corpus.</span>
 <span id="cb9-116"><a href="#cb9-116"></a></span>
-<span id="cb9-117"><a href="#cb9-117"></a><span class="in">```</span></span>
-<span id="cb9-118"><a href="#cb9-118"></a></span>
-<span id="cb9-119"><a href="#cb9-119"></a></span>
-<span id="cb9-120"><a href="#cb9-120"></a></span>
-<span id="cb9-121"><a href="#cb9-121"></a><span class="kw">&lt;img</span> <span class="er">src</span><span class="ot">=</span><span class="st">"tree.png"</span> <span class="er">alt</span><span class="ot">=</span><span class="st">"Texte alternatif de l'image"</span> <span class="er">title</span><span class="ot">=</span><span class="st">"Titre de l'image"</span> <span class="er">width</span><span class="ot">=</span><span class="st">700</span> <span class="er">lenght</span><span class="ot">=</span><span class="st">700</span><span class="kw">/&gt;</span></span>
-<span id="cb9-122"><a href="#cb9-122"></a></span>
-<span id="cb9-123"><a href="#cb9-123"></a></span>
-<span id="cb9-124"><a href="#cb9-124"></a><span class="fu"># 6. Pour aller plus loin</span></span>
+<span id="cb9-119"><a href="#cb9-119"></a><span class="in">```{r}</span></span>
+<span id="cb9-120"><a href="#cb9-120"></a><span class="co"># Créer un graphique d'analyse de co-occurrences de termes</span></span>
+<span id="cb9-121"><a href="#cb9-121"></a>Tree<span class="ot">&lt;-</span><span class="fu">terms_graph</span>(dtm2, <span class="at">min_occ =</span> <span class="dv">10</span>, <span class="at">interactive =</span> T,</span>
+<span id="cb9-122"><a href="#cb9-122"></a>            <span class="at">vertex.size =</span> <span class="fl">0.01</span>, <span class="at">vertex.color =</span> <span class="st">"lightblue"</span>,</span>
+<span id="cb9-123"><a href="#cb9-123"></a>            <span class="at">label.cex =</span> <span class="fl">0.1</span>)</span>
+<span id="cb9-124"><a href="#cb9-124"></a></span>
 <span id="cb9-125"><a href="#cb9-125"></a></span>
-<span id="cb9-126"><a href="#cb9-126"></a><span class="ot">&lt;https://rtemis.hypotheses.org/r-temis-dans-rstudio&gt;</span></span>
-<span id="cb9-127"><a href="#cb9-127"></a></span>
+<span id="cb9-126"><a href="#cb9-126"></a>  </span>
+<span id="cb9-127"><a href="#cb9-127"></a><span class="in">```</span></span>
 <span id="cb9-128"><a href="#cb9-128"></a></span>
 <span id="cb9-129"><a href="#cb9-129"></a></span>
-<span id="cb9-130"><a href="#cb9-130"></a></span>
+<span id="cb9-130"><a href="#cb9-130"></a><span class="kw">&lt;img</span> <span class="er">src</span><span class="ot">=</span><span class="st">"tree.png"</span> <span class="er">alt</span><span class="ot">=</span><span class="st">"Texte alternatif de l'image"</span> <span class="er">title</span><span class="ot">=</span><span class="st">"Titre de l'image"</span> <span class="er">width</span><span class="ot">=</span><span class="st">700</span> <span class="er">lenght</span><span class="ot">=</span><span class="st">700</span><span class="kw">/&gt;</span></span>
 <span id="cb9-131"><a href="#cb9-131"></a></span>
+<span id="cb9-132"><a href="#cb9-132"></a><span class="fu"># 6. Pour aller plus loin</span></span>
+<span id="cb9-133"><a href="#cb9-133"></a></span>
+<span id="cb9-134"><a href="#cb9-134"></a><span class="ot">&lt;https://rtemis.hypotheses.org/r-temis-dans-rstudio&gt;</span></span>
+<span id="cb9-135"><a href="#cb9-135"></a></span>
+<span id="cb9-136"><a href="#cb9-136"></a></span>
+<span id="cb9-137"><a href="#cb9-137"></a></span>
+<span id="cb9-138"><a href="#cb9-138"></a></span>
+<span id="cb9-139"><a href="#cb9-139"></a></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

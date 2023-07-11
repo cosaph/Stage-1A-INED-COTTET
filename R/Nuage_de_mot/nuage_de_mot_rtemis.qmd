@@ -13,11 +13,20 @@ date: 06/06/2023
 
 # 1. Travail préliminaire 
 
-  Comme dans tout bon code R il est nécessaire au début d'installer (une fois sur un ordinateur): (dans le terminal de commande )
+Les packages "R.temis", "dplyr" et "tibble" sont nécessaires pour ce code car ils contiennent des fonctions et des outils qui sont utilisés pour manipuler et analyser les données textuelles.
+
+Le package "R.temis" fournit des fonctions pour le traitement du langage naturel, telles que la lemmatisation, la tokenisation et l'analyse de sentiment. Ces fonctions sont utilisées dans le code pour analyser les tweets et extraire les mots clés.
+
+Le package "dplyr" fournit des fonctions pour la manipulation de données, telles que la sélection de colonnes, le filtrage de données et l'agrégation de données. Ces fonctions sont utilisées dans le code pour nettoyer et préparer les données textuelles.
+
+Le package "tibble" fournit une classe de données pour stocker des données tabulaires, qui est plus efficace que la classe de données par défaut de R. Cette classe de données est utilisée dans le code pour stocker les données textuelles nettoyées et préparées.
+
+Il est nécessaire d'installer ces packages une fois sur un ordinateur, car ils ne sont pas inclus dans l'installation de base de R. Ensuite, les packages doivent être chargés à chaque fois que le code est exécuté en utilisant la fonction "library". Cela permet d'utiliser les fonctions et les outils fournis par les packages dans le code.
+
 install.packages("R.temis") 
 install.packages("dplyr")
 install.packages("tibble")
-les packages recquis pour le code et de charger (à chaque fois ) les librairies requisent pour le code.
+
 
 
 ```{r warning=FALSE, message= FALSE}
@@ -27,11 +36,11 @@ library("tibble")
 ```
 
 
-Concernant le choix des données, j’ai choisis les voeux de François Hollande allant de 2013 à 2017. Les textes retranscrits dans des fichiers de type texte (.txt) et placé dans un seul dossier nommé _texte_. Il est important de vérifer l'encodage de vos textes pour la suite du code. Ici, l'encodage est _UTF-8_.
+Concernant le choix des données, j’ai choisis les voeux de François Hollande allant de 2013 à 2017. Les textes retranscrits dans des fichiers de type texte (.txt) et placé dans un seul dossier nommé _dossier_de_texte_. Il est important de vérifer l'encodage de vos textes pour la suite du code. Ici, l'encodage est _UTF-8_.
 
 ```{r message=FALSE }
 
-corpus <- import_corpus("texte", format="txt", language ="fr")
+corpus <- import_corpus("dossier_de_texte", format="txt", language ="fr")
 
 
 ```
@@ -41,27 +50,24 @@ corpus <- import_corpus("texte", format="txt", language ="fr")
 
 C'est quoi les __stop_words__?
 
-Les stop words (ou mots vides) sont des mots très courants d'une langue, comme les prépositions, les articles, les pronoms, etc., qui sont souvent omis lors de l'analyse de texte car ils ne portent pas de sens important pour la compréhension globale du texte.
-
-La fonction build_dtm est utilisée pour construire une matrice de termes-document (ou tableau lexical) à partir d'un corpus de textes. La matrice de termes-document est une représentation quantitative des termes présents dans un corpus de textes, où chaque colonne représente un terme et chaque ligne représente un document.
+Les stop words (ou mots vides) sont des mots très courants d’une langue comme les prépositions, les articles, les pronoms, etc., qui sont souvent omis lors de l’analyse de texte car en général ils ne portent pas de sens important pour la compréhension globale du texte.
+La fonction build_dtm est utilisée pour construire une matrice de termes-document (ou tableau lexical) à partir d’un corpus de textes. La matrice de termes-document (ou Tableau Lexical) est une représentation quantitative d'un corpus de textes, où chaque colonne représente un terme et chaque ligne représente un document.
 
 ```{r}
-# ---- traitement des données ----
+# Création du tableau lexical sans mots outils et avec les mots d’au moins 1 lettre
 dtm <-build_dtm(corpus, remove_stopwords = T, min_length = 1)
-
-dic <-dictionary(dtm) #création d'un dictionnaire de mot 
-
-frequent_terms(dtm) #fréquence apparition des mots dans le corpus de texte
-
+# Création d'un dictionnaire de mot
+dic <-dictionary(dtm) 
+# Calcul des occurrences des mots dans le corpus de textes
+frequent_terms(dtm) 
 
 ```
 
 # 3. Traitement du corpus
 
-J'aimerai retirer les mots "a" et "plus" et combiner les termes "tout", "toutes" et "tous" en "tous.tes" à titre d'exemple.
+J’aimerais aussi retirer les mots “a” et “plus” et rassembler sous un même mot  les termes “tout”, “toutes” et “tous” en “tous.tes” à titre d’exemple.
 
 ```{r}
-
 
 dic2 = dic %>%
   rownames_to_column(var="word") %>% 
@@ -69,38 +75,40 @@ dic2 = dic %>%
 
 row.names(dic2) <- dic2$word
 
-# Remplacer les mots spécifiés par "Année"
+# Remplacer les mots spécifiés par tous.tes
 dic2$Term[dic2$word == "toutes"] <- "tous.tes"
 dic2$Term[dic2$word == "tout"] <- "tous.tes"
 dic2$Term[dic2$word == "tous"] <- "tous.tes"
 
+# Lemmatisation
 dtmlem <-combine_terms(dtm, dic2)
 
+# Ensemble de mots à retirer
 mots_a_retirer <- c("a", "plus")
 
+# Suppression de mots dans le tablrau lexical
 dtm2<-dtmlem[, !colnames(dtmlem) %in% mots_a_retirer]
 
 
 frequent_terms(dtm2)
 ```
 
-# 4. Construction du Nuage
+#4. Affichage du Nuage de mot
 
+Ce graphique permet de visualiser les mots les plus fréquents d’un corpus de textes (et préciser que tu as supprimé des mots, tu en as regroupés …) 
+```{r}
 
-```{r results=FALSE}
-
+# On affiche au maximum 50 mots et les mots d’au moins une occurrence
 cloud<-word_cloud(dtm2, color= 'black', min.freq=1,n =50) 
-
 
 ```
 
 
 
-# 5. Analyse descriptive 
+# 5. Affichage d’un graphe de mots
 
-
-La fonction terms_graph du package R.temis permet de générer un réseau de mots qui est affiché dans une fenêtre interactive igraph. Les termes ou mots sont représentés par des sommets ou nœuds dans le graphe. Leur placement dans l'espace graphique est déterminé par un algorithme d'énergie, qui prend en compte les co-occurrences des termes dans le corpus et les liens représentent les co-occurrences entre les termes.
-Ici,ce n'est pas très représentatif mais ça donne globalement une idée de ce que peut nous fournir un tel graphe: l'idée globale des thématiques et des sujets traités dans le corpus.
+La fonction terms_graph du package R.temis permet de générer un réseau de mots qui est affiché dans une fenêtre interactive igraph. Les termes ou mots sont représentés par des sommets ou nœuds dans le graphe, les liens représentent les cooccurrences entre les mots dans les documents. Leur placement dans l’espace graphique est déterminé par un algorithme d’énergie. Ici,ce n’est pas très représentatif mais ça donne globalement une idée de ce que peut nous fournir un tel graphe: l’idée globale des thématiques et des sujets traités dans le
+corpus.
 
 ```{r}
 # Créer un graphique d'analyse de co-occurrences de termes
@@ -109,13 +117,11 @@ Tree<-terms_graph(dtm2, min_occ = 10, interactive = T,
             label.cex = 0.1)
 
 
-
+  
 ```
 
 
-
 <img src="tree.png" alt="Texte alternatif de l'image" title="Titre de l'image" width=700 lenght=700/>
-
 
 # 6. Pour aller plus loin
 
