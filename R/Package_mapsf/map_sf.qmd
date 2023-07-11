@@ -28,7 +28,13 @@ Affichage du fond de carte correspondant aux limites des arrondissements auquel 
 
 arrondissements <- st_read(dsn = "https://opendata.paris.fr/explore/dataset/arrondissements/download/?format=geojson&timezone=Europe/Berlin&lang=fr")
 
+
 cours_deau<-st_read(dsn="https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/plan-de-voirie-voies-deau/exports/geojson?lang=fr&timezone=Europe%2FBerlin")
+
+'''
+Le format de données géographiques "OGRGeoJSON" est un format de fichier qui permet de stocker des données spatiales sous forme de fichiers JSON.
+
+'''
 
 
 ```
