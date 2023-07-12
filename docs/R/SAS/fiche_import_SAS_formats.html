@@ -253,13 +253,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Pour l’instant nous ne pouvons pas recupérer les formats sas numériques avec intervalles mais nous pouvons les recréer dans R “à la main” comme ci-dessous.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>erfi_ext<span class="sc">$</span>MA_AGER <span class="ot">&lt;-</span> <span class="fu">cut</span>(<span class="fu">as.numeric</span>(erfi_ext<span class="sc">$</span>MA_AGER), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">35</span>, <span class="dv">45</span>, <span class="dv">55</span>, <span class="cn">Inf</span>), </span>
-<span id="cb12-2"><a href="#cb12-2"></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"17-35 ans"</span>, <span class="st">"36-45 ans"</span>, <span class="st">"46-55 ans"</span>, <span class="st">"56 ans et plus"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-2"><a href="#cb12-2"></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"17-35 ans"</span>, <span class="st">"36-45 ans"</span>, <span class="st">"46-55 ans"</span>, <span class="st">"56 ans et plus"</span>))</span>
+<span id="cb12-3"><a href="#cb12-3"></a></span>
+<span id="cb12-4"><a href="#cb12-4"></a></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="co">#essai</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="co">#erfi_ext$MA_AGER&lt;-cut(erfi_ext$MA_AGER, 4)</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="fu">table</span>(erfi_ext<span class="sc">$</span>MA_AGER)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     17-35 ans      36-45 ans      46-55 ans 56 ans et plus 
+          6018           1857           1324            880 </code></pre>
+</div>
 </div>
 <p>Une autre solution serait de créer dans SAS de nouvelles variables avec intervalles (format “en dur”) Exemple dans une etape data SAS:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1"></a>data erfi_ext;</span>
-<span id="cb13-2"><a href="#cb13-2"></a>set erfi_extrait2;</span>
-<span id="cb13-3"><a href="#cb13-3"></a>classe_age=put(MA_AGER,$age4c.);</span>
-<span id="cb13-4"><a href="#cb13-4"></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1"></a>data erfi_ext;</span>
+<span id="cb14-2"><a href="#cb14-2"></a>set erfi_extrait2;</span>
+<span id="cb14-3"><a href="#cb14-3"></a>classe_age=put(MA_AGER,$age4c.);</span>
+<span id="cb14-4"><a href="#cb14-4"></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>La nouvelle variable classe_age prendra les valeurs des intervalles définies dans le format créé “$age4c”. Quand on l’importera dans R, nous aurons une variable d’âge continu “MA_AGER” et une variable avec des classes d’âge (“classe_age”).</p>
 
 
@@ -552,78 +563,88 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb14" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1"></a><span class="co">---</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="an">title:</span><span class="co"> "Importer des fichiers SAS avec formats en R"</span></span>
-<span id="cb14-3"><a href="#cb14-3"></a><span class="an">author:</span><span class="co"> "Coralie Cottet et Elodie Baril"</span></span>
-<span id="cb14-4"><a href="#cb14-4"></a><span class="an">date:</span><span class="co"> "07/10/2023"</span></span>
-<span id="cb14-5"><a href="#cb14-5"></a><span class="an">editor:</span><span class="co"> visual</span></span>
-<span id="cb14-6"><a href="#cb14-6"></a><span class="an">style:</span><span class="co"> sms.css</span></span>
-<span id="cb14-7"><a href="#cb14-7"></a></span>
-<span id="cb14-8"><a href="#cb14-8"></a><span class="an">abstract:</span><span class="co"> |</span></span>
-<span id="cb14-9"><a href="#cb14-9"></a><span class="co"> Par défaut les catalogues de formats SAS ne s'importe pas dans R. Vous trouverez dans cette fiche comment importer des tables SAS associées à un catalogue de formats. </span></span>
-<span id="cb14-10"><a href="#cb14-10"></a><span class="co">---</span></span>
-<span id="cb14-11"><a href="#cb14-11"></a></span>
-<span id="cb14-12"><a href="#cb14-12"></a><span class="fu">## Charger les librairies</span></span>
-<span id="cb14-13"><a href="#cb14-13"></a></span>
-<span id="cb14-14"><a href="#cb14-14"></a><span class="in">```{r, message=FALSE}</span></span>
-<span id="cb14-15"><a href="#cb14-15"></a><span class="fu">library</span>(haven)</span>
-<span id="cb14-16"><a href="#cb14-16"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb14-17"><a href="#cb14-17"></a><span class="fu">library</span>(labelled)</span>
-<span id="cb14-18"><a href="#cb14-18"></a><span class="in">```</span></span>
-<span id="cb14-19"><a href="#cb14-19"></a></span>
-<span id="cb14-20"><a href="#cb14-20"></a><span class="fu">## Importer un fichier SAS</span></span>
-<span id="cb14-21"><a href="#cb14-21"></a></span>
-<span id="cb14-22"><a href="#cb14-22"></a>On doit indiquer dans l'instruction <span class="in">`read_sas`</span> le catalogue de formats après le nom de la table sas. Pour l'instant lorqu'on ouvre dans R le fichier "erfi_ext", on ne voit pas les formats mais on a l'indication dans les labels. Toutes les variables associées à un format sas sont importées en variables character dans R.</span>
-<span id="cb14-23"><a href="#cb14-23"></a></span>
-<span id="cb14-26"><a href="#cb14-26"></a><span class="in">```{r}</span></span>
-<span id="cb14-27"><a href="#cb14-27"></a>erfi_ext<span class="ot">&lt;-</span> <span class="fu">read_sas</span>(<span class="st">"erfi_extrait2.sas7bdat"</span>,<span class="at">catalog_file =</span><span class="st">"formats.sas7bcat"</span>)</span>
-<span id="cb14-28"><a href="#cb14-28"></a><span class="fu">str</span>(erfi_ext<span class="sc">$</span>MB_STOC)</span>
-<span id="cb14-29"><a href="#cb14-29"></a><span class="in">```</span></span>
-<span id="cb14-30"><a href="#cb14-30"></a></span>
-<span id="cb14-31"><a href="#cb14-31"></a><span class="fu">## Prise en compte des formats SAS</span></span>
-<span id="cb14-32"><a href="#cb14-32"></a></span>
-<span id="cb14-33"><a href="#cb14-33"></a>Il faut d'abord selectionner les colonnes avec formats, les convertir en factor et appliquer les formats SAS sur les valeurs.</span>
-<span id="cb14-34"><a href="#cb14-34"></a></span>
-<span id="cb14-37"><a href="#cb14-37"></a><span class="in">```{r}</span></span>
-<span id="cb14-38"><a href="#cb14-38"></a><span class="cf">for</span> (col <span class="cf">in</span> <span class="fu">names</span>(erfi_ext)) {</span>
-<span id="cb14-39"><a href="#cb14-39"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(<span class="fu">attr</span>(erfi_ext[[col]], <span class="st">"format"</span>))) {</span>
-<span id="cb14-40"><a href="#cb14-40"></a>    erfi_ext <span class="ot">&lt;-</span> erfi_ext <span class="sc">%&gt;%</span></span>
-<span id="cb14-41"><a href="#cb14-41"></a>      <span class="fu">mutate</span>(<span class="sc">!!</span><span class="at">col :=</span> <span class="fu">as_factor</span>(<span class="sc">!!</span><span class="fu">sym</span>(col)))  </span>
-<span id="cb14-42"><a href="#cb14-42"></a>  }</span>
-<span id="cb14-43"><a href="#cb14-43"></a>  vide <span class="ot">&lt;-</span> <span class="fu">which</span>(erfi_ext[[col]] <span class="sc">==</span> <span class="st">""</span>) </span>
-<span id="cb14-44"><a href="#cb14-44"></a>  erfi_ext[[col]][vide] <span class="ot">&lt;-</span> <span class="cn">NA</span> </span>
-<span id="cb14-45"><a href="#cb14-45"></a>}</span>
-<span id="cb14-46"><a href="#cb14-46"></a><span class="in">```</span></span>
-<span id="cb14-47"><a href="#cb14-47"></a></span>
-<span id="cb14-48"><a href="#cb14-48"></a>Désormais les valeurs des variables devenues "factor" sont sous format texte. Dans les 2 dernières lignes du code on corrige les valeurs vides par des NA.</span>
-<span id="cb14-49"><a href="#cb14-49"></a></span>
-<span id="cb14-50"><a href="#cb14-50"></a>Pour readapter ce code il faut juste changer "erfi_ext" par le nom de votre fichier importé.</span>
-<span id="cb14-51"><a href="#cb14-51"></a></span>
-<span id="cb14-54"><a href="#cb14-54"></a><span class="in">```{r}</span></span>
-<span id="cb14-55"><a href="#cb14-55"></a><span class="fu">head</span>(erfi_ext)</span>
-<span id="cb14-56"><a href="#cb14-56"></a><span class="in">```</span></span>
-<span id="cb14-57"><a href="#cb14-57"></a></span>
-<span id="cb14-58"><a href="#cb14-58"></a>Il reste un souci: seul les formats sas avec intervalles (exemple format groupe d'âge) n'ont pas pu s'importer correctement.</span>
-<span id="cb14-59"><a href="#cb14-59"></a></span>
-<span id="cb14-60"><a href="#cb14-60"></a><span class="fu">## Pour les intervalles numeriques ( A revoir!)</span></span>
-<span id="cb14-61"><a href="#cb14-61"></a></span>
-<span id="cb14-62"><a href="#cb14-62"></a>Pour l'instant nous ne pouvons pas recupérer les formats sas numériques avec intervalles mais nous pouvons les recréer dans R "à la main" comme ci-dessous.</span>
-<span id="cb14-63"><a href="#cb14-63"></a></span>
-<span id="cb14-66"><a href="#cb14-66"></a><span class="in">```{r}</span></span>
-<span id="cb14-67"><a href="#cb14-67"></a>erfi_ext<span class="sc">$</span>MA_AGER <span class="ot">&lt;-</span> <span class="fu">cut</span>(<span class="fu">as.numeric</span>(erfi_ext<span class="sc">$</span>MA_AGER), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">35</span>, <span class="dv">45</span>, <span class="dv">55</span>, <span class="cn">Inf</span>), </span>
-<span id="cb14-68"><a href="#cb14-68"></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"17-35 ans"</span>, <span class="st">"36-45 ans"</span>, <span class="st">"46-55 ans"</span>, <span class="st">"56 ans et plus"</span>))</span>
-<span id="cb14-69"><a href="#cb14-69"></a><span class="in">```</span></span>
-<span id="cb14-70"><a href="#cb14-70"></a></span>
-<span id="cb14-71"><a href="#cb14-71"></a>Une autre solution serait de créer dans SAS de nouvelles variables avec intervalles (format "en dur") Exemple dans une etape data SAS:</span>
-<span id="cb14-72"><a href="#cb14-72"></a></span>
-<span id="cb14-73"><a href="#cb14-73"></a><span class="in">``` markdown</span></span>
-<span id="cb14-74"><a href="#cb14-74"></a>data erfi_ext;</span>
-<span id="cb14-75"><a href="#cb14-75"></a>set erfi_extrait2;</span>
-<span id="cb14-76"><a href="#cb14-76"></a>classe_age=put(MA_AGER,$age4c.);</span>
-<span id="cb14-77"><a href="#cb14-77"></a>run;</span>
-<span id="cb14-78"><a href="#cb14-78"></a><span class="in">```</span></span>
-<span id="cb14-79"><a href="#cb14-79"></a></span>
-<span id="cb14-80"><a href="#cb14-80"></a>La nouvelle variable classe_age prendra les valeurs des intervalles définies dans le format créé "\$age4c". Quand on l'importera dans R, nous aurons une variable d'âge continu "MA_AGER" et une variable avec des classes d'âge ("classe_age").</span>
+<div class="sourceCode" id="cb15" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="#cb15-1"></a><span class="co">---</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="an">title:</span><span class="co"> "Importer des fichiers SAS avec formats en R"</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="an">author:</span><span class="co"> "Coralie Cottet et Elodie Baril"</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="an">date:</span><span class="co"> "07/10/2023"</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="an">editor:</span><span class="co"> visual</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="an">style:</span><span class="co"> sms.css</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a></span>
+<span id="cb15-8"><a href="#cb15-8"></a><span class="an">abstract:</span><span class="co"> |</span></span>
+<span id="cb15-9"><a href="#cb15-9"></a><span class="co"> Par défaut les catalogues de formats SAS ne s'importe pas dans R. Vous trouverez dans cette fiche comment importer des tables SAS associées à un catalogue de formats. </span></span>
+<span id="cb15-10"><a href="#cb15-10"></a><span class="co">---</span></span>
+<span id="cb15-11"><a href="#cb15-11"></a></span>
+<span id="cb15-12"><a href="#cb15-12"></a><span class="fu">## Charger les librairies</span></span>
+<span id="cb15-13"><a href="#cb15-13"></a></span>
+<span id="cb15-14"><a href="#cb15-14"></a><span class="in">```{r, message=FALSE}</span></span>
+<span id="cb15-15"><a href="#cb15-15"></a><span class="fu">library</span>(haven)</span>
+<span id="cb15-16"><a href="#cb15-16"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb15-17"><a href="#cb15-17"></a><span class="fu">library</span>(labelled)</span>
+<span id="cb15-18"><a href="#cb15-18"></a><span class="in">```</span></span>
+<span id="cb15-19"><a href="#cb15-19"></a></span>
+<span id="cb15-20"><a href="#cb15-20"></a><span class="fu">## Importer un fichier SAS</span></span>
+<span id="cb15-21"><a href="#cb15-21"></a></span>
+<span id="cb15-22"><a href="#cb15-22"></a>On doit indiquer dans l'instruction <span class="in">`read_sas`</span> le catalogue de formats après le nom de la table sas. Pour l'instant lorqu'on ouvre dans R le fichier "erfi_ext", on ne voit pas les formats mais on a l'indication dans les labels. Toutes les variables associées à un format sas sont importées en variables character dans R.</span>
+<span id="cb15-23"><a href="#cb15-23"></a></span>
+<span id="cb15-26"><a href="#cb15-26"></a><span class="in">```{r}</span></span>
+<span id="cb15-27"><a href="#cb15-27"></a>erfi_ext<span class="ot">&lt;-</span> <span class="fu">read_sas</span>(<span class="st">"erfi_extrait2.sas7bdat"</span>,<span class="at">catalog_file =</span><span class="st">"formats.sas7bcat"</span>)</span>
+<span id="cb15-28"><a href="#cb15-28"></a><span class="fu">str</span>(erfi_ext<span class="sc">$</span>MB_STOC)</span>
+<span id="cb15-29"><a href="#cb15-29"></a><span class="in">```</span></span>
+<span id="cb15-30"><a href="#cb15-30"></a></span>
+<span id="cb15-31"><a href="#cb15-31"></a><span class="fu">## Prise en compte des formats SAS</span></span>
+<span id="cb15-32"><a href="#cb15-32"></a></span>
+<span id="cb15-33"><a href="#cb15-33"></a>Il faut d'abord selectionner les colonnes avec formats, les convertir en factor et appliquer les formats SAS sur les valeurs.</span>
+<span id="cb15-34"><a href="#cb15-34"></a></span>
+<span id="cb15-37"><a href="#cb15-37"></a><span class="in">```{r}</span></span>
+<span id="cb15-38"><a href="#cb15-38"></a><span class="cf">for</span> (col <span class="cf">in</span> <span class="fu">names</span>(erfi_ext)) {</span>
+<span id="cb15-39"><a href="#cb15-39"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(<span class="fu">attr</span>(erfi_ext[[col]], <span class="st">"format"</span>))) {</span>
+<span id="cb15-40"><a href="#cb15-40"></a>    erfi_ext <span class="ot">&lt;-</span> erfi_ext <span class="sc">%&gt;%</span></span>
+<span id="cb15-41"><a href="#cb15-41"></a>      <span class="fu">mutate</span>(<span class="sc">!!</span><span class="at">col :=</span> <span class="fu">as_factor</span>(<span class="sc">!!</span><span class="fu">sym</span>(col)))  </span>
+<span id="cb15-42"><a href="#cb15-42"></a>  }</span>
+<span id="cb15-43"><a href="#cb15-43"></a>  vide <span class="ot">&lt;-</span> <span class="fu">which</span>(erfi_ext[[col]] <span class="sc">==</span> <span class="st">""</span>) </span>
+<span id="cb15-44"><a href="#cb15-44"></a>  erfi_ext[[col]][vide] <span class="ot">&lt;-</span> <span class="cn">NA</span> </span>
+<span id="cb15-45"><a href="#cb15-45"></a>}</span>
+<span id="cb15-46"><a href="#cb15-46"></a></span>
+<span id="cb15-47"><a href="#cb15-47"></a><span class="in">```</span></span>
+<span id="cb15-48"><a href="#cb15-48"></a></span>
+<span id="cb15-49"><a href="#cb15-49"></a>Désormais les valeurs des variables devenues "factor" sont sous format texte. Dans les 2 dernières lignes du code on corrige les valeurs vides par des NA.</span>
+<span id="cb15-50"><a href="#cb15-50"></a></span>
+<span id="cb15-51"><a href="#cb15-51"></a>Pour readapter ce code il faut juste changer "erfi_ext" par le nom de votre fichier importé.</span>
+<span id="cb15-52"><a href="#cb15-52"></a></span>
+<span id="cb15-55"><a href="#cb15-55"></a><span class="in">```{r}</span></span>
+<span id="cb15-56"><a href="#cb15-56"></a><span class="fu">head</span>(erfi_ext)</span>
+<span id="cb15-57"><a href="#cb15-57"></a><span class="in">```</span></span>
+<span id="cb15-58"><a href="#cb15-58"></a></span>
+<span id="cb15-59"><a href="#cb15-59"></a>Il reste un souci: seul les formats sas avec intervalles (exemple format groupe d'âge) n'ont pas pu s'importer correctement.</span>
+<span id="cb15-60"><a href="#cb15-60"></a></span>
+<span id="cb15-61"><a href="#cb15-61"></a><span class="fu">## Pour les intervalles numeriques ( A revoir!)</span></span>
+<span id="cb15-62"><a href="#cb15-62"></a></span>
+<span id="cb15-63"><a href="#cb15-63"></a>Pour l'instant nous ne pouvons pas recupérer les formats sas numériques avec intervalles mais nous pouvons les recréer dans R "à la main" comme ci-dessous.</span>
+<span id="cb15-64"><a href="#cb15-64"></a></span>
+<span id="cb15-67"><a href="#cb15-67"></a><span class="in">```{r}</span></span>
+<span id="cb15-68"><a href="#cb15-68"></a>erfi_ext<span class="sc">$</span>MA_AGER <span class="ot">&lt;-</span> <span class="fu">cut</span>(<span class="fu">as.numeric</span>(erfi_ext<span class="sc">$</span>MA_AGER), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">35</span>, <span class="dv">45</span>, <span class="dv">55</span>, <span class="cn">Inf</span>), </span>
+<span id="cb15-69"><a href="#cb15-69"></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"17-35 ans"</span>, <span class="st">"36-45 ans"</span>, <span class="st">"46-55 ans"</span>, <span class="st">"56 ans et plus"</span>))</span>
+<span id="cb15-70"><a href="#cb15-70"></a></span>
+<span id="cb15-71"><a href="#cb15-71"></a></span>
+<span id="cb15-72"><a href="#cb15-72"></a><span class="co">#essai</span></span>
+<span id="cb15-73"><a href="#cb15-73"></a><span class="co">#erfi_ext$MA_AGER&lt;-cut(erfi_ext$MA_AGER, 4)</span></span>
+<span id="cb15-74"><a href="#cb15-74"></a></span>
+<span id="cb15-75"><a href="#cb15-75"></a><span class="fu">table</span>(erfi_ext<span class="sc">$</span>MA_AGER)</span>
+<span id="cb15-76"><a href="#cb15-76"></a></span>
+<span id="cb15-77"><a href="#cb15-77"></a></span>
+<span id="cb15-78"><a href="#cb15-78"></a></span>
+<span id="cb15-79"><a href="#cb15-79"></a><span class="in">```</span></span>
+<span id="cb15-80"><a href="#cb15-80"></a></span>
+<span id="cb15-81"><a href="#cb15-81"></a>Une autre solution serait de créer dans SAS de nouvelles variables avec intervalles (format "en dur") Exemple dans une etape data SAS:</span>
+<span id="cb15-82"><a href="#cb15-82"></a></span>
+<span id="cb15-83"><a href="#cb15-83"></a><span class="in">``` markdown</span></span>
+<span id="cb15-84"><a href="#cb15-84"></a>data erfi_ext;</span>
+<span id="cb15-85"><a href="#cb15-85"></a>set erfi_extrait2;</span>
+<span id="cb15-86"><a href="#cb15-86"></a>classe_age=put(MA_AGER,$age4c.);</span>
+<span id="cb15-87"><a href="#cb15-87"></a>run;</span>
+<span id="cb15-88"><a href="#cb15-88"></a><span class="in">```</span></span>
+<span id="cb15-89"><a href="#cb15-89"></a></span>
+<span id="cb15-90"><a href="#cb15-90"></a>La nouvelle variable classe_age prendra les valeurs des intervalles définies dans le format créé "\$age4c". Quand on l'importera dans R, nous aurons une variable d'âge continu "MA_AGER" et une variable avec des classes d'âge ("classe_age").</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

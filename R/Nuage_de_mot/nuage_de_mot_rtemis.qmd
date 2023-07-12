@@ -11,6 +11,8 @@ date: 06/06/2023
 
 ---
 
+
+
 # 1. Travail préliminaire 
 
 Les packages "R.temis", "dplyr" et "tibble" sont nécessaires pour ce code car ils contiennent des fonctions et des outils qui sont utilisés pour manipuler et analyser les données textuelles.
@@ -40,7 +42,8 @@ Concernant le choix des données, j’ai choisis les voeux de François Hollande
 
 ```{r message=FALSE }
 
-corpus <- import_corpus("dossier_de_texte", format="txt", language ="fr")
+corpus1 <- import_corpus("dossier_de_texte", format="txt", language ="fr")
+corpus<-split_documents(corpus1, 5, preserveMetadata = TRUE)
 
 
 ```
@@ -112,20 +115,59 @@ corpus.
 
 ```{r}
 # Créer un graphique d'analyse de co-occurrences de termes
+
+
+
 Tree<-terms_graph(dtm2, min_occ = 10, interactive = T,
             vertex.size = 0.01, vertex.color = "lightblue",
             label.cex = 0.1)
 
 
-  
 ```
 
+<img src="tree.png" alt="Texte alternatif de l'image" title="Titre de l'image" width=500 lenght=500/>
 
-<img src="tree.png" alt="Texte alternatif de l'image" title="Titre de l'image" width=700 lenght=700/>
+
 
 # 6. Pour aller plus loin
 
 <https://rtemis.hypotheses.org/r-temis-dans-rstudio>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

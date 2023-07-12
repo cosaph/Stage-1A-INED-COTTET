@@ -9,6 +9,8 @@ affiliations: INED
 
 date: 06/06/2023
 ---
+<img src="logo.png" alt="Texte alternatif de l'image" title="Titre de l'image" width=180 length=170/>
+
 Nous allons réaliser des cartes avec R à l'aide du package "mapsf" et du packages "sf". Le package "mapsf" est un outil très utile pour manipuler et visualiser des données spatiales en R, tandis que le package "sf" fournit une infrastructure pour stocker et manipuler ces données. Ces deux packages sont très utiles pour travailler avec des données spatiales dans R, ce qui en fait un choix idéal pour créer des cartes et réaliser des analyses spatiales. 
 
 ```{r warning=FALSE, message=FALSE}

@@ -39,6 +39,7 @@ for (col in names(erfi_ext)) {
   vide <- which(erfi_ext[[col]] == "") 
   erfi_ext[[col]][vide] <- NA 
 }
+
 ```
 
 Désormais les valeurs des variables devenues "factor" sont sous format texte. Dans les 2 dernières lignes du code on corrige les valeurs vides par des NA.
@@ -58,6 +59,15 @@ Pour l'instant nous ne pouvons pas recupérer les formats sas numériques avec i
 ```{r}
 erfi_ext$MA_AGER <- cut(as.numeric(erfi_ext$MA_AGER), breaks = c(0, 35, 45, 55, Inf), 
                    labels = c("17-35 ans", "36-45 ans", "46-55 ans", "56 ans et plus"))
+
+
+#essai
+#erfi_ext$MA_AGER<-cut(erfi_ext$MA_AGER, 4)
+
+table(erfi_ext$MA_AGER)
+
+
+
 ```
 
 Une autre solution serait de créer dans SAS de nouvelles variables avec intervalles (format "en dur") Exemple dans une etape data SAS:
