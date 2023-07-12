@@ -1,0 +1,72 @@
+---
+title: "Importer des fichiers SAS avec formats en R"
+author: "Coralie Cottet et Elodie Baril"
+date: "07/10/2023"
+editor: visual
+style: sms.css
+
+abstract: |
+ Par défaut les catalogues de formats SAS ne s'importe pas dans R. Vous trouverez dans cette fiche comment importer des tables SAS associées à un catalogue de formats. 
+---
+
+## Charger les librairies
+
+```{r, message=FALSE}
+library(haven)
+library(dplyr)
+library(labelled)
+```
+
+## Importer un fichier SAS
+
+On doit indiquer dans l'instruction `read_sas` le catalogue de formats après le nom de la table sas. Pour l'instant lorqu'on ouvre dans R le fichier "erfi_ext", on ne voit pas les formats mais on a l'indication dans les labels. Toutes les variables associées à un format sas sont importées en variables character dans R.
+
+```{r}
+erfi_ext<- read_sas("erfi_extrait2.sas7bdat",catalog_file ="formats.sas7bcat")
+str(erfi_ext$MB_STOC)
+```
+
+## Prise en compte des formats SAS
+
+Il faut d'abord selectionner les colonnes avec formats, les convertir en factor et appliquer les formats SAS sur les valeurs.
+
+```{r}
+for (col in names(erfi_ext)) {
+  if (!is.null(attr(erfi_ext[[col]], "format"))) {
+    erfi_ext <- erfi_ext %>%
+      mutate(!!col := as_factor(!!sym(col)))  
+  }
+  vide <- which(erfi_ext[[col]] == "") 
+  erfi_ext[[col]][vide] <- NA 
+}
+```
+
+Désormais les valeurs des variables devenues "factor" sont sous format texte. Dans les 2 dernières lignes du code on corrige les valeurs vides par des NA.
+
+Pour readapter ce code il faut juste changer "erfi_ext" par le nom de votre fichier importé.
+
+```{r}
+head(erfi_ext)
+```
+
+Il reste un souci: seul les formats sas avec intervalles (exemple format groupe d'âge) n'ont pas pu s'importer correctement.
+
+## Pour les intervalles numeriques ( A revoir!)
+
+Pour l'instant nous ne pouvons pas recupérer les formats sas numériques avec intervalles mais nous pouvons les recréer dans R "à la main" comme ci-dessous.
+
+```{r}
+erfi_ext$MA_AGER <- cut(as.numeric(erfi_ext$MA_AGER), breaks = c(0, 35, 45, 55, Inf), 
+                   labels = c("17-35 ans", "36-45 ans", "46-55 ans", "56 ans et plus"))
+```
+
+Une autre solution serait de créer dans SAS de nouvelles variables avec intervalles (format "en dur") Exemple dans une etape data SAS:
+
+``` markdown
+data erfi_ext;
+set erfi_extrait2;
+classe_age=put(MA_AGER,$age4c.);
+run;
+```
+
+La nouvelle variable classe_age prendra les valeurs des intervalles définies dans le format créé "\$age4c". Quand on l'importera dans R, nous aurons une variable d'âge continu "MA_AGER" et une variable avec des classes d'âge ("classe_age").

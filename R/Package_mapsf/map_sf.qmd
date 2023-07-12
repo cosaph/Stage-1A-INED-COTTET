@@ -66,7 +66,6 @@ Sur la carte, j'affiche l'effectif de la population de chaque arrondissement et 
 ```{r results= 'hide'}
 arrondissements$pop <- c(1012687, 903036, 1369857, 1491027, 1672009, 1506475, 1637163, 1603380, 1637542, 1059282, 1494945, 1436205, 1705774, 1425805, 236769, 1668605, 1674568, 1539668, 1421827, 1829526) #INSEE,2021
 mf_map(x = arrondissements)
-mf_map(x=cours_deau,lwd=2,border="lightblue",col="lightblue",add=TRUE)
 mf_map(
   x = arrondissements,
 # variable à représenter: population des arrondissements

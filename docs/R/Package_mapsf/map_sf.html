@@ -363,22 +363,23 @@ all geometries</code></pre>
 <span id="cb16-23"><a href="#cb16-23"></a>arrondissements_test <span class="ot">&lt;-</span> <span class="fu">subset</span>(new_poly, <span class="at">select =</span> <span class="fu">c</span>(c_ar, l_aroff, surface, l_ar, n_sq_co, c_arinsee, n_sq_ar, perimetre, geom_x_y,pop, DENS,bords_politiques))</span>
 <span id="cb16-24"><a href="#cb16-24"></a><span class="co"># à noter qu'il est très important de mettre les éléments dans le même ordre que celui du tableau</span></span>
 <span id="cb16-25"><a href="#cb16-25"></a></span>
-<span id="cb16-26"><a href="#cb16-26"></a><span class="co"># Remplacer les informations de l'arrondissement "Passy" dans l'objet "arrondissements" par les nouvelles informations</span></span>
-<span id="cb16-27"><a href="#cb16-27"></a>arrondissements[arrondissements<span class="sc">$</span>l_aroff <span class="sc">==</span> <span class="st">"Passy"</span>, ] <span class="ot">&lt;-</span> arrondissements_test</span>
-<span id="cb16-28"><a href="#cb16-28"></a>arrondissements <span class="ot">&lt;-</span> arrondissements[<span class="sc">-</span><span class="fu">which</span>(arrondissements<span class="sc">$</span>c_ar <span class="sc">==</span> <span class="st">"15"</span>),]</span>
-<span id="cb16-29"><a href="#cb16-29"></a></span>
+<span id="cb16-26"><a href="#cb16-26"></a><span class="co"># Remplacer les informations de l'arrondissement "Passy" dans l'objet "arrondissements" par les nouvelles informations et supprimer la ligne correspondant à l'arrondissement du  15e. </span></span>
+<span id="cb16-27"><a href="#cb16-27"></a></span>
+<span id="cb16-28"><a href="#cb16-28"></a>arrondissements[arrondissements<span class="sc">$</span>l_aroff <span class="sc">==</span> <span class="st">"Passy"</span>, ] <span class="ot">&lt;-</span> arrondissements_test</span>
+<span id="cb16-29"><a href="#cb16-29"></a>arrondissements <span class="ot">&lt;-</span> arrondissements[<span class="sc">-</span><span class="fu">which</span>(arrondissements<span class="sc">$</span>c_ar <span class="sc">==</span> <span class="st">"15"</span>),]</span>
 <span id="cb16-30"><a href="#cb16-30"></a></span>
-<span id="cb16-31"><a href="#cb16-31"></a><span class="co"># Afficher la carte de l'objet "arrondissements" avec les contours en noir</span></span>
-<span id="cb16-32"><a href="#cb16-32"></a><span class="fu">mf_map</span>(<span class="at">x =</span> arrondissements,<span class="at">border=</span> <span class="st">"black"</span>)</span>
-<span id="cb16-33"><a href="#cb16-33"></a><span class="fu">mf_map</span>(<span class="at">x =</span> arrondissements,</span>
-<span id="cb16-34"><a href="#cb16-34"></a><span class="co"># variable à représenter: population des arrondissements</span></span>
-<span id="cb16-35"><a href="#cb16-35"></a>  <span class="at">var =</span> <span class="st">"pop"</span>,</span>
-<span id="cb16-36"><a href="#cb16-36"></a><span class="co"># type de carte : symboles proportionnels</span></span>
-<span id="cb16-37"><a href="#cb16-37"></a>  <span class="at">type =</span> <span class="st">"prop"</span>,</span>
-<span id="cb16-38"><a href="#cb16-38"></a>  <span class="at">leg_title =</span> <span class="st">"Population totale\12 271 794"</span>,</span>
-<span id="cb16-39"><a href="#cb16-39"></a>  <span class="at">col=</span><span class="st">"blue"</span>,</span>
-<span id="cb16-40"><a href="#cb16-40"></a>  <span class="at">add=</span> <span class="cn">TRUE</span>,</span>
-<span id="cb16-41"><a href="#cb16-41"></a>  <span class="at">inches=</span><span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-31"><a href="#cb16-31"></a></span>
+<span id="cb16-32"><a href="#cb16-32"></a><span class="co"># Afficher la carte de l'objet "arrondissements" avec les contours en noir</span></span>
+<span id="cb16-33"><a href="#cb16-33"></a><span class="fu">mf_map</span>(<span class="at">x =</span> arrondissements,<span class="at">border=</span> <span class="st">"black"</span>)</span>
+<span id="cb16-34"><a href="#cb16-34"></a><span class="fu">mf_map</span>(<span class="at">x =</span> arrondissements,</span>
+<span id="cb16-35"><a href="#cb16-35"></a><span class="co"># variable à représenter: population des arrondissements</span></span>
+<span id="cb16-36"><a href="#cb16-36"></a>  <span class="at">var =</span> <span class="st">"pop"</span>,</span>
+<span id="cb16-37"><a href="#cb16-37"></a><span class="co"># type de carte : symboles proportionnels</span></span>
+<span id="cb16-38"><a href="#cb16-38"></a>  <span class="at">type =</span> <span class="st">"prop"</span>,</span>
+<span id="cb16-39"><a href="#cb16-39"></a>  <span class="at">leg_title =</span> <span class="st">"Population totale\12 271 794"</span>,</span>
+<span id="cb16-40"><a href="#cb16-40"></a>  <span class="at">col=</span><span class="st">"blue"</span>,</span>
+<span id="cb16-41"><a href="#cb16-41"></a>  <span class="at">add=</span> <span class="cn">TRUE</span>,</span>
+<span id="cb16-42"><a href="#cb16-42"></a>  <span class="at">inches=</span><span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="map_sf_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -868,37 +869,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb17-195"><a href="#cb17-195"></a>arrondissements_test <span class="ot">&lt;-</span> <span class="fu">subset</span>(new_poly, <span class="at">select =</span> <span class="fu">c</span>(c_ar, l_aroff, surface, l_ar, n_sq_co, c_arinsee, n_sq_ar, perimetre, geom_x_y,pop, DENS,bords_politiques))</span>
 <span id="cb17-196"><a href="#cb17-196"></a><span class="co"># à noter qu'il est très important de mettre les éléments dans le même ordre que celui du tableau</span></span>
 <span id="cb17-197"><a href="#cb17-197"></a></span>
-<span id="cb17-198"><a href="#cb17-198"></a><span class="co"># Remplacer les informations de l'arrondissement "Passy" dans l'objet "arrondissements" par les nouvelles informations</span></span>
-<span id="cb17-199"><a href="#cb17-199"></a>arrondissements[arrondissements<span class="sc">$</span>l_aroff <span class="sc">==</span> <span class="st">"Passy"</span>, ] <span class="ot">&lt;-</span> arrondissements_test</span>
-<span id="cb17-200"><a href="#cb17-200"></a>arrondissements <span class="ot">&lt;-</span> arrondissements[<span class="sc">-</span><span class="fu">which</span>(arrondissements<span class="sc">$</span>c_ar <span class="sc">==</span> <span class="st">"15"</span>),]</span>
-<span id="cb17-201"><a href="#cb17-201"></a></span>
+<span id="cb17-198"><a href="#cb17-198"></a><span class="co"># Remplacer les informations de l'arrondissement "Passy" dans l'objet "arrondissements" par les nouvelles informations et supprimer la ligne correspondant à l'arrondissement du  15e. </span></span>
+<span id="cb17-199"><a href="#cb17-199"></a></span>
+<span id="cb17-200"><a href="#cb17-200"></a>arrondissements[arrondissements<span class="sc">$</span>l_aroff <span class="sc">==</span> <span class="st">"Passy"</span>, ] <span class="ot">&lt;-</span> arrondissements_test</span>
+<span id="cb17-201"><a href="#cb17-201"></a>arrondissements <span class="ot">&lt;-</span> arrondissements[<span class="sc">-</span><span class="fu">which</span>(arrondissements<span class="sc">$</span>c_ar <span class="sc">==</span> <span class="st">"15"</span>),]</span>
 <span id="cb17-202"><a href="#cb17-202"></a></span>
-<span id="cb17-203"><a href="#cb17-203"></a><span class="co"># Afficher la carte de l'objet "arrondissements" avec les contours en noir</span></span>
-<span id="cb17-204"><a href="#cb17-204"></a><span class="fu">mf_map</span>(<span class="at">x =</span> arrondissements,<span class="at">border=</span> <span class="st">"black"</span>)</span>
-<span id="cb17-205"><a href="#cb17-205"></a><span class="fu">mf_map</span>(<span class="at">x =</span> arrondissements,</span>
-<span id="cb17-206"><a href="#cb17-206"></a><span class="co"># variable à représenter: population des arrondissements</span></span>
-<span id="cb17-207"><a href="#cb17-207"></a>  <span class="at">var =</span> <span class="st">"pop"</span>,</span>
-<span id="cb17-208"><a href="#cb17-208"></a><span class="co"># type de carte : symboles proportionnels</span></span>
-<span id="cb17-209"><a href="#cb17-209"></a>  <span class="at">type =</span> <span class="st">"prop"</span>,</span>
-<span id="cb17-210"><a href="#cb17-210"></a>  <span class="at">leg_title =</span> <span class="st">"Population totale\12 271 794"</span>,</span>
-<span id="cb17-211"><a href="#cb17-211"></a>  <span class="at">col=</span><span class="st">"blue"</span>,</span>
-<span id="cb17-212"><a href="#cb17-212"></a>  <span class="at">add=</span> <span class="cn">TRUE</span>,</span>
-<span id="cb17-213"><a href="#cb17-213"></a>  <span class="at">inches=</span><span class="fl">0.2</span>)</span>
-<span id="cb17-214"><a href="#cb17-214"></a></span>
+<span id="cb17-203"><a href="#cb17-203"></a></span>
+<span id="cb17-204"><a href="#cb17-204"></a><span class="co"># Afficher la carte de l'objet "arrondissements" avec les contours en noir</span></span>
+<span id="cb17-205"><a href="#cb17-205"></a><span class="fu">mf_map</span>(<span class="at">x =</span> arrondissements,<span class="at">border=</span> <span class="st">"black"</span>)</span>
+<span id="cb17-206"><a href="#cb17-206"></a><span class="fu">mf_map</span>(<span class="at">x =</span> arrondissements,</span>
+<span id="cb17-207"><a href="#cb17-207"></a><span class="co"># variable à représenter: population des arrondissements</span></span>
+<span id="cb17-208"><a href="#cb17-208"></a>  <span class="at">var =</span> <span class="st">"pop"</span>,</span>
+<span id="cb17-209"><a href="#cb17-209"></a><span class="co"># type de carte : symboles proportionnels</span></span>
+<span id="cb17-210"><a href="#cb17-210"></a>  <span class="at">type =</span> <span class="st">"prop"</span>,</span>
+<span id="cb17-211"><a href="#cb17-211"></a>  <span class="at">leg_title =</span> <span class="st">"Population totale\12 271 794"</span>,</span>
+<span id="cb17-212"><a href="#cb17-212"></a>  <span class="at">col=</span><span class="st">"blue"</span>,</span>
+<span id="cb17-213"><a href="#cb17-213"></a>  <span class="at">add=</span> <span class="cn">TRUE</span>,</span>
+<span id="cb17-214"><a href="#cb17-214"></a>  <span class="at">inches=</span><span class="fl">0.2</span>)</span>
 <span id="cb17-215"><a href="#cb17-215"></a></span>
-<span id="cb17-216"><a href="#cb17-216"></a><span class="in">```</span></span>
-<span id="cb17-217"><a href="#cb17-217"></a></span>
+<span id="cb17-216"><a href="#cb17-216"></a></span>
+<span id="cb17-217"><a href="#cb17-217"></a><span class="in">```</span></span>
 <span id="cb17-218"><a href="#cb17-218"></a></span>
-<span id="cb17-219"><a href="#cb17-219"></a><span class="fu"># En savoir plus sur mapsf:</span></span>
-<span id="cb17-220"><a href="#cb17-220"></a></span>
-<span id="cb17-221"><a href="#cb17-221"></a>Pour la rédaction de cet article je me suis grandement inspirée du travail de Timothée Giraud.</span>
-<span id="cb17-222"><a href="#cb17-222"></a></span>
+<span id="cb17-219"><a href="#cb17-219"></a></span>
+<span id="cb17-220"><a href="#cb17-220"></a><span class="fu"># En savoir plus sur mapsf:</span></span>
+<span id="cb17-221"><a href="#cb17-221"></a></span>
+<span id="cb17-222"><a href="#cb17-222"></a>Pour la rédaction de cet article je me suis grandement inspirée du travail de Timothée Giraud.</span>
 <span id="cb17-223"><a href="#cb17-223"></a></span>
-<span id="cb17-224"><a href="#cb17-224"></a><span class="ot">&lt;https://rcarto.github.io/ined2022/07_mise_en_page.html&gt;</span></span>
-<span id="cb17-225"><a href="#cb17-225"></a></span>
-<span id="cb17-226"><a href="#cb17-226"></a><span class="ot">&lt;http://riatelab.github.io/mapsf&gt;</span></span>
-<span id="cb17-227"><a href="#cb17-227"></a></span>
-<span id="cb17-228"><a href="#cb17-228"></a><span class="ot">&lt;http://rgeomatic.hypotheses.org/2077&gt;</span></span>
+<span id="cb17-224"><a href="#cb17-224"></a></span>
+<span id="cb17-225"><a href="#cb17-225"></a><span class="ot">&lt;https://rcarto.github.io/ined2022/07_mise_en_page.html&gt;</span></span>
+<span id="cb17-226"><a href="#cb17-226"></a></span>
+<span id="cb17-227"><a href="#cb17-227"></a><span class="ot">&lt;http://riatelab.github.io/mapsf&gt;</span></span>
+<span id="cb17-228"><a href="#cb17-228"></a></span>
+<span id="cb17-229"><a href="#cb17-229"></a><span class="ot">&lt;http://rgeomatic.hypotheses.org/2077&gt;</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
