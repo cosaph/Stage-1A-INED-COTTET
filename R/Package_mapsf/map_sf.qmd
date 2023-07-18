@@ -11,7 +11,7 @@ date: 06/06/2023
 ---
 <img src="logo.png" alt="Texte alternatif de l'image" title="Titre de l'image" width=180 length=170/>
 
-Nous allons réaliser des cartes avec R à l'aide du package "mapsf" et du packages "sf". Le package "mapsf" est un outil très utile pour manipuler et visualiser des données spatiales en R, tandis que le package "sf" fournit une infrastructure pour stocker et manipuler ces données. Ces deux packages sont très utiles pour travailler avec des données spatiales dans R, ce qui en fait un choix idéal pour créer des cartes et réaliser des analyses spatiales. 
+Nous allons réaliser des cartes avec R à l'aide du package "mapsf" et du packages "sf". Le package "mapsf" est un outil très utile pour manipuler et visualiser des données spatiales en R, tandis que le package "sf" fournit une infrastructure pour stocker et manipuler ces données. Ces deux packages sont très utiles pour travailler avec des données spatiales dans R, ce qui en fait un choix simple et pratique pour créer des cartes et réaliser des analyses spatiales. 
 
 ```{r warning=FALSE, message=FALSE}
 library(mapsf)
@@ -20,13 +20,18 @@ library(dplyr)
 
 ```
 
-Nous allons réaliser une carte de Paris. Pour cet exemple, j'ai récupéré les données sur 
-le site de Paris Data : 
+Nous allons réaliser une carte de Paris avec les données du site de Paris Data : 
 <https://opendata.paris.fr/pages/catalogue/?disjunctive.theme&disjunctive.publisher>
 
-Affichage du fond de carte correspondant aux limites des arrondissements auquel je vais ajouter les voies d'eau en couche d'habillage.
+Affichage du fond de carte correspondant aux limites des arrondissements auquel on va ajouter les voies d'eau en couche d'habillage.
 
-```{r}
+Il existe plusieurs format de fond de carte:
+
+__GeoJSON__ est un format de données géospatiales basé sur JSON (JavaScript Object Notation) qui permet de stocker des données géographiques sous forme de caractères.
+
+__Shapefile__ est un format de données géospatiales propriétaire développé par Esri (Environmental Systems Research Institute). Il est constitué de plusieurs fichiers qui stockent des informations sur les entités géographiques telles que les points, les lignes et les polygones, ainsi que des attributs associés à ces entités. 
+
+```{r result=FALSE}
 # ----- Import des données -----
 
 arrondissements <- st_read(dsn = "https://opendata.paris.fr/explore/dataset/arrondissements/download/?format=geojson&timezone=Europe/Berlin&lang=fr")
@@ -34,13 +39,10 @@ arrondissements <- st_read(dsn = "https://opendata.paris.fr/explore/dataset/arro
 
 cours_deau<-st_read(dsn="https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/plan-de-voirie-voies-deau/exports/geojson?lang=fr&timezone=Europe%2FBerlin")
 
-
-
-
 ```
 
 ```{r}
-#Dans un premier temps je réalise mon fond de carte avec les arrondissements de Paris 
+#Dans un premier temps j'affiche mon fond de carte avec des arrondissements de Paris 
 mf_map(x = arrondissements, border = "black") 
 
 #Je rajoute la couche des cours d'eau sur mon fond de carte avec l'argument "add=TRUE"
@@ -55,7 +57,7 @@ mf_theme("darkula")
 
 
 ```
-# __Les différents types de cartes__
+# __ Différents types de cartes__
 
 
 <img src="arbre_type_data.png" alt="Texte alternatif de l'image" title="Titre de l'image" width="800" height="500" />
@@ -66,7 +68,8 @@ La  carte en symboles proportionnels est la méthode de représentation graphiqu
 Sur la carte, j'affiche l'effectif de la population de chaque arrondissement et j'ajoute la légende et un titre.
 
 ```{r results= 'hide'}
-arrondissements$pop <- c(1012687, 903036, 1369857, 1491027, 1672009, 1506475, 1637163, 1603380, 1637542, 1059282, 1494945, 1436205, 1705774, 1425805, 236769, 1668605, 1674568, 1539668, 1421827, 1829526) #INSEE,2021
+#Ajout manuel des valeurs des populations de chaque arrondissements dans le tableau sous le nom "pop"
+arrondissements$pop <- c(1012687, 903036, 1369857, 1491027, 1672009, 1506475, 1637163, 1603380, 1637542, 1059282, 1494945, 1436205, 1705774, 1425805, 236769, 1668605, 1674568, 1539668, 1421827, 1829526) #INSEE,2021. La valeur 1012687 correspond à la population dans le 1er arrondissement.
 mf_map(x = arrondissements)
 mf_map(
   x = arrondissements,
@@ -79,13 +82,14 @@ mf_map(
   add= TRUE,
   inches=0.2)
 
-mf_title("Distribution de la population dans Paris")
+mf_title("Distribution de la population dans les arrondissements de Paris")
 ```
+
  # __Les cartes choroplèthes__
 
-La carte choroplèthe est la représentation graphique à utiliser pour visualiser des ratios (des variables quantitatives relatives pour lesquelles la moyenne a un sens, mais dont la somme n’a pas de sens) qui sont des variables qualitatives ordinales.
+La carte choroplèthe est la représentation  à utiliser pour visualiser des ratios (variables quantitatives relatives pour lesquelles la moyenne a un sens, mais dont la somme n’a pas de sens) qui sont des variables ordinales.
 
-Sur la carte, j'affiche la densité de population de chaque arrondissement. J'utilise la méthode des quantiles pour discréditer cette variable et j'utilise une palette de couleur avec dégradé pour représenter l'ordre entre mes valeurs.
+Sur la carte, j'affiche la densité de population de chaque arrondissement. J'utilise la méthode des quantiles pour discrétiser cette variable et j'utilise une palette de couleur avec dégradé pour représenter l'ordre entre mes valeurs.
 
 ```{r}
 #création de la variable densite 
@@ -108,12 +112,14 @@ pal = "Reds",
 
 
 ```
-__Remarque: la faible densité de population des 12e et 16e arrondissement est faible, notamment en raison des bois de Vincennes et de Boulogne qui les composent.__
+__Remarque: la faible densité de population des 12e et 16e arrondissement résulte notamment des bois de Vincennes et de Boulogne qui les composent.__
 
-On peut aussi représenter un autre  type de variable: qualitative nominale ici les bords politiques des mairies de chaque arrondissement.
+On peut aussi représenter un autre  type de variable: qualitative nominale. Pour illuster cette fiche on va représenter les bords politiques des mairies de chaque arrondissement.
 Pour cela, on produit une carte choroplèthes mais avec des couleurs «sans dégradé»
-```{r}
+```{r warning=FALSE}
 bords_politiques <- c("PS", "EELV", "PS", "PS", "DVD", "LR", "LR", "LR", "DVD", "PS", "PS", "PS", "PS", "EELV", "LR", "LR", "LR", "PS", "PS", "EELV")
+# le maire du 2e arrondissement de Paris est EELV.
+
 arrondissements <- cbind(arrondissements, bords_politiques)
 
 # choix des couleurs
@@ -143,14 +149,28 @@ mf_map(
 
 # Et si on regroupait deux arrondissement ?
 
-Pour cet exemple nous prenons le cas où, dans les statistiques que nous avons à représenter, les données, des 15e et 16e doivent être sommées. Il faut que les polygones du fond de carte représentant ces deux arrondissements soient alors aussi fusionnés.
 
-L’idée globale du code ci-dessous c’est de fusionner les deux polygones (celui du 15e _Vaugirard_ et du 16e _Passy_). 
+L'objectif est de fusionner les données de deux arrondissements (le 15ème et le 16ème) en un seul arrondissement sur le fond de carte.
 
-Quand je crée mon nouveau polygone (new_poly) j'ai une nouvelle geometrie "POLYGON" qui a concaténné les deux arrondissements. J'ai donc sur une ligne, toutes les informations relatives à mes deux polygones et en plus, une geometrie commune.
- 
+Les étapes sont :
 
-```{r results= 'hide'}
+1.Sélectionner les polygones géométriques des 15ème (Vaugirard) et 16ème (Passy) arrondissements dans le dataset des arrondissements.
+
+2.Fusionner ces deux polygones en un seul avec la fonction st_union(). On obtient un nouveau polygone contenant la géométrie unifiée.
+
+3.Additionner les valeurs de surface, population, périmètre, coordonnées pour le nouveau polygone.
+
+4.Renommer les informations d'identification du nouvel arrondissement (nom, numéro, code INSEE etc).
+
+5.Créer un nouveau dataset avec ces informations pour le nouvel arrondissement.
+
+6.Remplacer dans le dataset original les données de l'arrondissement Passy par celles du nouvel arrondissement.
+
+7.Supprimer la ligne de l'arrondissement 15ème.
+
+On obtient ainsi un nouveau dataset des arrondissements dans lequel les 15ème et 16ème ont été fusionnés en un seul. Ce nouvel arrondissement fusionné peut alors être représenté sur le fond de carte.
+
+```{r warning= FALSE}
 
 
 # ---- Fusionner deux polygones ---- #
