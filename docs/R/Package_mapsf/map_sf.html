@@ -367,12 +367,12 @@ Geodetic CRS:  WGS 84</code></pre>
 <span id="cb12-29"><a href="#cb12-29"></a></span>
 <span id="cb12-30"><a href="#cb12-30"></a></span>
 <span id="cb12-31"><a href="#cb12-31"></a><span class="co"># Sélectionner certaines colonnes pour créer un nouvel objet de données</span></span>
-<span id="cb12-32"><a href="#cb12-32"></a>arrondissements_test <span class="ot">&lt;-</span> <span class="fu">subset</span>(new_poly, <span class="at">select =</span> <span class="fu">c</span>(c_ar, l_aroff, surface, l_ar, n_sq_co, c_arinsee, n_sq_ar, perimetre, geom_x_y,pop, DENS,bords_politiques))</span>
+<span id="cb12-32"><a href="#cb12-32"></a>arrondissements_fus <span class="ot">&lt;-</span> <span class="fu">subset</span>(new_poly, <span class="at">select =</span> <span class="fu">c</span>(c_ar, l_aroff, surface, l_ar, n_sq_co, c_arinsee, n_sq_ar, perimetre, geom_x_y,pop, DENS,bords_politiques))</span>
 <span id="cb12-33"><a href="#cb12-33"></a><span class="co"># à noter qu'il est très important de mettre les éléments dans le même ordre que celui du tableau</span></span>
 <span id="cb12-34"><a href="#cb12-34"></a></span>
 <span id="cb12-35"><a href="#cb12-35"></a><span class="co"># Remplacer les informations de l'arrondissement "Passy" dans l'objet "arrondissements" par les nouvelles informations et supprimer la ligne correspondant à l'arrondissement du  15e. </span></span>
 <span id="cb12-36"><a href="#cb12-36"></a></span>
-<span id="cb12-37"><a href="#cb12-37"></a>arrondissements[arrondissements<span class="sc">$</span>l_aroff <span class="sc">==</span> <span class="st">"Passy"</span>, ] <span class="ot">&lt;-</span> arrondissements_test</span>
+<span id="cb12-37"><a href="#cb12-37"></a>arrondissements[arrondissements<span class="sc">$</span>l_aroff <span class="sc">==</span> <span class="st">"Passy"</span>, ] <span class="ot">&lt;-</span> arrondissements_fus</span>
 <span id="cb12-38"><a href="#cb12-38"></a>arrondissements <span class="ot">&lt;-</span> arrondissements[<span class="sc">-</span><span class="fu">which</span>(arrondissements<span class="sc">$</span>c_ar <span class="sc">==</span> <span class="st">"15"</span>),]</span>
 <span id="cb12-39"><a href="#cb12-39"></a></span>
 <span id="cb12-40"><a href="#cb12-40"></a></span>
@@ -894,12 +894,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb13-209"><a href="#cb13-209"></a></span>
 <span id="cb13-210"><a href="#cb13-210"></a></span>
 <span id="cb13-211"><a href="#cb13-211"></a><span class="co"># Sélectionner certaines colonnes pour créer un nouvel objet de données</span></span>
-<span id="cb13-212"><a href="#cb13-212"></a>arrondissements_test <span class="ot">&lt;-</span> <span class="fu">subset</span>(new_poly, <span class="at">select =</span> <span class="fu">c</span>(c_ar, l_aroff, surface, l_ar, n_sq_co, c_arinsee, n_sq_ar, perimetre, geom_x_y,pop, DENS,bords_politiques))</span>
+<span id="cb13-212"><a href="#cb13-212"></a>arrondissements_fus <span class="ot">&lt;-</span> <span class="fu">subset</span>(new_poly, <span class="at">select =</span> <span class="fu">c</span>(c_ar, l_aroff, surface, l_ar, n_sq_co, c_arinsee, n_sq_ar, perimetre, geom_x_y,pop, DENS,bords_politiques))</span>
 <span id="cb13-213"><a href="#cb13-213"></a><span class="co"># à noter qu'il est très important de mettre les éléments dans le même ordre que celui du tableau</span></span>
 <span id="cb13-214"><a href="#cb13-214"></a></span>
 <span id="cb13-215"><a href="#cb13-215"></a><span class="co"># Remplacer les informations de l'arrondissement "Passy" dans l'objet "arrondissements" par les nouvelles informations et supprimer la ligne correspondant à l'arrondissement du  15e. </span></span>
 <span id="cb13-216"><a href="#cb13-216"></a></span>
-<span id="cb13-217"><a href="#cb13-217"></a>arrondissements[arrondissements<span class="sc">$</span>l_aroff <span class="sc">==</span> <span class="st">"Passy"</span>, ] <span class="ot">&lt;-</span> arrondissements_test</span>
+<span id="cb13-217"><a href="#cb13-217"></a>arrondissements[arrondissements<span class="sc">$</span>l_aroff <span class="sc">==</span> <span class="st">"Passy"</span>, ] <span class="ot">&lt;-</span> arrondissements_fus</span>
 <span id="cb13-218"><a href="#cb13-218"></a>arrondissements <span class="ot">&lt;-</span> arrondissements[<span class="sc">-</span><span class="fu">which</span>(arrondissements<span class="sc">$</span>c_ar <span class="sc">==</span> <span class="st">"15"</span>),]</span>
 <span id="cb13-219"><a href="#cb13-219"></a></span>
 <span id="cb13-220"><a href="#cb13-220"></a></span>

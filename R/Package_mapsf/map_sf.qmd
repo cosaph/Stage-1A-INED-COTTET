@@ -204,12 +204,12 @@ new_poly$bords_politiques<-"PS" #changer le bord politique du nouvel arrondissem
 
 
 # Sélectionner certaines colonnes pour créer un nouvel objet de données
-arrondissements_test <- subset(new_poly, select = c(c_ar, l_aroff, surface, l_ar, n_sq_co, c_arinsee, n_sq_ar, perimetre, geom_x_y,pop, DENS,bords_politiques))
+arrondissements_fus <- subset(new_poly, select = c(c_ar, l_aroff, surface, l_ar, n_sq_co, c_arinsee, n_sq_ar, perimetre, geom_x_y,pop, DENS,bords_politiques))
 # à noter qu'il est très important de mettre les éléments dans le même ordre que celui du tableau
 
 # Remplacer les informations de l'arrondissement "Passy" dans l'objet "arrondissements" par les nouvelles informations et supprimer la ligne correspondant à l'arrondissement du  15e. 
 
-arrondissements[arrondissements$l_aroff == "Passy", ] <- arrondissements_test
+arrondissements[arrondissements$l_aroff == "Passy", ] <- arrondissements_fus
 arrondissements <- arrondissements[-which(arrondissements$c_ar == "15"),]
 
 
