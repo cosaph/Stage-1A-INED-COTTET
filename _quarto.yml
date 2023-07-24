@@ -20,8 +20,6 @@ website:
             href: R/Package_rio/Rio_package.qmd
           - text: "Produire des cartes thématiques avec Mapsf"
             href: R/Package_mapsf/map_sf.qmd
-          - text: "Afficher des cartes interactives avec Mapview"
-            href: R/Package_mapsf/R_cartographie.qmd
           - text: "Importer des fichiers SAS avec formats en R"
             href: R/SAS/fiche_import_SAS_formats.qmd
     
